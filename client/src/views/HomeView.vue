@@ -2,14 +2,46 @@
 import NavBar from '../components/NavBar.vue';
 import PlanCard from '../components/PlanCard.vue';
 import PrimaryButton from '../components/PrimaryButton.vue';
-
+import { mapActions, mapState, mapWritableState } from 'pinia'
+import { useProductStore } from '../stores/product';
+import { useCustomerStore } from '../stores/customer';
 
 export default {
   components:{
     NavBar,
     PlanCard,
     PrimaryButton,
-}
+  },
+  computed:{
+        ...mapState(useProductStore, ['PlanList']),
+        ...mapWritableState(useProductStore, ['pageNumber']),
+        ...mapWritableState(useCustomerStore, ['currentPage'])
+      },
+      methods: {
+        ...mapActions(useProductStore, ['fetchPlan']),
+        changePageNum(num){
+          if(num == -1 && this.pageNumber == 0){
+            this.pageNumber = 0
+          } else {
+            this.pageNumber += num
+          }
+          this.fetchPlan()
+        },
+      },
+      data(){
+        return{
+          // isActive: false,
+          // pageOne:'',
+          // pageTwo:'',
+          // pageThree:'',
+        }
+      },
+      created(){
+        this.fetchPlan()
+        this.currentPage = 'home'
+      }
+  
+  
 }
 </script>
 
@@ -17,13 +49,17 @@ export default {
   <NavBar/>
   <main >
     <div class="d-flex justify-content-center mt-3  container">
-      <img id="hero-image" class="opacity-75" style="width: 600px;" src="https://images.unsplash.com/photo-1592178036775-70c41f818c13?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
+      <img id="hero-image" class="opacity-75" style="width: 600px; height: 350px;" src="https://images.unsplash.com/photo-1592178036775-70c41f818c13?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
       <div class="centered">
         <h1 class="box">Plan Plenty Plant</h1>
         <PrimaryButton msg='Plan Now'/>
       </div>
     </div>
-    <PlanCard/>
+    <div class="row">
+      <h1 class="swipe col-1 mt-5 ms-auto" @click="changePageNum(-1)">&laquo;</h1>
+      <PlanCard msg="Buy" v-for="el in PlanList" :key="el.id" :el="el" />
+      <h1 class="swipe col-1 mt-5 ms-auto" @click="changePageNum(1)">&raquo;</h1>
+    </div>
   </main>
 </template>
 
@@ -34,9 +70,9 @@ export default {
   }
 
   .container {
-  position: relative;
-  text-align: center;
-}
+    position: relative;
+    text-align: center;
+  }
 
   .centered {
     position: absolute;
@@ -54,4 +90,9 @@ export default {
     border-radius: 5px;
     text-shadow: 1px  1px 2px black;
   }
+
+  .swipe{
+    font-size: 5rem;
+  }
+  
 </style>

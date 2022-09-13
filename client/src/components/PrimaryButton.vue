@@ -20,6 +20,7 @@ export default{
         padding: 5px 10px;
         border-radius: 5px;
         border: 0;
+        min-width: 100px;
     }
     .my-btn:hover{
         background-color: #274405;
