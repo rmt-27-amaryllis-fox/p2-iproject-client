@@ -5,7 +5,7 @@ import router from "../router";
 export const useCounterStore = defineStore("Counter", {
   state: () => ({
     isLogin: false,
-    baseUrl: `https://phase2-livecode2-2nd.herokuapp.com`,
+    baseUrl: `http://localhost:3000`,
     apiUrl: `https://api.jikan.moe/v4/anime`,
     dataAnime: [],
   }),
@@ -47,6 +47,26 @@ export const useCounterStore = defineStore("Counter", {
         console.log(page, "page");
         // console.log(this.dataAnime[0].data.data, "<<<<");
       } catch (error) {}
+    },
+    async registerAction(email, password, phoneNumber, bank) {
+      try {
+        let result = await axios({
+          method: "post",
+          url: this.baseUrl + `/register`,
+          data: {
+            email,
+            password,
+            phoneNumber,
+            bank,
+          },
+        });
+
+        if (result) {
+          router.push("/login");
+        }
+      } catch (error) {
+        console.log(error.message, "error");
+      }
     },
   },
 });

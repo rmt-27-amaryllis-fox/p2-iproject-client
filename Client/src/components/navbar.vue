@@ -13,15 +13,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
-        </li>
+        <router-link to="/"
+          ><li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+          </li></router-link
+        >
+        <router-link to="/register">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Register</a>
+          </li>
+        </router-link>
+
+        <router-link to="/login">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+        </router-link>
       </ul>
     </div>
   </nav>

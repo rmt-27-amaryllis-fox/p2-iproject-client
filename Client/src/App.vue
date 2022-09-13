@@ -16,6 +16,15 @@ export default {
 </template>
 
 <style>
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+  font-size: 1rem;
+  line-height: 2.15;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+}
+.card-registration .select-arrow {
+  top: 13px;
+}
 html {
   height: 100%;
 }
@@ -80,7 +89,7 @@ body {
   font-size: 12px;
 }
 
-.login-box form a {
+.login-box form button {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -92,9 +101,10 @@ body {
   transition: 0.5s;
   margin-top: 40px;
   letter-spacing: 4px;
+  background: transparent;
 }
 
-.login-box a:hover {
+.login-box button:hover {
   background: #03e9f4;
   color: #fff;
   border-radius: 5px;
@@ -102,12 +112,12 @@ body {
     0 0 100px #03e9f4;
 }
 
-.login-box a span {
+.login-box button span {
   position: absolute;
   display: block;
 }
 
-.login-box a span:nth-child(1) {
+.login-box button span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
@@ -126,7 +136,7 @@ body {
   }
 }
 
-.login-box a span:nth-child(2) {
+.login-box button span:nth-child(2) {
   top: -100%;
   right: 0;
   width: 2px;
@@ -146,7 +156,7 @@ body {
   }
 }
 
-.login-box a span:nth-child(3) {
+.login-box button span:nth-child(3) {
   bottom: 0;
   right: -100%;
   width: 100%;
@@ -166,7 +176,7 @@ body {
   }
 }
 
-.login-box a span:nth-child(4) {
+.login-box button span:nth-child(4) {
   bottom: -100%;
   left: 0;
   width: 2px;
