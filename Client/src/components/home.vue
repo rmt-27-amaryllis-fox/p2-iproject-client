@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div
-      class="container shadow-sm p-3 mb-5 bg-white rounded width-5 mt-5 mb-1"
+      class="container shadow-sm p-3 mb-5 rounded width-5 mt-5 mb-1"
+      style="background: transparent"
     >
       <h1 class="text-center text-dark display-1 font-weight-bold">
         ANIMEDORO
