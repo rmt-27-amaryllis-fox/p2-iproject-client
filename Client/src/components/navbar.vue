@@ -18,24 +18,42 @@
             <a class="nav-link" href="#">Home</a>
           </li></router-link
         >
-        <router-link to="/register">
+        <router-link to="/register" v-if="!isLogin">
           <li class="nav-item">
             <a class="nav-link" href="#">Register</a>
           </li>
         </router-link>
 
-        <router-link to="/login">
+        <router-link to="/login" v-if="!isLogin">
           <li class="nav-item">
             <a class="nav-link" href="#">Login</a>
           </li>
         </router-link>
+        <button
+          @click.prevent="logoutAction"
+          style="background: transparent"
+          v-if="isLogin"
+        >
+          <li class="nav-item">
+            <a class="nav-link" href="#">Log Out</a>
+          </li>
+        </button>
       </ul>
     </div>
   </nav>
 </template>
 
 <script>
-export default {};
+import { mapActions, mapState } from "pinia";
+import { useCounterStore } from "../stores/counter";
+export default {
+  computed: {
+    ...mapState(useCounterStore, ["isLogin"]),
+  },
+  methods: {
+    ...mapActions(useCounterStore, ["logoutAction"]),
+  },
+};
 </script>
 
 <style></style>

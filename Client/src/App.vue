@@ -1,9 +1,17 @@
 <script>
+import { mapActions } from "pinia";
 import { RouterLink, RouterView } from "vue-router";
 import navbarVue from "./components/navbar.vue";
+import { useCounterStore } from "./stores/counter";
 export default {
   components: {
     navbarVue,
+  },
+  methods: {
+    ...mapActions(useCounterStore, ["checkLogin"]),
+  },
+  created() {
+    this.checkLogin();
   },
 };
 </script>

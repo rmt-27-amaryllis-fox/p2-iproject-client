@@ -68,5 +68,10 @@ export const useCounterStore = defineStore("Counter", {
         console.log(error.message, "error");
       }
     },
+    async checkLogin() {
+      if (localStorage.access_token) {
+        this.isLogin = true;
+      }
+    },
   },
 });

@@ -2,9 +2,9 @@
   <div class="container">
     <div
       class="container shadow-sm p-3 mb-5 rounded width-5 mt-5 mb-1"
-      style="background: transparent"
+      style="background: rgba(0, 0, 0, 0.5)"
     >
-      <h1 class="text-center text-dark display-1 font-weight-bold">
+      <h1 class="text-center text-white display-1 font-weight-bold">
         ANIMEDORO
       </h1>
     </div>
@@ -75,7 +75,7 @@ export default {
     ...mapState(useCounterStore, ["dataAnime"]),
   },
   methods: {
-    ...mapActions(useCounterStore, ["getAnime"]),
+    ...mapActions(useCounterStore, ["getAnime", "checkLogin"]),
     async changePage(page) {
       this.page = this.page + page;
       console.log(this.page, "asdfkj");
