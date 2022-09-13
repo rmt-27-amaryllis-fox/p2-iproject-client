@@ -1,9 +1,10 @@
 <script>
 import NavBarPage from "./views/NavBarPage.vue";
 import LoginPage from "./views/LoginPage.vue";
+import RegisterPage from "./views/RegisterPage.vue";
 // import RegisterPage from "./views/RegisterPage.vue";
 export default {
-  components: { NavBarPage, LoginPage },
+  components: { NavBarPage, LoginPage, RegisterPage },
 };
 </script>
 
@@ -11,7 +12,6 @@ export default {
   <NavBarPage />
   <!-- <LoginPage /> -->
 
-  <!-- <RegisterPage /> -->
   <!-- <HomePage />
   <ProductDetailPage />
   <RegisterPage />
