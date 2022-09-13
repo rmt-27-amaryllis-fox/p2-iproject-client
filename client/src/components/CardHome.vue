@@ -1,6 +1,18 @@
 <script>
+import { mapActions } from "pinia";
+import { useInventoriesStore } from "../stores/inventories";
 export default {
   props: ["data"],
+  methods: {
+    ...mapActions(useInventoriesStore, ["deleteProduct", "getProductbyId"]),
+    async deleted() {
+      await this.deleteProduct(this.data.id);
+    },
+    edit() {
+      this.$router.push(`/editproduct/${this.data.id}`);
+      this.getProductbyId(this.data.id);
+    },
+  },
 };
 </script>
 <template>
@@ -12,7 +24,16 @@ export default {
         <h5 class="card-text">stock: {{ data.stock }}</h5>
         <div class="row">
           <div class="col mt-2">
-            <button type="submit" class="btn btn-outline-primary">Edit</button>
+            <button @click="edit" type="submit" class="btn btn-outline-primary">
+              Edit
+            </button>
+            <button
+              @click="deleted"
+              type="submit"
+              class="btn btn-outline-primary"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>

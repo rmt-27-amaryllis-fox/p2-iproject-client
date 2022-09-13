@@ -1,6 +1,23 @@
 <script>
+import { mapActions } from "pinia";
+import { useEmployeesStore } from "../stores/employee";
 export default {
   props: ["data"],
+  methods: {
+    ...mapActions(useEmployeesStore, [
+      "getEmployeesById",
+      "editEmployees",
+      "deleteEmployeesById",
+    ]),
+    async edit() {
+      console.log(this.data.cloudinary_id, "<<< dari ccard");
+      this.$router.push(`/editemployee/${this.data.cloudinary_id}`);
+      await this.getEmployeesById(this.data.id);
+    },
+    async deleted() {
+      await this.deleteEmployeesById(this.data.cloudinary_id);
+    },
+  },
 };
 </script>
 <template>
@@ -13,7 +30,16 @@ export default {
         <h6 class="card-text">Department: {{ data.department }}</h6>
         <div class="row">
           <div class="col mt-2">
-            <button type="submit" class="btn btn-outline-primary">Edit</button>
+            <button @click="edit" type="submit" class="btn btn-outline-primary">
+              Edit
+            </button>
+            <button
+              @click="deleted"
+              type="submit"
+              class="btn btn-outline-primary"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>

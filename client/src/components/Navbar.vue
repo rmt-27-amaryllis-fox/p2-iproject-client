@@ -28,14 +28,44 @@ export default {
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
+                <router-link
+                  to="/employees"
+                  class="navbar-brand"
+                  aria-current="page"
+                  href="#"
+                  >Employee</router-link
+                >
+              </li> -->
+            <li class="nav-item dropdown bold">
               <router-link
                 to="/employees"
-                class="navbar-brand"
-                aria-current="page"
+                class="nav-link dropdown-toggle"
                 href="#"
-                >Employee</router-link
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
+                Menu
+              </router-link>
+
+              <ul class="dropdown-menu">
+                <li>
+                  <router-link to="/addproduct" class="dropdown-item" href="#"
+                    >Add Product</router-link
+                  >
+                </li>
+                <li>
+                  <router-link to="/addemployee" class="dropdown-item" href="#"
+                    >Add Employee</router-link
+                  >
+                </li>
+                <li>
+                  <router-link to="/employees" class="dropdown-item" href="#"
+                    >List Employees</router-link
+                  >
+                </li>
+              </ul>
             </li>
             <li class="nav-item">
               <router-link to="/categories" class="navbar-brand" href="#"

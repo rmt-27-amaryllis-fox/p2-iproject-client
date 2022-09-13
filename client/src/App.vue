@@ -12,13 +12,18 @@ export default {
   //   ...mapState(useInventoriesStore, ["inventories"]),
   // },
   methods: {
-    ...mapActions(useInventoriesStore, ["getInventories", "getCategories"]),
+    ...mapActions(useInventoriesStore, [
+      "getInventories",
+      "getCategories",
+      "getProductbyId",
+    ]),
     ...mapActions(useEmployeesStore, ["getEmployees"]),
   },
   created() {
     this.getInventories();
     this.getEmployees();
     this.getCategories();
+    this.getProductbyId();
   },
 };
 </script>
