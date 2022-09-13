@@ -4,11 +4,12 @@ import axios from "axios"
 export const useCustomerStore = defineStore({
     id:'customer',
     state: () => ({ 
-        baseUrl:'https://localhost:3000',
+        baseUrl:'http://localhost:3000',
         isLogin: false,
         formRegistration: {},
         formLogin: {},
         regisStat: false,
+        currentPage: 'home'
     }),
     getters: {
 
@@ -18,13 +19,12 @@ export const useCustomerStore = defineStore({
             try {
                 let visitor = await axios ({
                     method: 'POST',
-                    url: this.baseUrl + '/pub/login',
+                    url: this.baseUrl + '/login',
                     data: this.formLogin
                 })
                 localStorage.setItem('access_token', visitor.data.access_token)
                 this.isLogin = true
-                this.getDataCustomer()
-                // console.log('sukses login');
+                this.currentPage= 'home'
             } catch (error) {
                 console.log(error);
                 Swal.fire({
@@ -33,17 +33,17 @@ export const useCustomerStore = defineStore({
                     text: error.response.data.message
                 })
                 this.isLogin = false
+                this.currentPage = 'login'
             }
         },
         async signingUp(){
             try {
                 let newUser = await axios ({
                     method: 'POST',
-                    url: this.baseUrl + '/pub/register',
+                    url: this.baseUrl + '/register',
                     data: this.formRegistration
                 })
                 this.regisStat= true
-                // console.log(newUser);
             } catch (error) {
                 console.log(error);
                 this.regisStat= false
