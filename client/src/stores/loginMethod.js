@@ -16,7 +16,7 @@ export const useLoginMethodStore = defineStore({
       try {
         let result = await axios({
           method: "POST",
-          url: `${this.baseurl}/public/login`,
+          url: `${this.baseurl}/login`,
           data: {
             email: email,
             password: password,
@@ -24,8 +24,8 @@ export const useLoginMethodStore = defineStore({
         });
         // console.log(result)
         localStorage.setItem("access_token", result.data.access_token);
-        // localStorage.setItem("user_logged", result.data.usernameFind);
-        // this.username_logged = localStorage.getItem("user_logged");
+        localStorage.setItem("user_logged", result.data.usernameFind);
+        this.username_logged = localStorage.getItem("user_logged");
 
         this.isLogin = true;
         // this.router.push("/");
@@ -47,7 +47,7 @@ export const useLoginMethodStore = defineStore({
       localStorage.clear();
       this.username_logged = "";
       this.isLogin = false;
-      this.router.push("/");
+      // this.router.push("/");
       // console.log("u logout boi");
 
       Swal.fire({
