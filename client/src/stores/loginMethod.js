@@ -16,7 +16,7 @@ export const useLoginMethodStore = defineStore({
       try {
         let result = await axios({
           method: "POST",
-          url: `${this.baseurl}/login`,
+          url: `${this.baseurl}/users/login`,
           data: {
             email: email,
             password: password,
