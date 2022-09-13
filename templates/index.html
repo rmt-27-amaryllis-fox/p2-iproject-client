@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeatherNow</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- Navbar section -->
+    <section>
+      <header class="py-3 mb-3 border-bottom">
+        <div
+          class="container-fluid d-grid gap-3 align-items-center"
+          style="grid-template-columns: 1fr 2fr"
+        >
+          <div class="">
+            <a class="navbar-brand" href="#"
+              ><img
+                src="./assets/weathernow-logo.png"
+                alt="logo"
+                class="d-inline-block me-2 navbar-logo"
+                width="230px"
+            /></a>
+          </div>
+
+          <div class="d-flex align-items-center flex-row-reverse">
+            <!-- Profile icon -->
+            <div class="d-flex flex-row-reverse flex-shrink-0 dropdown">
+              <a
+                href="#"
+                class="d-block link-dark text-decoration-none dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="https://github.com/mdo.png"
+                  alt="mdo"
+                  width="32"
+                  height="32"
+                  class="rounded-circle"
+                />
+              </a>
+              <ul class="dropdown-menu text-small shadow">
+                <li><a class="dropdown-item" href="#">New Post</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">Sign out</a></li>
+              </ul>
+            </div>
+
+            <!-- Search form -->
+            <form class="w-40 me-3" role="search">
+              <input
+                type="search"
+                class="form-control"
+                placeholder="Search..."
+                aria-label="Search"
+              />
+            </form>
+          </div>
+        </div>
+      </header>
+    </section>
+    <!-- End of navbar section -->
+
+    <!-- Register section -->
+    <section>
+      <div id="intro" class="bg-image shadow-2-strong vh-100">
+        <div
+          class="mask d-flex align-items-center h-100"
+          style="background-color: rgba(0, 0, 0, 0.8)"
+        >
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-xl-5 col-md-8">
+                <!-- Register Form -->
+                <form class="bg-dark rounded-5 shadow-5-strong p-5">
+                  <h2 style="color: white; text-align: center">Register</h2>
+                  <div class="form-floating mb-3 mt-5">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="floatingUsername"
+                      placeholder="Username"
+                    />
+                    <label for="floatingPassword">Username</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="name@example.com"
+                    />
+                    <label for="floatingInput">Email address</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="floatingPassword"
+                      placeholder="Password"
+                    />
+                    <label for="floatingPassword">Password</label>
+                  </div>
+                  <div class="form-floating mb-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="floatingLocation"
+                      placeholder="Location"
+                    />
+                    <label for="floatingPassword">Location</label>
+                  </div>
+
+                  <div class="d-grid">
+                    <button
+                      class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                      type="submit"
+                    >
+                      Sign in
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End of register section -->
+
+    <!-- Login section -->
+    <section>
+      <div id="intro" class="bg-image shadow-2-strong vh-100">
+        <div
+          class="mask d-flex align-items-center h-100"
+          style="background-color: rgba(0, 0, 0, 0.8)"
+        >
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-xl-5 col-md-8">
+                <!-- Sign In Form -->
+                <form class="bg-dark rounded-5 shadow-5-strong p-5">
+                  <h2 style="color: white; text-align: center">Login</h2>
+                  <div class="form-floating mb-3 mt-5">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="name@example.com"
+                    />
+                    <label for="floatingInput">Email address</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="floatingPassword"
+                      placeholder="Password"
+                    />
+                    <label for="floatingPassword">Password</label>
+                  </div>
+
+                  <div class="d-grid">
+                    <button
+                      class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                      type="submit"
+                    >
+                      Sign in
+                    </button>
+                    <div class="text-center">
+                      <a class="small" href="#">Create your account here</a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End of login section -->
+
+    <!-- Home section -->
+    <section class="container-md">
+      <h1 style="text-align: center" class="mb-5">Home</h1>
+
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col d-flex justify-content-center">
+          <div class="card" style="width: 40rem">
+            <img
+              src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp"
+              class="card-img-top"
+              alt="Hollywood Sign on The Hill"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col d-flex justify-content-center">
+          <div class="card" style="width: 40rem">
+            <img
+              src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp"
+              class="card-img-top"
+              alt="Hollywood Sign on The Hill"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col d-flex justify-content-center">
+          <div class="card" style="width: 40rem">
+            <img
+              src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp"
+              class="card-img-top"
+              alt="Hollywood Sign on The Hill"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col d-flex justify-content-center">
+          <div class="card" style="width: 40rem">
+            <img
+              src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp"
+              class="card-img-top"
+              alt="Hollywood Sign on The Hill"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                This is a longer card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End of Home section -->
+
+    <!-- Profile detail section -->
+    <section class="h-100 gradient-custom-2">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-lg-9 col-xl-12">
+            <div class="card">
+              <div
+                class="rounded-top text-white d-flex flex-row"
+                style="background-color: #000; height: 200px"
+              >
+                <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px">
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                    alt="Generic placeholder image"
+                    class="img-fluid img-thumbnail mt-4 mb-2"
+                    style="width: 150px; z-index: 1"
+                  />
+                  <button
+                    type="button"
+                    class="btn btn-outline-dark"
+                    data-mdb-ripple-color="dark"
+                    style="z-index: 1"
+                  >
+                    Edit profile
+                  </button>
+                </div>
+                <div class="ms-3 mb-2" style="margin-top: 110px">
+                  <h3>John Doe</h3>
+                  <h5>Jakarta</h5>
+                </div>
+              </div>
+              <div class="p-4 text-black" style="background-color: #f8f9fa">
+                <div class="d-flex justify-content-end text-center py-1">
+                  <div>
+                    <p class="mb-1 h3">12</p>
+                    <p class="small text-muted mb-0">Posts</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body p-4 text-black">
+                <div class="mb-5">
+                  <p class="lead fw-normal mb-1">About</p>
+                  <div class="p-4" style="background-color: #f8f9fa">
+                    <p class="font-italic mb-1" style="text-align: justify">
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Officiis nostrum voluptate reiciendis commodi sed, itaque
+                      odit, velit cumque quia quas iure quod doloribus ipsam,
+                      repellat molestiae mollitia perferendis eaque! Illum vel
+                      sit aspernatur unde saepe consequuntur distinctio! Non
+                      eveniet blanditiis sapiente eos nobis perspiciatis veniam
+                      libero fuga aspernatur. Aut, repellendus!
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="d-flex justify-content-between align-items-center mb-4"
+                >
+                  <p class="lead fw-normal mb-0">Recent posts</p>
+                  <p class="mb-0">
+                    <a href="#!" class="text-muted">Show all</a>
+                  </p>
+                </div>
+                <div class="row g-2">
+                  <div class="col mb-2">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
+                      alt="image 1"
+                      class="w-100 rounded-3"
+                    />
+                  </div>
+                  <div class="col mb-2">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
+                      alt="image 1"
+                      class="w-100 rounded-3"
+                    />
+                  </div>
+                </div>
+                <div class="row g-2">
+                  <div class="col">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
+                      alt="image 1"
+                      class="w-100 rounded-3"
+                    />
+                  </div>
+                  <div class="col">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
+                      alt="image 1"
+                      class="w-100 rounded-3"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End of profile detail section -->
+
+    <!-- Not found section-->
+    <section class="vh-100">
+      <div class="d-flex flex-row align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-12 text-center">
+              <span class="display-1 d-block">404</span>
+              <div class="mb-4 lead">
+                Oops. The page you are looking for was not found.
+              </div>
+              <a href="#" class="btn btn-link">Back to Home</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End of not found section-->
+  </body>
+</html>
