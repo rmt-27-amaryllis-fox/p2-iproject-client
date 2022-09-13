@@ -1,23 +1,23 @@
 <script>
 import { mapActions, mapWritableState } from "pinia";
-// import { useLoginMethodStore } from "../stores/loginMethod";
+import { useLoginMethodStore } from "../stores/loginMethod";
 
 export default {
   computed: {
-    // ...mapWritableState(useLoginMethodStore, ["isLogin", "username_logged"]),
-    // ...mapActions(useLoginMethodStore, ["logOut"]),
+    ...mapWritableState(useLoginMethodStore, ["isLogin", "username_logged"]),
+    ...mapActions(useLoginMethodStore, ["logOut"]),
   },
   methods: {
-    // async logoutMethod() {
-    //   await this.logOut;
-    // },
+    async logoutMethod() {
+      await this.logOut;
+    },
   },
 
   // biar ttp login meski di refresh pasksa
   created() {
-    // if (localStorage.getItem("access_token")) {
-    //   this.isLogin = true;
-    // }
+    if (localStorage.getItem("access_token")) {
+      this.isLogin = true;
+    }
   },
 };
 </script>
