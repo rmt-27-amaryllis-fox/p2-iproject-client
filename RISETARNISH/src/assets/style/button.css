@@ -1,0 +1,59 @@
+div.btn-add {
+  margin-top: 2em;
+}
+
+.btn-add {
+  font-weight: bold;
+  width: 15vw;
+  margin: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(0%, 0%);
+  cursor: pointer;
+}
+
+.btn-add a {
+  text-align: center;
+  padding: 6px 16px;
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  border: 1px solid #282726;
+  color: white;
+  font-family: arial;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  transition: all .35s;
+  border-radius: 10px;
+}
+
+.btn-add a:before,
+.btn-add a:after{
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: -100%;
+  left: 0;
+  background: #fff;
+  z-index: -1;
+  transition: all .35s;
+}
+
+.btn-add a:before{
+  opacity: .5;
+}
+
+.btn-add a:after{
+  transition-delay: .2s;
+}
+
+.btn-add a:hover{
+  color: #000;
+}
+
+.btn-add a:hover:before,
+.btn-add a:hover:after{
+  top: 0;
+}

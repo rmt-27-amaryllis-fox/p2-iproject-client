@@ -1,0 +1,90 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+div.container-landing {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  margin-top: 7vh;
+  margin-right: 10vw;
+  margin-left: 10vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 55% 45%;
+}
+
+div#landing {
+  margin-right: 1.5em;
+  color: darkgoldenrod;
+  text-align: center;
+}
+
+div#landing p {
+  color: white;
+  text-align: left;
+}
+
+div#container-trailer{
+  margin-top: 10vw;
+}
+
+div#container-trailer video {
+  width: 100%;
+  border-radius: 1.5em;
+}
+
+section#landing-page {
+  background: url('../elden-ring-bg-4b90b97a1dbc5a3d6c6e0f329a6e2d79.webp') no-repeat 50% fixed;
+  background-size: cover;
+  overflow: hidden;
+  height: 100vh;
+}
+
+section.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.navbar {
+  height: 3.5em;
+}
+
+div.col a {
+  color: white;
+}
+
+div.col a:hover {
+  color: white;
+}
+
+ul.pagination li a {
+  cursor: pointer;
+  color: darkgoldenrod;
+}
+
+ul.pagination li a:hover {
+  cursor: pointer;
+  color: black;
+}
+
+a.btn-nav {
+  color: white;
+  text-decoration: none;
+}
+
+div#card {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+div.three-by-three {
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+a {
+  cursor: pointer;
+}
