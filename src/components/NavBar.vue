@@ -18,6 +18,9 @@ export default {
             <router-link class="nav-link" :to="{name: 'home'}">Home</router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link" :to="{name: 'news'}">News</router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'watchlist'}">Watchlist</router-link>
           </li>
         </ul>
