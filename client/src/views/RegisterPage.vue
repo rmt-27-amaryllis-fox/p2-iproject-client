@@ -1,0 +1,105 @@
+<script>
+export default {};
+</script>
+<template>
+    <main class="page-wrapper pt-5">
+        <!-- Page content-->
+        <div
+            class="container-fluid d-flex h-100 align-items-center justify-content-center py-4 py-sm-5 mt-5"
+        >
+            <div class="card card-light card-body" style="max-width: 940px">
+                <div class="row mx-0 align-items-center">
+                    <div class="col-md-6 border-end-md border-light p-2 p-sm-5">
+                        <h2 class="h3 text-light mb-4 mb-sm-5">
+                            Join Us!<br />So you can get the benefits
+                        </h2>
+                        <img
+                            class="d-block mx-auto"
+                            src="./img/signup-dark.svg"
+                            width="344"
+                            alt="Illustartion"
+                        />
+                        <div class="text-light mt-sm-4 pt-md-3">
+                            <span class="opacity-60"
+                                >Already have an account? </span
+                            ><a
+                                class="text-light"
+                                href=""
+                                @click.prevent="$router.push('/login')"
+                                >Sign in</a
+                            >
+                        </div>
+                    </div>
+                    <div
+                        class="col-md-6 px-2 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5"
+                    >
+                        <a class="btn btn-outline-info w-100 mb-3" href="#"
+                            ><i class="bi bi-facebook me-2"></i>Sign in with
+                            Facebook</a
+                        >
+                        <div class="d-flex align-items-center py-3 mb-3">
+                            <hr class="hr-light w-100" />
+                            <div class="text-light opacity-70 px-3">Or</div>
+                            <hr class="hr-light w-100" />
+                        </div>
+                        <form class="needs-validation" novalidate="">
+                            <div class="mb-4">
+                                <label
+                                    class="form-label text-light"
+                                    for="signup-name"
+                                    >Full name</label
+                                >
+                                <input
+                                    class="form-control form-control-light"
+                                    type="text"
+                                    id="signup-name"
+                                    placeholder="Enter your full name"
+                                    required=""
+                                />
+                            </div>
+                            <div class="mb-4">
+                                <label
+                                    class="form-label text-light"
+                                    for="signup-email"
+                                    >Email address</label
+                                >
+                                <input
+                                    class="form-control form-control-light"
+                                    type="email"
+                                    id="signup-email"
+                                    placeholder="Enter your email"
+                                    required=""
+                                />
+                            </div>
+                            <div class="mb-4">
+                                <label
+                                    class="form-label text-light"
+                                    for="signup-password"
+                                    >Password
+                                    <span class="fs-sm opacity-50"
+                                        >min. 8 char</span
+                                    ></label
+                                >
+                                <div class="password">
+                                    <input
+                                        class="form-control form-control-light"
+                                        type="password"
+                                        id="signup-password"
+                                        minlength="8"
+                                        required=""
+                                    />
+                                </div>
+                            </div>
+                            <button
+                                class="btn btn-primary btn-lg w-100"
+                                type="submit"
+                            >
+                                Sign up
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</template>
