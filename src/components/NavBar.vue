@@ -1,6 +1,35 @@
 <script>
+import {mapWritableState} from "pinia";
+import {useUserStore} from "../stores/user";
+
 export default {
-  name: "NavBar"
+  name: "NavBar",
+  computed: {
+    ...mapWritableState(useUserStore, ['identity'])
+  },
+  methods: {
+    onLogoutHandler() {
+      Swal.fire({
+        title: 'Are you sure want to logout?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.identity = '';
+          localStorage.clear();
+          this.$router.push({name: 'home'});
+          Swal.fire(
+              'Success!',
+              'Goodbye!',
+              'success'
+          )
+        }
+      })
+    },
+  }
 }
 </script>
 
@@ -25,15 +54,15 @@ export default {
           </li>
         </ul>
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <li class="nav-item" v-if="!identity">
             <router-link class="nav-link" :to="{name: 'login'}">Login</router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="!identity">
             <router-link class="nav-link" :to="{name: 'register'}">Register</router-link>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" v-if="identity">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-              Alfinna
+              {{ identity }}
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
@@ -41,7 +70,7 @@ export default {
                   <router-link class="dropdown-item" :to="{name: 'profile'}">My Profile</router-link>
                 </div>
               </li>
-              <li><a class="dropdown-item" href="#">Logout</a></li>
+              <li><a class="dropdown-item" href="#" @click.prevent="onLogoutHandler">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -53,11 +82,12 @@ export default {
 
 <style scoped>
 
-li > div .router-link-active{
+li > div .router-link-active {
   font-weight: bold;
   color: black;
 }
-.router-link-active{
+
+.router-link-active {
   color: white;
 }
 </style>

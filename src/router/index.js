@@ -17,12 +17,18 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: LoginView
+      component: LoginView,
+      beforeEnter: (to, from) => {
+        return !localStorage.getItem('access_token') ? true : '/'
+      }
     },
     {
       path: '/register',
       name: 'register',
-      component: RegisterView
+      component: RegisterView,
+      beforeEnter: (to, from) => {
+        return !localStorage.getItem('access_token') ? true : '/'
+      }
     },
     {
       path: '/profile',
