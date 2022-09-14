@@ -6,9 +6,15 @@ import SearchFilter from "../components/SearchFilter.vue";
 import StocksTable from "../components/StocksTable.vue";
 import TickerCompany from "../components/TickerCompany.vue";
 import TickerFinance from "../components/TickerFinance.vue";
+import LoadingBar from "../components/LoadingBar.vue";
 
 export default {
-  components: {TickerFinance, TickerCompany, StocksTable, SearchFilter, SearchBar},
+  components: {LoadingBar, TickerFinance, TickerCompany, StocksTable, SearchFilter, SearchBar},
+  data() {
+    return {
+      invisible: true
+    }
+  },
   computed: {
     ...mapState(useTickerStore, ['data'])
   },
@@ -16,24 +22,35 @@ export default {
     ...mapActions(useTickerStore, ['fetchTickerHandler']),
     onSearchHandler(ticker) {
       this.$router.push({name: 'home', query: {ticker}})
-      // this.fetchTickerHandler(ticker);
     },
+
   },
   created() {
+    this.$router.replace({'query': null});
+
     this.$watch(
         () => this.$route.query,
-        () => {
-          this.fetchTickerHandler(this.$route.query.ticker)
+        async () => {
+          if (this.$route.query.ticker) {
+            this.invisible = false;
+            await this.fetchTickerHandler(this.$route.query.ticker)
+            this.invisible = true;
+          }
         }
     )
   }
 }
 </script>
-
+t
 <template>
+  <LoadingBar v-if="!invisible"/>
   <div class="container-fluid my-4">
     <SearchBar @onSearch="onSearchHandler"/>
-    <div class="card rounded-0">
+    <div class="text-center" v-if="!data.news.length">
+      <h2 class="m-0">Try to search using stock picker</h2>
+      <img src="../assets/search.png" class="card-img-top p-0 rounded-0" alt="..." style="width: 40%">
+    </div>
+    <div class="card rounded-0" v-else>
       <div class="card-body rounded-0">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
@@ -69,6 +86,7 @@ export default {
                 <img :src="news.image_url" class="card-img-top rounded-0" alt="..."
                      style="height: 280px;object-fit: cover">
                 <div class="card-body rounded-0">
+                  <span class="badge text-bg-primary mb-4 me-1" v-for="(ticker, i) in news.tickers" :key="i" >{{ ticker }}</span>
                   <h5 class="card-title">{{ news.title }}</h5>
                   <p class="card-text">{{ news.description }}</p>
                   <p class="card-text"><small class="text-muted">Published at {{ news.published_utc }}</small></p>
