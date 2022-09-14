@@ -3,6 +3,7 @@ import LoginPage from '../views/LoginPage.vue'
 import RegisterPage from '../views/RegisterPage.vue'
 import UserProfilePage from '../views/UserProfilePage.vue'
 import LandingPage from '../views/LandingPage.vue'
+import HomePage from '../views/HomePage.vue'
 import Swal from "sweetalert2";
 
 const router = createRouter({
@@ -12,6 +13,11 @@ const router = createRouter({
       path: "/",
       name: "landing",
       component: LandingPage,
+    },
+    {
+      path: "/myhome",
+      name: "myhome",
+      component: HomePage,
     },
     {
       path: '/login',
@@ -45,13 +51,27 @@ router.beforeEach((to, from, next) => {
       icon: "error",
       title: `You already have registered, bro`,
     });
-    next({ name: 'landing' });;
+    next({ name: 'myhome' });;
   } else if (localStorage.getItem("access_token") && to.name === "login") {
     Swal.fire({
       icon: "error",
       title: `You already have login, bro`,
     });
-    next({ name: 'landing' });;
+    next({ name: 'myhome' });;
+  }
+  else if (localStorage.getItem("access_token") && to.name === "landing") {
+    Swal.fire({
+      icon: "error",
+      title: `You already have login, bro`,
+    });
+    next({ name: 'myhome' });;
+  }
+  else if (!localStorage.getItem("access_token") && to.name === "myhome") {
+    Swal.fire({
+      icon: "error",
+      title: `Please login to access this feature`,
+    });
+    next({ path: '/login' });
   }
   else {
     next()
