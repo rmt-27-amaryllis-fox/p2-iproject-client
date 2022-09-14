@@ -1,17 +1,17 @@
 <script>
+
 export default {
     props: {
         m: Object
-    }
+    },
 };
 </script>
 <template>
     <div class="col-sm-3 mb-4">
         <div class="card card-light card-hover h-100">
             <div class="card-img-top card-img-hover">
-                <a href="" class="img-overlay" @click.prevent="$router.push('/movie/' + m.id)"></a>
-
-                <div class="content-overlay end-0 top-0 pt-3 pe-3">
+                <a class="img-overlay" href="" @click="$router.push('/movie/' + s.id)"></a>
+                <!-- <div class="content-overlay end-0 top-0 pt-3 pe-3">
                     <button
                         class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
                         type="button"
@@ -20,10 +20,11 @@ export default {
                         title=""
                         data-bs-original-title="Add to Watchlist"
                         aria-label="Add to Watchlist"
+                        
                     >
                         <i class="bi bi-bookmark-heart-fill"></i>
                     </button>
-                </div>
+                </div> -->
                 <img
                     :src="m.poster"
                     alt="Image"

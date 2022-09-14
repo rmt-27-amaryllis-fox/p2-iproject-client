@@ -9,7 +9,8 @@ export const useCounterStore = defineStore("counter", {
         isVerified: false,
         movies: [],
         page: "1",
-        detail: {}
+        detail: {},
+        watchlists: []
     }),
     getters: {},
     actions: {
@@ -72,6 +73,42 @@ export const useCounterStore = defineStore("counter", {
                     url: this.baseUrl + "/movies/" + id
                 })
                 this.detail = data
+            } catch (err) {
+                console.log(err.response.data);
+            }
+        },
+        async createWatchlist(id) {
+            try {
+                await axios({
+                    method: "POST",
+                    url: this.baseUrl + "/watchlists/" + id,
+                    headers: { access_token: localStorage.access_token }
+                })
+                this.router.push("/watchlist")
+            } catch (err) {
+                console.log(err.response.data);
+            }
+        },
+        async fetchWatchlist() {
+            try {
+                const {data} = await axios({
+                    method: "GET",
+                    url: this.baseUrl + "/watchlists",
+                    headers: { access_token: localStorage.access_token }
+                })
+                this.watchlists = data
+            } catch (err) {
+                console.log(err.response.data);
+            }
+        },
+        async deleteWatchlist(id) {
+            try {
+                await axios({
+                    method: "DELETE",
+                    url: this.baseUrl + "/watchlists/" + id,
+                    headers: { access_token: localStorage.access_token }
+                })
+                this.fetchWatchlist()
             } catch (err) {
                 console.log(err.response.data);
             }
