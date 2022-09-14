@@ -3,6 +3,7 @@ import HomePage from "../views/HomePage.vue";
 import PlaylistPage from "../views/PlaylistPage.vue";
 import SchedulePage from "../views/SchedulePage.vue";
 import NotFound from "../views/NotFound.vue";
+import MessagePage from "../views/MessagePage.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -20,6 +21,11 @@ const router = createRouter({
       path: "/gigs",
       name: "schedules",
       component: SchedulePage,
+    },
+    {
+      path: "/messages",
+      name: "message",
+      component: MessagePage,
     },
     { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
   ],

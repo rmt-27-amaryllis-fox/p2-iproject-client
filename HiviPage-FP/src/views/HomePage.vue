@@ -105,6 +105,7 @@ h1 {
   /* width: 1000px; */
   /* tambahan */
   display: flex;
+
   /* display: none; */
   /* margin-top: 50px; */
   /* position: relative; */
