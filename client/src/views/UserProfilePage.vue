@@ -3,12 +3,7 @@
 <template>
   <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
     <div class="card p-4">
-      <div
-        class="image d-flex flex-column justify-content-center align-items-center"
-      >
-        <button class="btn btn-secondary">
-          <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
-        </button>
+      <div class="d-flex flex-column justify-content-center align-items-center">
         <span class="name mt-3">Eleanor Pena</span>
         <span class="idd">@eleanorpena</span>
         <div
@@ -52,7 +47,7 @@ body {
 }
 
 .card {
-  width: 350px;
+  width: 550px;
   background-color: #efefef;
   border: none;
   cursor: pointer;
