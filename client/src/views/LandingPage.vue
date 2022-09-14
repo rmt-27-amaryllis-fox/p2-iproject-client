@@ -1,24 +1,30 @@
-<script></script>
+<script>
+import InMemoriam from "../components/InMemoriam.vue";
+import ParagraphOpening from "../components/ParagraphOpening.vue";
+export default { components: { InMemoriam, ParagraphOpening } };
+</script>
 
-<style scoped>
-  
-</style>
+<style scoped></style>
 
 <template>
-  <section class="content-section bg-light">
-    <div class="container px-4 px-lg-5 text-center">
-      <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-lg-10">
-          <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
-          <p class="lead mb-5">
-            This theme features a flexible, UX friendly sidebar menu and stock
-            photos from our friends at
-            <a href="https://unsplash.com/">Unsplash</a>
-            !
-          </p>
-          <a class="btn btn-dark btn-xl" href="#services">What We Offer</a>
+  <div class="bg-dark text-secondary px-4 py-5 text-center">
+    <div class="py-5">
+      <h1 class="display-5 fw-bold text-white">Welcome !</h1>
+      <div class="col-lg-6 mx-auto">
+        <div class="col-lg-6 py-4 mx-auto">
+          <p class="fs-5 mb-4"></p>
+          <ParagraphOpening />
         </div>
       </div>
     </div>
-  </section>
+    <router-link to="/login" class="nav-link">
+      <button
+        type="button"
+        class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold"
+      >
+        Login To Access
+      </button></router-link
+    >
+  </div>
+  <InMemoriam />
 </template>
