@@ -12,7 +12,8 @@ export const useCounterStore = defineStore("counter", {
         page: "1",
         movieData: {},
         seriesData: {},
-        watchlists: []
+        watchlists: [],
+        searchData: {}
     }),
     getters: {},
     actions: {
@@ -33,7 +34,7 @@ export const useCounterStore = defineStore("counter", {
         },
         async registerHandler(payload) {
             try {
-                const { data } = await axios({
+                await axios({
                     url: this.baseUrl + "/register",
                     method: "POST",
                     data: payload
@@ -146,6 +147,22 @@ export const useCounterStore = defineStore("counter", {
                     headers: { access_token: localStorage.access_token }
                 })
                 this.fetchWatchlist()
+            } catch (err) {
+                console.log(err.response.data);
+            }
+        },
+        async search(query) {
+            try {
+                const { data } = await axios({
+                    method: "POST",
+                    url: this.baseUrl + "/search/",
+                    params: {
+                        query,
+                        page: this.page
+                    }
+                })
+                this.searchData = data
+                this.router.push('/search/' + query)
             } catch (err) {
                 console.log(err.response.data);
             }

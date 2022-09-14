@@ -8,6 +8,8 @@ import SeriesPage from '../views/SeriesPage.vue'
 import DetailMovie from '../views/DetailMovie.vue'
 import DetailSeries from '../views/DetailSeries.vue'
 import WatchlistPage from '../views/WatchlistPage.vue'
+import SearchPage from '../views/SearchPage.vue'
+import NotFound from '../views/NotFound.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -61,7 +63,13 @@ const router = createRouter({
       path: "/series/:id",
       name: "DetailSeries",
       component: DetailSeries
-    }
+    },
+    {
+      path: "/search/:query",
+      name: "Search",
+      component: SearchPage
+    },
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
   ]
 })
 

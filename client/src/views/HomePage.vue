@@ -1,5 +1,17 @@
 <script>
-export default {};
+import {mapActions} from 'pinia';
+import {useCounterStore} from '../stores/counter';
+
+export default {
+    data() {
+        return {
+            query: ""
+        }
+    },
+    methods: {
+        ...mapActions(useCounterStore, ['search'])
+    }
+};
 </script>
 <template>
     <main class="page-wrapper py-5 my-3">
@@ -35,12 +47,13 @@ export default {};
             </div>
             <div class="container mt-4 mt-sm-3 mt-lg-n3 pb-5 mb-md-4">
                 <!-- Search-->
-                <form class="form-group form-group-light mb-5 mt-3">
+                <form @submit.prevent="search(this.query.split(' ').join('+'))" class="form-group form-group-light mb-5 mt-3">
                     <div class="input-group">
                         <span class="input-group-text">
                             <i class="bi bi-search"></i
                         ></span>
                         <input
+                            v-model="query"
                             class="form-control"
                             type="text"
                             placeholder="Search for movie or series..."

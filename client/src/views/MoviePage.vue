@@ -6,6 +6,10 @@ import MoviesCard from "../components/MoviesCard.vue";
 export default {
     methods: {
         ...mapActions(useCounterStore, ["fetchMovies"]),
+        pageIncrement() {
+            this.page++
+            this.fetchMovies()
+        }
     },
     computed: {
         ...mapWritableState(useCounterStore, ["movies", 'page'])
@@ -135,6 +139,7 @@ export default {
                                 </li>
                                 <li class="page-item">
                                     <a
+                                        @click.prevent="pageIncrement"
                                         class="page-link"
                                         href="#"
                                         aria-label="Next"
