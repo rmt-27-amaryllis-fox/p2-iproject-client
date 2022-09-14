@@ -12,12 +12,14 @@ export default {};
           feature :
         </p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <button
-            type="button"
-            class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold"
+          <router-link to="/game" class="nav-link">
+            <button
+              type="button"
+              class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold"
+            >
+              Game Generator
+            </button></router-link
           >
-            Game Generator
-          </button>
           <button type="button" class="btn btn-outline-light btn-lg px-4">
             Redeem Card
           </button>
@@ -43,13 +45,8 @@ export default {};
   </div>
   <div class="bg-dark text-secondary px-4 py-5 text-center">
     <div class="py-5">
-      <h1 class="display-5 fw-bold text-white">Fact(os)!</h1>
-      <div class="col-lg-6 mx-auto">
-        <p class="fs-5 mb-4">In memoriam : Kazuki Takahashi (1961-2022)</p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <p class="fs-5 mb-4"></p>
-        </div>
-      </div>
+      <h1 class="display-5 fw-bold text-white">In memoriam :</h1>
+      <h2 class="display-5 fw-bold text-white">Kazuki Takahashi (1961-2022)</h2>
     </div>
   </div>
 </template>

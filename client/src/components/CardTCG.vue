@@ -6,7 +6,7 @@ export default {
 
 <template>
   <div class="card text-bg-dark mb-3" style="max-width: 18rem">
-    <img :src="card.imageUrl" class="card-img" alt="" />
+    <img :src="card.image_url" class="card-img" alt="" />
   </div>
 </template>
 
