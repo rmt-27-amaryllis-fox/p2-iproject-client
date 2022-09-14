@@ -5,6 +5,7 @@ import RegisterView from "../views/RegisterView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import WatchlistView from "../views/WatchlistView.vue";
 import NewsView from "../views/NewsView.vue";
+import CalculatorView from "../views/CalculatorView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@ const router = createRouter({
       path: '/news',
       name: 'news',
       component: NewsView
+    },
+    {
+      path: '/calculator',
+      name: 'calculator',
+      component: CalculatorView
     }
   ]
 })

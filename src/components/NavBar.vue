@@ -52,6 +52,9 @@ export default {
           <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'watchlist'}">Watchlist</router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" :to="{name: 'calculator'}">Calculator</router-link>
+          </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item" v-if="!identity">
