@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
@@ -26,8 +27,16 @@ export const useUserStore = defineStore("user", {
         });
 
         this.router.push("/login");
+        Swal.fire({
+          icon: "success",
+          title: `Welcome, ${payload.username}!`,
+          text: `Enjoy your journey`,
+        });
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: `${err.response.data.message}`,
+        });
       }
     },
 
@@ -48,8 +57,16 @@ export const useUserStore = defineStore("user", {
         this.navbarProfilePicture = data.profilePicture;
         this.isLogin = true;
         this.router.push("/home");
+
+        Swal.fire({
+          icon: "success",
+          title: `Hello, ${payload.username}!`,
+        });
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: `${err.response.data.message}`,
+        });
       }
     },
 
@@ -58,6 +75,11 @@ export const useUserStore = defineStore("user", {
       this.isLogin = false;
       this.navbarProfilePicture = "";
       this.router.push("/");
+
+      Swal.fire({
+        icon: "success",
+        title: `Logged out`,
+      });
     },
 
     async fetchUserData() {
@@ -72,7 +94,10 @@ export const useUserStore = defineStore("user", {
 
         this.userProfile = result.data;
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: `${err.response.data.message}`,
+        });
       }
     },
 
@@ -95,8 +120,16 @@ export const useUserStore = defineStore("user", {
         });
         this.navbarProfilePicture = payload.profilePicture;
         this.router.push("/profile");
+
+        Swal.fire({
+          icon: "success",
+          title: `Profile updated`,
+        });
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: `${err.response.data.message}`,
+        });
       }
     },
   },
