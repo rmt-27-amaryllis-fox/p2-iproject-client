@@ -13,7 +13,7 @@ export default {
         <!-- <h5 class="card-text">stock: {{ data.stock }}</h5> -->
         <div class="row">
           <div class="col mt-2">
-            <button type="submit" class="btn btn-outline-primary">Edit</button>
+            <!-- <button type="submit" class="btn btn-outline-primary">Edit</button> -->
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ export default {
 </script>
 <template>
   <div class="container">
-    <nav class="navbar navbar-expand-lg bg-primary shadow">
+    <nav class="navbar sticky-top navbar-expand-lg bg-primary shadow">
       <div class="container-fluid">
         <router-link to="/" class="navbar-brand" href="#">
           Laksana Baru</router-link
@@ -68,15 +68,18 @@ export default {
               </ul>
             </li>
             <li class="nav-item">
-              <router-link to="/categories" class="navbar-brand" href="#"
+              <router-link to="/categories" class="nav-link" href="#"
                 >Categories</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link to="/login" class="navbar-brand">Login</router-link>
+              <router-link to="/login" class="nav-link">Login</router-link>
             </li>
             <li class="nav-item">
-              <a @click.prevent="logout" class="navbar-brand">Logout</a>
+              <a @click.prevent="logout" class="nav-link">Logout</a>
+            </li>
+            <li class="nav-item">
+              <router-link to="register" class="nav-link">Register</router-link>
             </li>
           </ul>
         </div>
@@ -84,3 +87,8 @@ export default {
     </nav>
   </div>
 </template>
+<style scoped>
+.container {
+  font-weight: bold;
+}
+</style>

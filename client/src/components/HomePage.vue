@@ -6,18 +6,23 @@ export default {
   components: {
     CardHome,
   },
-  methods: {},
+  methods: {
+    ...mapActions(useInventoriesStore, ["getInventories"]),
+  },
   computed: {
     ...mapState(useInventoriesStore, ["inventories"]),
+  },
+  created() {
+    this.getInventories();
   },
 };
 </script>
 <template>
-  <div class="container shadow mt-3">
+  <div class="container shadow rounded mt-5">
     <div class="row mt-3">
       <div
         id="carouselExampleDark"
-        class="carousel carousel-primary slide"
+        class="carousel rounded carousel-dark slide"
         data-bs-ride="carousel"
       >
         <div class="carousel-indicators">
@@ -61,10 +66,8 @@ export default {
               alt="..."
             />
             <div class="carousel-caption d-none d-md-block">
-              <h5>Third slide label</h5>
-              <p>
-                Some representative placeholder content for the third slide.
-              </p>
+              <h5>LAKSANA BARU SWALAYAN</h5>
+              <p>Senyum salam sapa santun</p>
             </div>
           </div>
         </div>
@@ -87,6 +90,7 @@ export default {
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+
       <div class="d-flex justify-content-center">
         <h4>Home Page</h4>
       </div>
@@ -100,14 +104,14 @@ export default {
             </li>
 
             <li class="page-item">
-              <a class="page-link">{{ currentPage }}</a>
+              <!-- <a class="page-link">{{ currentPage }}</a> -->
             </li>
 
             <li @click="nextPage" class="page-item">
               <a class="page-link" href="#">Next</a>
             </li>
             <li class="page-item">
-              <a class="page-link">{{ totalPages }}</a>
+              <!-- <a class="page-link">{{ totalPages }}</a> -->
             </li>
           </ul>
         </nav>

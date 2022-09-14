@@ -30,7 +30,7 @@ export default {
             <button
               @click="deleted"
               type="submit"
-              class="btn btn-outline-primary"
+              class="btn btn-outline-primary m-2"
             >
               Delete
             </button>

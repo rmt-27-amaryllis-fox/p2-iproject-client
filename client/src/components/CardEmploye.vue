@@ -11,8 +11,7 @@ export default {
     ]),
     async edit() {
       console.log(this.data.cloudinary_id, "<<< dari ccard");
-      this.$router.push(`/editemployee/${this.data.cloudinary_id}`);
-      await this.getEmployeesById(this.data.id);
+      this.$router.push(`/editemployee/${this.data.id}`);
     },
     async deleted() {
       await this.deleteEmployeesById(this.data.cloudinary_id);
@@ -36,7 +35,7 @@ export default {
             <button
               @click="deleted"
               type="submit"
-              class="btn btn-outline-primary"
+              class="btn btn-outline-primary m-2"
             >
               Delete
             </button>

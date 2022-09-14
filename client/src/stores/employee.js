@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 export const useEmployeesStore = defineStore({
@@ -35,8 +36,9 @@ export const useEmployeesStore = defineStore({
             access_token: localStorage.getItem("access_token"),
           },
         });
-        this.employees = data;
-        console.log(data);
+        this.oneEmployee = data;
+        console.log(data, "<<< by ID get employe");
+        return data;
       } catch (error) {
         console.log(error);
       }
@@ -55,6 +57,13 @@ export const useEmployeesStore = defineStore({
         this.router.push("/employees");
         this.getEmployees();
         console.log(data);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Success Deleted",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } catch (error) {
         console.log(error);
       }
@@ -82,13 +91,33 @@ export const useEmployeesStore = defineStore({
         this.router.push("/employees");
         this.getEmployees();
         console.log(data);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Success Added",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something Wrong",
+        });
       }
     },
     async editEmployees(name, imageUrl, birthDate, status, department) {
       try {
         //! belum oke
+        console.log(
+          name,
+          imageUrl,
+          birthDate,
+          status,
+          department,
+          "dari edit store"
+        );
         console.log("masuk ke edit employee");
         console.log(this.oneEmployee, "ini oneEmploye");
         console.log(this.oneEmployee.cloudinary_id, "<<<id nyaa edit");
@@ -112,8 +141,20 @@ export const useEmployeesStore = defineStore({
         this.router.push("/employees");
         this.getEmployees();
         console.log(data);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Success Edited",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Harus Format PNG,JPEG,JPG!",
+        });
       }
     },
   },

@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 export const useInventoriesStore = defineStore({
@@ -7,6 +8,9 @@ export const useInventoriesStore = defineStore({
     inventories: [],
     categories: [],
     oneProduct: {},
+    // totalPakaian: 0,
+    // totalWarehouse: 0,
+    // total: 0,
   }),
   actions: {
     async getInventories() {
@@ -19,7 +23,8 @@ export const useInventoriesStore = defineStore({
           },
         });
         this.inventories = data;
-        console.log(data);
+        this.total = data.length;
+        this.console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -51,6 +56,13 @@ export const useInventoriesStore = defineStore({
         this.router.push("/");
         this.getInventories();
         console.log(data);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Success Deleted",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } catch (error) {
         console.log(error);
       }
@@ -91,8 +103,20 @@ export const useInventoriesStore = defineStore({
         this.router.push("/");
         this.getInventories();
         console.log(data);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Success Added",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response.data.message,
+        });
       }
     },
     async editProduct(name, image, stock, CategoryId) {
@@ -114,8 +138,20 @@ export const useInventoriesStore = defineStore({
         this.router.push("/");
         this.getInventories();
         console.log(data);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Success Edited",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response.data.message,
+        });
       }
     },
   },

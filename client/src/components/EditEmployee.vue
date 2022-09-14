@@ -17,26 +17,30 @@ export default {
   methods: {
     ...mapActions(useEmployeesStore, ["editEmployees", "getEmployeesById"]),
     async editEmployee() {
-      let name = this.oneEmployee.name;
-      let imageUrl = this.oneEmployee.imageUrl;
-      let birthDate = this.oneEmployee.birthDate;
-      let status = this.oneEmployee.status;
-      let department = this.oneEmployee.department;
+      let name = this.name;
+      let imageUrl = this.imageUrl;
+      let birthDate = this.birthDate;
+      let status = this.status;
+      let department = this.department;
       await this.editEmployees(name, imageUrl, birthDate, status, department);
     },
     upload(event) {
+      console.log(event.target, "<<< edit");
       this.imageUrl = event.target.files[0];
       console.log(event.target.files, "<< form ");
       console.log(event.target, "<< form ");
     },
   },
   created() {
-    this.name = this.oneEmployee.name;
-    this.imageUrl = this.oneEmployee.imageUrl;
-    this.birthDate = this.oneEmployee.birthDate;
-    this.status = this.oneEmployee.status;
-    this.department = this.oneEmployee.department;
-    this.getEmployeesById(this.$route.params.id);
+    this.getEmployeesById(this.$route.params.id).then((result) => {
+      this.name = result.name;
+      this.imageUrl = result.imageUrl;
+      this.birthDate = result.birthDate;
+      this.status = result.status;
+      this.department = result.department;
+    });
+
+    // this.getEmployeesById(this.$route.params.id);
   },
 };
 </script>
