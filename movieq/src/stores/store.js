@@ -20,6 +20,19 @@ export const useProjectStore = defineStore({
       } catch (error) {
         console.log(error)
       }
+    },
+
+    async register(param){
+      try {
+        const {data} = await axios({
+          method: "post",
+          url: this.baseUrl + '/register',
+          data: param
+        })
+        this.router.push('/login')
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 })
