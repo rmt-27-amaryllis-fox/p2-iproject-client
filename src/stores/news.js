@@ -10,10 +10,9 @@ export const useNewsStore = defineStore('news', {
     async fetchNewsHandler() {
       try{
         const {data} = await axios.get(`${this.baseUrl}/news`);
-        this.news = data
-        console.log(data)
+        this.news = data;
       }catch (e) {
-        console.log(e);
+        throw e;
       }
     },
   },
