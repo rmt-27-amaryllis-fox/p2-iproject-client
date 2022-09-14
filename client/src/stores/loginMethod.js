@@ -47,7 +47,7 @@ export const useLoginMethodStore = defineStore({
       localStorage.clear();
       this.username_logged = "";
       this.isLogin = false;
-      // this.router.push("/");
+      this.router.push("/");
       // console.log("u logout boi");
 
       Swal.fire({
