@@ -17,6 +17,7 @@ export default {
   created() {
     if (localStorage.getItem("access_token")) {
       this.isLogin = true;
+      this.username_logged = localStorage.getItem("user_logged");
     }
   },
 };
@@ -39,16 +40,12 @@ export default {
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- Link -->
         <li class="nav-item">
-          <router-link to="/" class="nav-link">Home</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/myprofile" class="nav-link">myprofile</router-link>
+          <router-link to="/" class="nav-link">Landing</router-link>
         </li>
         <li v-if="isLogin === true" class="nav-item">
-          <router-link to="/wishlists" class="nav-link"
-            >My Wishlists</router-link
-          >
+          <router-link to="/myprofile" class="nav-link">myprofile</router-link>
         </li>
+
         <li v-if="isLogin === false" class="nav-item">
           <router-link to="/register" class="nav-link">Register</router-link>
         </li>

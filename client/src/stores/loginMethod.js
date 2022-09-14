@@ -28,7 +28,7 @@ export const useLoginMethodStore = defineStore({
         this.username_logged = localStorage.getItem("user_logged");
 
         this.isLogin = true;
-        // this.router.push("/");
+        this.router.push("/myprofile");
         Swal.fire({
           position: "center",
           icon: "success",
