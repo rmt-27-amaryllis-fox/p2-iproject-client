@@ -1,10 +1,6 @@
 <script>
-import { mapActions, mapWritableState } from "pinia";
-import { usePostStore } from "../stores/post";
-
 export default {
   props: ["post"],
-  methods: {},
   data() {
     return {
       flagUrl: `https://countryflagsapi.com/png`,

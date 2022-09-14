@@ -65,9 +65,11 @@ export default {
                   >
                     Sign in
                   </button>
-                  <div class="text-center">
-                    <a class="small" href="#">Create your account here</a>
-                  </div>
+                  <!-- <div class="text-center">
+                    <router-link to="/register" class="small" href="#"
+                      >Create your account here</router-link
+                    >
+                  </div> -->
                 </div>
               </form>
             </div>

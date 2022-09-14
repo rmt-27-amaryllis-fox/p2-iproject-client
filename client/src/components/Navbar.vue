@@ -58,7 +58,11 @@ export default {
               />
             </a>
             <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">New Post</a></li>
+              <li>
+                <router-link to="/new-post" class="dropdown-item" href="#"
+                  >New Post</router-link
+                >
+              </li>
               <li>
                 <router-link to="/profile" class="dropdown-item" href="#"
                   >Profile</router-link

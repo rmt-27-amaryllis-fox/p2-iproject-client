@@ -3,6 +3,8 @@ import Home from "../views/Home.vue";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import Profile from "../views/Profile.vue";
+import CityPost from "../views/AddPostByCity.vue";
+import CoordinatePost from "../views/AddPostByCoordinate.vue";
 import NotFound from "../views/NotFound.vue";
 
 const router = createRouter({
@@ -27,6 +29,16 @@ const router = createRouter({
       path: "/profile",
       name: "profile",
       component: Profile,
+    },
+    {
+      path: "/new-post",
+      name: "new-post",
+      component: CityPost,
+    },
+    {
+      path: "/new-post2",
+      name: "new-post2",
+      component: CoordinatePost,
     },
     {
       path: "/:pathMatch(.*)*",
