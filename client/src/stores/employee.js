@@ -20,7 +20,7 @@ export const useEmployeesStore = defineStore({
           },
         });
         this.employees = data;
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -37,7 +37,7 @@ export const useEmployeesStore = defineStore({
           },
         });
         this.oneEmployee = data;
-        console.log(data, "<<< by ID get employe");
+        // console.log(data, "<<< by ID get employe");
         return data;
       } catch (error) {
         console.log(error);
@@ -46,7 +46,7 @@ export const useEmployeesStore = defineStore({
     async deleteEmployeesById(id) {
       try {
         //! udah oke
-        console.log(id);
+        // console.log(id);
         let { data } = await axios({
           url: `https://laksana-baru.herokuapp.com/employees/${id}`,
           method: "delete",
@@ -56,7 +56,7 @@ export const useEmployeesStore = defineStore({
         });
         this.router.push("/employees");
         this.getEmployees();
-        console.log(data);
+        // console.log(data);
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -71,7 +71,7 @@ export const useEmployeesStore = defineStore({
     async addEmployees(name, imageUrl, birthDate, status, department) {
       try {
         //! udah oke
-        console.log(imageUrl, "<<image");
+        // console.log(imageUrl, "<<image");
         let formData = new FormData();
         formData.append("imageUrl", imageUrl);
         formData.append("name", name);
@@ -90,7 +90,7 @@ export const useEmployeesStore = defineStore({
         });
         this.router.push("/employees");
         this.getEmployees();
-        console.log(data);
+        // console.log(data);
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -99,7 +99,7 @@ export const useEmployeesStore = defineStore({
           timer: 1500,
         });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -110,26 +110,26 @@ export const useEmployeesStore = defineStore({
     async editEmployees(name, imageUrl, birthDate, status, department) {
       try {
         //! belum oke
-        console.log(
-          name,
-          imageUrl,
-          birthDate,
-          status,
-          department,
-          "dari edit store"
-        );
-        console.log("masuk ke edit employee");
-        console.log(this.oneEmployee, "ini oneEmploye");
-        console.log(this.oneEmployee.cloudinary_id, "<<<id nyaa edit");
-        console.log(imageUrl, "<<image");
+        // console.log(
+        //   name,
+        //   imageUrl,
+        //   birthDate,
+        //   status,
+        //   department,
+        //   "dari edit store"
+        // );
+        // console.log("masuk ke edit employee");
+        // console.log(this.oneEmployee, "ini oneEmploye");
+        // console.log(this.oneEmployee.cloudinary_id, "<<<id nyaa edit");
+        // console.log(imageUrl, "<<image");
         let formData = new FormData();
         formData.append("imageUrl", imageUrl);
         formData.append("name", name);
         formData.append("birthDate", birthDate);
         formData.append("status", status);
         formData.append("department", department);
-        console.log(formData);
-        console.log(formData.imageUrl);
+        // console.log(formData);
+        // console.log(formData.imageUrl);
         let { data } = await axios({
           url: `https://laksana-baru.herokuapp.com/employees/${this.oneEmployee.cloudinary_id}`,
           method: "put",
@@ -140,7 +140,7 @@ export const useEmployeesStore = defineStore({
         });
         this.router.push("/employees");
         this.getEmployees();
-        console.log(data);
+        // console.log(data);
         Swal.fire({
           position: "top-end",
           icon: "success",
