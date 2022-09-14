@@ -38,10 +38,10 @@ export default {
     // total stats win/lose
 
     const dataGamesUser = {
-      labels: ["Win", "Lose"],
+      labels: ["Lose", "Win"],
       datasets: [
         {
-          data: [this.totalWin, this.totalLose],
+          data: [this.totalLose, this.totalWin],
           backgroundColor: ["rgb(255, 99, 132)", "rgb(102, 255, 178)"],
           hoverOffset: 4,
         },
@@ -50,18 +50,13 @@ export default {
 
     const chartStatGame = document.getElementById("chart-game");
     const visualkanGameStat = new Chart(chartStatGame, {
-      type: "bar",
+      type: "pie",
       data: dataGamesUser,
       options: {
         plugins: {
           title: {
             display: true,
             text: "Games History :",
-          },
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
           },
         },
       },
@@ -112,42 +107,30 @@ export default {
     <div class="card p-4 justify-content-center">
       <div class="d-flex flex-column justify-content-center align-items-center">
         <span class="name mt-3">{{ username }}</span>
-        <div class="d-flex mt-2">
-          <button class="btn1 btn-dark">Edit Profile</button>
-        </div>
-        <div class="text mt-3">
-          <span> {{ bio }} </span>
-        </div>
 
-        <div class="text px-2 rounded mt-4">
-          <div class="container">
-            Games : <br />
-            Win : {{ totalWin }} <br />
-            Lose : {{ totalLose }} <br />
+        <div class="container row">
+          <div class="col">
+            <canvas id="chart-game" width="300" height="300"></canvas>
           </div>
-          <canvas id="chart-game" width="300" height="300"></canvas>
+          <div class="col">
+            <canvas id="chart-kartu" width="300" height="300"></canvas>
+          </div>
         </div>
 
-        <div class="text px-2 rounded mt-4">
-          <!-- <div class="container">
+        <!-- <div class="container">
             Cards Gained : <br />
             Monster Cards : {{ totalMonsterCard }} <br />
             Trap Cards :
             {{ totalTrapCard }} <br />
             Spell Cards : {{ totalSpellCard }}
           </div> -->
-          <canvas id="chart-kartu" width="300" height="300"></canvas>
-        </div>
 
-        <div class="text px-2 rounded mt-4">Latest 3 Cards :</div>
+        <span class="name mt-3">Latest 3 Cards :</span>
 
         <div class="px-2 rounded mt-4">
           <div class="container d-flex justify-content-center">
             <CardTCG v-for="card in cardList" :key="card.id" :card="card" />
           </div>
-        </div>
-        <div class="px-2 rounded mt-4 date">
-          <span class="join">Joined May,2021</span>
         </div>
       </div>
     </div>
@@ -155,11 +138,6 @@ export default {
 </template>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-}
-
 body {
   background-color: #000;
 }
