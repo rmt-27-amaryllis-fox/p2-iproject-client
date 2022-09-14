@@ -1,4 +1,7 @@
 <script>
+import { mapActions } from "pinia";
+import { usePostStore } from "../stores/post";
+
 export default {
   props: ["post"],
   data() {
@@ -12,12 +15,19 @@ export default {
       return this.post.createdAt.substring(0, 19).replace("T", " ");
     },
   },
+  methods: {
+    ...mapActions(usePostStore, ["fetchPost"]),
+    async fetchPostComponent() {
+      this.fetchPost(this.post.id);
+      this.$router.push(`/post/${this.post.id}`);
+    },
+  },
 };
 </script>
 
 <template>
   <div class="col d-flex justify-content-center">
-    <div class="card" style="width: 40rem">
+    <div class="card" style="width: 40rem" @click="fetchPostComponent">
       <img :src="post.imageUrl" class="card-img-top" alt="card-image" />
       <div class="card-body">
         <div class="row">
@@ -28,10 +38,11 @@ export default {
               class="flag-icon"
               style="border: black 0.5pt solid"
             />
-            <h4 class="fw-bolder">{{ post.location }}</h4>
-            <div></div>
+            <div class="mt-3">
+              <h4 class="fw-bolder">{{ post.location }}</h4>
+            </div>
           </div>
-          <div class="col">
+          <div class="col mt-2">
             <img
               :src="`${weatherIconUrl}/${post.weatherIcon}.png`"
               alt="weather-icon"

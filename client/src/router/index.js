@@ -5,6 +5,7 @@ import Login from "../views/Login.vue";
 import Profile from "../views/Profile.vue";
 import CityPost from "../views/AddPostByCity.vue";
 import CoordinatePost from "../views/AddPostByCoordinate.vue";
+import PostDetail from "../views/PostDetail.vue";
 import NotFound from "../views/NotFound.vue";
 
 const router = createRouter({
@@ -41,6 +42,16 @@ const router = createRouter({
       component: CoordinatePost,
     },
     {
+      path: "/new-post2",
+      name: "new-post2",
+      component: CoordinatePost,
+    },
+    {
+      path: "/post/:id",
+      name: "postDetail",
+      component: PostDetail,
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "NotFound",
       component: NotFound,
@@ -56,8 +67,8 @@ router.beforeEach((to, from, next) => {
     next({ name: "home" });
   } else if (to.name !== "login" && !isLogin) {
     next({ name: "login" });
-  } else if (to.name === "register" && isLogin) {
-    next({ name: "home" });
+    // } else if (to.name === "register" && isLogin) {
+    //   next({ name: "home" });
   } else {
     next();
   }

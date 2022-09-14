@@ -21,8 +21,10 @@ export default {
 
 <template>
   <!-- Home section -->
-  <section class="container-fluid home-bg pb-5">
-    <h1 style="text-align: center" class="mb-5">Home</h1>
+  <section class="container-fluid home-bg pb-5 home">
+    <h1 style="text-align: center; color: #fff" class="mb-4 mt-5 pt-3 pb-3">
+      Home
+    </h1>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <HomeCard v-for="post in posts" :key="post.id" :post="post" />
     </div>
@@ -31,7 +33,10 @@ export default {
 </template>
 
 <style scoped>
+.home {
+  margin-top: 4.7rem;
+}
 .home-bg {
-  background-color: #e8e9eb;
+  background-color: #0f3d3e;
 }
 </style>
