@@ -18,18 +18,18 @@ export default {
       <div class="container-fluid row">
         <div class="col">
           <a class="navbar-brand col" href="#">
-            <img src="./assets/eldenring-rune-icon.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-            OMOH8 ELDEN RING
+            <img src="../assets/eldenring-rune-icon.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            H8OMORING
           </a>
         </div>
         <div class="col-md-auto">
-          <a class="btn-nav">Home</a>
+          <router-link to="/" class="btn-nav">Home</router-link>
         </div>
         <div class="col-md-auto">
-          <a class="btn-nav">Login</a>
+          <router-link to="/login" class="btn-nav">Login</router-link>
         </div>
         <div class="col-md-auto">
-          <a class="btn-nav">Register</a>
+          <router-link to="/register" class="btn-nav">Register</router-link>
         </div>
       </div>
     </nav>

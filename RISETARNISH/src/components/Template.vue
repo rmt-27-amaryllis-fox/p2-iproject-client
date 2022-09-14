@@ -1,5 +1,6 @@
 <script>
 import { mapState, mapActions, mapWritableState } from 'pinia'
+import { useErapiStore } from '../stores/erapi'
 
 export default {
   name: '',

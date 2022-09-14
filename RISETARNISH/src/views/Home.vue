@@ -3,10 +3,12 @@ import { mapState, mapActions, mapWritableState } from 'pinia'
 import { useErapiStore } from '../stores/erapi'
 import Card from '../components/Card.vue';
 import Navbar from '../components/Navbar.vue'
+import Sidebar from '../components/Sidebar.vue'
+import Weapons from './Weapons.vue'
 
 export default {
   name: 'Home',
-  components: { Card, Navbar },
+  components: { Card, Navbar, Sidebar, Weapons },
   data() {
     return {
       currentPage: 1
@@ -19,7 +21,8 @@ export default {
   },
   methods: {
     ...mapActions(useErapiStore, {
-      getWeapon: 'getWeapon'
+      getWeapon: 'getWeapon',
+      weaponByCategory: 'weaponByCategory'
     }),
 
     async triggerPagination(page) {
@@ -33,6 +36,10 @@ export default {
       } else {
         this.getWeapon(this.currentPage)
       }
+    },
+
+    async test() {
+      console.log('test')
     }
 
   },
@@ -58,48 +65,15 @@ export default {
 
     <div id="card">
       <!-- Sidebar -->
-      <div class="row filter-card">
-        <div class="filter-area">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Hello. </li>
-            <li class="list-group-item">
-              <a>Weapons</a>
-            </li>
-            <li class="list-group-item">
-              <a>Armors & Shields</a>
-            </li>
-            <li class="list-group-item">
-              <a>Talismans</a>
-            </li>
-            <li class="list-group-item">
-              <a>Shields</a>
-            </li>
-            <li class="list-group-item">
-              <a>Spirits Ashes</a>
-            </li>
-            <li class="list-group-item">
-              <a>Skills and Ashes of War</a>
-            </li>
-            <li class="list-group-item">
-              <a>Spells</a>
-            </li>
-            <li class="list-group-item">
-              <a>Items</a>
-            </li>
-            <li class="list-group-item"></li>
-          </ul>
-        </div>
-      </div>
-
+      <Sidebar />
       <!-- Card -->
       <div class="row three-by-three">
-        <Card 
+        <Card
           v-for="weapon in weapons.rows"
           :key="weapon.id"
           :weapon="weapon"
         />
       </div>
-
     </div>
   </section>
 </template>
@@ -107,6 +81,10 @@ export default {
 <style scoped>
 nav {
   margin-top: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 1.5em;
 }
 </style>
   

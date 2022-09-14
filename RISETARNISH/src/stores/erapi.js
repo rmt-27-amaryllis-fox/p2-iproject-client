@@ -6,13 +6,18 @@ import axios from 'axios'
 export const useErapiStore = defineStore('erapi', {
   state: () => ({
     baseUrl: 'http://localhost:3000',
-    weapons: []
+    weapons: [],
+    WeaponsByCategory: [],
+    armors: [],
+    armorsByCategory: [],
+    shields: [],
+    shieldsByCategory: [],
+    talismans: []
   }),
 
   actions: {
     async getWeapon(page) {
       try {
-        console.log(page)
         const { data } = await axios({
           method: 'GET',
           url: `${this.baseUrl}/local/weapons`,
@@ -22,7 +27,87 @@ export const useErapiStore = defineStore('erapi', {
       } catch (err) {
         console.log(err)
       }
-    }
+    },
+
+    async weaponByCategory(category) {
+      try {
+        const { data } = await axios({
+          method: 'POST',
+          url: `${this.baseUrl}/erapi/weapon/${category}`
+        })
+        this.WeaponsByCategory = data.data.weapon
+        this.router.push(`/weapon/${category}`)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    async getArmor() {
+      try {
+        const { data } = await axios({
+          method: "GET",
+          url: `${this.baseUrl}/local/armors`,
+        })
+        this.armors = data
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    
+    async armorByCategory(category) {
+      try {
+        const { data } = await axios({
+          method: 'POST',
+          url: `${this.baseUrl}/erapi/armor/${category}`
+        })
+        this.armorsByCategory = data.data.armor
+        this.router.push(`/armor/${category}`)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    async getShield() {
+      try {
+        const { data } = await axios({
+          method: "GET",
+          url: `${this.baseUrl}/local/shields`,
+        })
+        this.shields = data
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    
+    
+    async shieldByCategory(category) {
+      try {
+        const { data } = await axios({
+          method: 'POST',
+          url: `${this.baseUrl}/erapi/shield/${category}`
+        })
+        this.shieldsByCategory = data.data.shield
+        this.router.push(`/shield/${category}`)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    async getTalisman(page) {
+      try {
+        if (!page) {
+          page = 1
+        }
+        const { data } = await axios({
+          method: 'POST',
+          url: `${this.baseUrl}/erapi/talisman`,
+          params: { page }
+        })
+        this.talismans = data.data.talisman
+      } catch (err) {
+        console.log(err)
+      }
+    },
   },
 
   getters: { },

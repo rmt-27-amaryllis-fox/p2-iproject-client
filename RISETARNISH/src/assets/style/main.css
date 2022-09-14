@@ -1,10 +1,11 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: 'Sorts Mill Goudy', serif;
 }
 
 div.container-landing {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
   text-align: center;
   margin-top: 7vh;
   margin-right: 10vw;
@@ -13,6 +14,7 @@ div.container-landing {
   display: grid;
   grid-template-columns: 55% 45%;
 }
+
 
 div#landing {
   margin-right: 1.5em;
@@ -36,6 +38,13 @@ div#container-trailer video {
 
 section#landing-page {
   background: url('../elden-ring-bg-4b90b97a1dbc5a3d6c6e0f329a6e2d79.webp') no-repeat 50% fixed;
+  background-size: cover;
+  overflow: hidden;
+  height: 100vh;
+}
+
+div.login-register {
+  background: url('../Elden-ring-background-page.png') no-repeat 50% fixed;
   background-size: cover;
   overflow: hidden;
   height: 100vh;
@@ -87,4 +96,35 @@ div.three-by-three {
 
 a {
   cursor: pointer;
+}
+
+
+.login-register-section {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+#register {
+  padding: 5%;
+  background-color: #282726;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  height: auto;
+}
+
+#register h3 {
+  text-align: center;
+  margin-bottom:9%;
+  color:white;
+}
+
+#login {
+  padding: 5%;
+  background-color: white;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+#login h3 {
+  text-align: center;
+  margin-bottom:9%;
+  color:black;
 }

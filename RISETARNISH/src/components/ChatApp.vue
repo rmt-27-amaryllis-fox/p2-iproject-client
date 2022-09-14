@@ -24,7 +24,9 @@ export default {
     join() {
       console.log(this.currentUser)
       this.joinend = true
-      this.socketInstance = io('http://localhost:3000')
+      this.socketInstance = io('http://localhost:3000', {
+        transports: ['websocket']
+      })
 
       this.socketInstance.on('message:received', (data) => {
         this.messages = this.messages.concat(data)
