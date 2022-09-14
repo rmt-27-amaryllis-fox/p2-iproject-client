@@ -3,10 +3,10 @@
     import { useUserStore } from '../stores/user';
     export default {
         computed : {
-            ...mapState(useUserStore, ['isLoggedIn'])
+            ...mapState(useUserStore, ['isLoggedIn', 'inLoginPage'])
         },
         methods : {
-            ...mapActions(useUserStore, ['logout'])
+            ...mapActions(useUserStore, ['logout', 'moveToLogin', 'moveToRegister'])
         }
     }
 </script>
@@ -24,10 +24,12 @@
           <router-link to="/" class="nav-link">Home</router-link>
         </li>
         <li class="nav-item" v-if="!isLoggedIn">
-          <router-link to="/register" class="nav-link">Register</router-link>
+          <!-- <router-link to="/register" class="nav-link">Register</router-link> -->
+          <a href="" @click.prevent="moveToRegister" class="nav-link">Register</a>
         </li>
         <li class="nav-item" v-if="!isLoggedIn">
-          <router-link to="/login" class="nav-link">Login</router-link>
+          <!-- <router-link to="/login" class="nav-link">Login</router-link> -->
+          <a href="" @click.prevent="moveToLogin" class="nav-link">Login</a>
         </li>
         <li class="nav-item" v-if="isLoggedIn">
           <router-link to="/wallet" class="nav-link">Wallet</router-link>

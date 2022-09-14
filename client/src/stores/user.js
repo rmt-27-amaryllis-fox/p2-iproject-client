@@ -6,7 +6,13 @@ export const useUserStore = defineStore('user', {
         email : '',
         password : '',
         baseUrl : 'http://localhost:3000',
-        isLoggedIn : false
+        isLoggedIn : false,
+        inLoginPage : false,
+        newUser : {
+            username : '',
+            email : '',
+            password : ''
+        }
     }),
 
     actions : {
@@ -34,6 +40,39 @@ export const useUserStore = defineStore('user', {
             localStorage.clear()
             this.isLoggedIn = false
             this.router.push('/login')
+        },
+
+        moveToLogin(){
+            this.router.push('/login')
+            this.inLoginPage = true
+        },
+
+        moveToRegister(){
+            this.router.push('/register')
+            this.inLoginPage = true
+        },
+
+        moveToHome(){
+            this.router.push('/')
+            this.inLoginPage = false
+        },
+
+        async register(){
+            try {
+                await axios({
+                    method : 'POST',
+                    url : this.baseUrl + '/user/register',
+                    data : {
+                        username : this.newUser.username,
+                        email : this.newUser.email,
+                        password : this.newUser.password
+                    }
+                })
+
+                this.router.push('/login')
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 })

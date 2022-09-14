@@ -7,7 +7,7 @@
       navbar
     },
     computed : {
-      ...mapWritableState(useUserStore, ['isLoggedIn'])
+      ...mapWritableState(useUserStore, ['inLoginPage', 'isLoggedIn'])
     },
     created(){
       if(localStorage.access_token){
@@ -19,7 +19,7 @@
 
 <template>
 
-<navbar v-if="isLoggedIn" />
+<navbar v-if="!inLoginPage || isLoggedIn"/>
 
 <router-view></router-view>
 

@@ -1,41 +1,48 @@
 <script>
+    import { mapWritableState, mapActions } from 'pinia';
+    import { useUserStore } from '../stores/user';
     export default {
+        computed : {
+            ...mapWritableState(useUserStore, ['inLoginPage', 'newUser'])
+        },
 
+        methods : {
+            ...mapActions(useUserStore, ['moveToHome', 'register'])
+        },
+
+        created(){
+            if(!localStorage.access_token){
+                this.inLoginPage = true
+            }
+        }
     }
 </script>
 
 <template>
     <div class="register-section">
     <div class="login-container">
+        <div class="back" @click="moveToHome">
+            ⬅︎
+        </div>
       <div class="form-section register">
           <div class="header-section">
             <h1 class="title">Register</h1>
           </div>
 
-          <form action="" method="post">
+          <form action="" method="post" @submit.prevent="register">
             <div class="form-register-item">
                 <label for="">Username</label>
-                <input type="text" name="Username" placeholder="Create a username">
+                <input type="text" name="Username" placeholder="Create a username" v-model="newUser.username">
             </div>
 
             <div class="form-register-item email">
                 <label for="">Email</label>
-                <input type="text" name="Email" placeholder="Enter your email" required>
+                <input type="text" name="Email" placeholder="Enter your email" required v-model="newUser.email">
             </div>
 
             <div class="form-register-item">
                 <label for="">Password</label>
-                <input type="password" name="password" placeholder="Create a password" required>
-            </div>
-
-            <div class="form-register-item">
-                <label for="">Phone Number</label>
-                <input type="text" name="phoneNumber" placeholder="Input your phone number">
-            </div>
-
-            <div class="form-register-item">
-                <label for="">Address</label>
-                <textarea name="address" id="" rows="5" placeholder="input your address"></textarea>
+                <input type="password" name="password" placeholder="Create a password" required v-model="newUser.password">
             </div>
               
               <button class='form-btn'>Register</button>

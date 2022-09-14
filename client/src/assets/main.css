@@ -4,7 +4,7 @@
 
 .form-section {
     width: 500px;
-    margin-top: 25vh;
+    margin-top: 20vh;
 }
 
 form {
@@ -288,4 +288,18 @@ form {
 
 .buy {
     width: 100%;
+}
+
+.back {
+    width: fit-content;
+    margin-left: 10px;
+    font-size: 25px;
+}
+
+.back:hover {
+    cursor: pointer;
+}
+
+.nav-item {
+    margin-left: 30px;
 }

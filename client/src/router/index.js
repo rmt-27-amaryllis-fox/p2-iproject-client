@@ -29,6 +29,10 @@ router.beforeEach((to, from, next) => {
     next({name : 'loginPage'})
   }
 
+  else if(to.name == "buyCoinPage" && !isLoggedIn){
+    next({name : 'loginPage'})
+  }
+
   else {
     next();
   }
