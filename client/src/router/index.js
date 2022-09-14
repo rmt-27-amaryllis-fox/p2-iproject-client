@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../views/HomePage.vue'
 import LoginPage from '../views/LoginPage.vue'
 import RegisterPage from '../views/RegisterPage.vue'
+import Confirmation from '../views/Confirmation.vue'
 import MoviePage from '../views/MoviePage.vue'
 import SeriesPage from '../views/SeriesPage.vue'
 import DetailMovie from '../views/DetailMovie.vue'
@@ -25,6 +26,16 @@ const router = createRouter({
       path: "/register",
       name: "Register",
       component: RegisterPage
+    },
+    {
+      path: "/confirmation",
+      name: "Confirmation",
+      component: Confirmation
+    },
+    {
+      path: "/confirmation/:token",
+      name: "checkToken",
+      component: Confirmation
     },
     {
       path: "/movie",
@@ -52,6 +63,15 @@ const router = createRouter({
       component: DetailSeries
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.access_token
+  const isVerified = localStorage.status
+  if (to.name == "Watchlist" && !isAuthenticated) next("/login")
+  else if (to.name == "Login" && isAuthenticated || to.name == "Register" && isAuthenticated) next('/')
+  else if (to.path == '/confirmation' && isVerified || to.name == 'checkToken' && isVerified) next('/')
+  else next()
 })
 
 export default router

@@ -1,5 +1,26 @@
 <script>
-export default {};
+import {mapActions} from 'pinia';
+import {useCounterStore} from '../stores/counter';
+
+export default {
+    methods: {
+        ...mapActions(useCounterStore, ['registerHandler']),
+        localRegisterHandler() {
+            this.registerHandler({
+                fullname: this.fullname,
+                email: this.email,
+                password: this.password
+            })
+        }
+    },
+    data() {
+        return {
+            fullname: "",
+            email: "",
+            password: ""
+        }
+    }
+};
 </script>
 <template>
     <main class="page-wrapper pt-5">
@@ -42,7 +63,7 @@ export default {};
                             <div class="text-light opacity-70 px-3">Or</div>
                             <hr class="hr-light w-100" />
                         </div>
-                        <form class="needs-validation" novalidate="">
+                        <form @submit.prevent="localRegisterHandler">
                             <div class="mb-4">
                                 <label
                                     class="form-label text-light"
@@ -55,6 +76,7 @@ export default {};
                                     id="signup-name"
                                     placeholder="Enter your full name"
                                     required=""
+                                    v-model="fullname"
                                 />
                             </div>
                             <div class="mb-4">
@@ -69,6 +91,7 @@ export default {};
                                     id="signup-email"
                                     placeholder="Enter your email"
                                     required=""
+                                    v-model="email"
                                 />
                             </div>
                             <div class="mb-4">
@@ -87,6 +110,7 @@ export default {};
                                         id="signup-password"
                                         minlength="8"
                                         required=""
+                                        v-model="password"
                                     />
                                 </div>
                             </div>

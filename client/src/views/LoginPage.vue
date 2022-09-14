@@ -1,5 +1,24 @@
 <script>
-export default {};
+import {mapActions} from 'pinia';
+import {useCounterStore} from '../stores/counter';
+
+export default {
+    data() {
+        return {
+            email: "",
+            password: ""
+        }
+    },
+    methods: {
+        ...mapActions(useCounterStore, ['loginHandler']),
+        localLoginHandler() {
+            this.loginHandler({
+                email: this.email,
+                password: this.password
+            })
+        }
+    }
+};
 </script>
 <template>
     <main class="page-wrapper pt-5">
@@ -45,7 +64,7 @@ export default {};
                             <div class="text-light opacity-70 px-3">Or</div>
                             <hr class="hr-light w-100" />
                         </div>
-                        <form class="needs-validation" novalidate="">
+                        <form @submit.prevent="localLoginHandler">
                             <div class="mb-4">
                                 <label
                                     class="form-label text-light mb-2"
@@ -58,6 +77,7 @@ export default {};
                                     id="signin-email"
                                     placeholder="Enter your email"
                                     required=""
+                                    v-model="email"
                                 />
                             </div>
                             <div class="mb-4">
@@ -77,6 +97,7 @@ export default {};
                                         id="signin-password"
                                         placeholder="Enter password"
                                         required=""
+                                        v-model="password"
                                     />
                                 </div>
                             </div>

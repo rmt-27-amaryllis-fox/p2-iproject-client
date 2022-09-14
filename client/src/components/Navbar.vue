@@ -1,12 +1,15 @@
 <script>
-import {mapWritableState} from 'pinia';
-import {useCounterStore} from '../stores/counter';
+import { mapActions, mapWritableState } from "pinia";
+import { useCounterStore } from "../stores/counter";
 
-    export default {
-        computed: {
-            ...mapWritableState(useCounterStore, ['isLogin'])
-        }
+export default {
+    computed: {
+        ...mapWritableState(useCounterStore, ["isLogin"]),
+    },
+    methods: {
+        ...mapActions(useCounterStore, ['logout'])
     }
+};
 </script>
 <template>
     <header
@@ -43,7 +46,8 @@ import {useCounterStore} from '../stores/counter';
                 ><i class="bi bi-eye me-2"></i>Watchlist</a
             >
 
-            <a
+            <a  
+                @click.prevent="logout"
                 class="btn btn-link border border-primary btn-light btn-primary btn-sm d-none d-lg-block order-lg-3 mx-2"
                 href=""
                 v-if="isLogin"
