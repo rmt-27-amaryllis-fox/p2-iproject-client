@@ -13,7 +13,7 @@ export const useInventoriesStore = defineStore({
     // total: 0,
     // product:[],
     filter1: "",
-    currentPage: 0,
+    currentPage: 1,
     totalItems: 0,
     totalPages: 0,
   }),
