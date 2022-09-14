@@ -1,6 +1,7 @@
 <script>
 export default {
-  name: "WatchlistItem"
+  name: "WatchlistItem",
+  props: ['ticker', 'company', 'targetPrice', 'date']
 }
 </script>
 
@@ -8,16 +9,16 @@ export default {
   <div class="col-md-4 mb-4">
     <div class="card">
       <div class="card-header bg-transparent d-flex justify-content-center">
-        <span style="">Created : 12 Agustus 2022</span>
+        <span style="">Created : {{ new Date(date).toDateString() }}</span>
       </div>
-      <div class="card-body">
+      <div class="card-body" style="height: 120px">
         <div class="row">
-          <div class="col-md-6">
-            <h5 class="card-title">ACES</h5>
-            <p class="card-text">PT Aces Hardware Indonesia</p>
+          <div class="col-md-8">
+            <h5 class="card-title">{{ ticker }}</h5>
+            <p class="card-text">{{company}}</p>
           </div>
-          <div class="col-md-6">
-            <h5 class="card-title">1500</h5>
+          <div class="col-md-4">
+            <h5 class="card-title">{{targetPrice}}</h5>
             <p class="card-text">Target Price</p>
           </div>
         </div>

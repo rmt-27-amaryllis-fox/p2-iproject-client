@@ -9,8 +9,8 @@ export default {
     <div class="card">
       <div class="card-body">
         <p class="card-text">
-          Watchlist merupakan analisis intrinsik value terhadap emiten pilihan yang dilakukan oleh Tim Analyst
-          Kantong Saham. Analisis berikut bukan merupakan rekomendasi, nasihat serta ajakan membeli ataupun menjual.
+          The watchlist is an analysis of the intrinsic value of selected issuers conducted by Kantong Saham Analyst
+          Team. The following analysis does not constitute a recommendation, advice or solicitation to buy or sell.
         </p>
       </div>
     </div>

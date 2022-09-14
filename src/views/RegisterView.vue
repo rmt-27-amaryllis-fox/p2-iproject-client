@@ -1,27 +1,32 @@
 <script>
 import {mapActions} from "pinia";
 import {useUserStore} from "../stores/user";
+import LoadingBar from "../components/LoadingBar.vue";
 
 export default {
   name: "RegisterView",
+  components: {LoadingBar},
   data() {
     return {
       name: '',
       email: '',
       password: '',
+      invisible: true
     }
   },
   methods: {
     ...mapActions(useUserStore, ['registerHandler']),
     async onRegisterHandler() {
       try {
+        this.invisible = false;
         await this.registerHandler({
           name: this.name,
           email: this.email,
           password: this.password
         });
+        this.invisible = true;
         Swal.fire({
-          position: 'top-end',
+          position: 'center',
           icon: 'success',
           title: 'Register success',
           showConfirmButton: false,
@@ -29,6 +34,7 @@ export default {
         })
         this.$router.push({name: 'login'});
       } catch (e) {
+        this.invisible = true;
         const message = e.response.data.message;
         Swal.fire({
           icon: 'error',
@@ -42,6 +48,8 @@ export default {
 </script>
 
 <template>
+  <LoadingBar v-if="!invisible"/>
+
   <div class="container mt-4">
     <div class="card m-auto" style="width: 50%">
       <img

@@ -20,5 +20,11 @@ export const useUserStore = defineStore('user', {
         password
       });
     },
+    fetchProfile() {
+      const access_token = localStorage.getItem('access_token');
+      return axios.get(`${this.baseUrl}/users`, {
+        headers: {access_token}
+      });
+    },
   },
 })

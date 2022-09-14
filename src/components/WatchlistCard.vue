@@ -3,7 +3,8 @@ import WatchlistItem from "./WatchlistItem.vue";
 
 export default {
   name: "WatchlistCard",
-  components: {WatchlistItem}
+  components: {WatchlistItem},
+  props: ['data']
 }
 </script>
 
@@ -12,7 +13,13 @@ export default {
     <div class="card">
       <div class="card-body">
         <div class="row">
-          <WatchlistItem/>
+          <WatchlistItem v-for="watchlist in data"
+                         :key="watchlist.id"
+                         :ticker="watchlist.ticker"
+                         :company="watchlist.company"
+                         :targetPrice="watchlist.targetPrice"
+                         :date="watchlist.updatedAt"
+          />
         </div>
       </div>
     </div>
