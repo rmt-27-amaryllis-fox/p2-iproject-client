@@ -12,7 +12,7 @@ export default {
 
 <template>
   <NavBar />
-  <HomePage />
+  <!-- <HomePage /> -->
 
   <RouterView />
 </template>

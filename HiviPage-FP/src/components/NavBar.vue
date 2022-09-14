@@ -33,21 +33,40 @@ export default {
           <span class="ml-3 text-xl">Hivi-Club</span>
         </a>
         <nav
-          class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center"
+          class="navbar-link md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center"
         >
-          <a class="mr-5 hover:text-gray-900">Home</a>
-          <a class="mr-5 hover:text-gray-900">Playlist</a>
-          <a class="mr-5 hover:text-gray-900">Upcoming gigs</a>
-          <a class="mr-5 hover:text-gray-900">Merchandise</a>
+          <router-link class="mr-5 hover:text-gray-900" to="/"
+            >Home</router-link
+          >
+          <router-link class="mr-5 hover:text-gray-900" to="/playlists"
+            >Playlists</router-link
+          >
+          <router-link class="mr-5 hover:text-gray-900" to="/gigs"
+            >Upcoming gigs</router-link
+          >
+          <router-link class="mr-5 hover:text-gray-900" to="/gigs"
+            >Merchandise</router-link
+          >
+          <!-- <a class="mr-5 hover:text-gray-900">Home</a>
+          <a class="mr-5 hover:text-gray-900">Playlists</a> -->
+          <!-- <a class="mr-5 hover:text-gray-900">Upcoming gigs</a> -->
+          <!-- <a class="mr-5 hover:text-gray-900">Merchandise</a> -->
         </nav>
       </div>
     </header>
   </section>
 </template>
 <style scoped>
+.navbar-link {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .navbar {
   background-color: darkorange;
   font-weight: 400;
+
+  top: 0;
 }
 a {
   cursor: pointer;
