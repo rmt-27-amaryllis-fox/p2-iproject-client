@@ -41,6 +41,9 @@ export default {
         <li class="nav-item">
           <router-link to="/" class="nav-link">Home</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/myprofile" class="nav-link">myprofile</router-link>
+        </li>
         <li v-if="isLogin === true" class="nav-item">
           <router-link to="/wishlists" class="nav-link"
             >My Wishlists</router-link
