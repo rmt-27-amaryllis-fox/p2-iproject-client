@@ -1,6 +1,7 @@
 <script>
 import { mapActions, mapWritableState } from "pinia";
 import { useUserProfileMethodStore } from "../stores/userProfileMethod";
+import CardTCG from "../components/CardTCG.vue";
 
 export default {
   methods: {
@@ -18,16 +19,16 @@ export default {
       "cardList",
     ]),
   },
-
   created() {
     this.getUserProfile();
   },
+  components: { CardTCG },
 };
 </script>
 
 <template>
   <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
-    <div class="card p-4">
+    <div class="card p-4 justify-content-center">
       <div class="d-flex flex-column justify-content-center align-items-center">
         <span class="name mt-3">{{ username }}</span>
         <div class="d-flex mt-2">
@@ -38,7 +39,14 @@ export default {
         </div>
 
         <div class="text px-2 rounded mt-4">
-          Statistics :
+          <div class="container">
+            Games : <br />
+            Win : {{ totalWin }} <br />
+            Lose : {{ totalLose }} <br />
+          </div>
+        </div>
+
+        <div class="text px-2 rounded mt-4">
           <div class="container">
             Cards Gained : <br />
             Monster Cards : {{ totalMonsterCard }} <br />
@@ -48,7 +56,13 @@ export default {
           </div>
         </div>
 
-        <div class="px-2 rounded mt-4">Latest 3 cards :</div>
+        <div class="text px-2 rounded mt-4">Latest 3 Cards :</div>
+
+        <div class="px-2 rounded mt-4">
+          <div class="container d-flex justify-content-center">
+            <CardTCG v-for="card in cardList" :key="card.id" :card="card" />
+          </div>
+        </div>
         <div class="px-2 rounded mt-4 date">
           <span class="join">Joined May,2021</span>
         </div>
@@ -68,7 +82,7 @@ body {
 }
 
 .card {
-  width: 550px;
+  width: 950px;
   background-color: #efefef;
   border: none;
   cursor: pointer;
