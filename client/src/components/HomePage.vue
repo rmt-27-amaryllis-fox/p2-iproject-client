@@ -69,6 +69,7 @@ export default {
         aria-label="Default select example"
       >
         <option value="" selected disabled>Filter By Categories</option>
+        <option value="">All</option>
         <option value="1">Pakaian</option>
         <option value="2">Warehouse</option>
       </select>
