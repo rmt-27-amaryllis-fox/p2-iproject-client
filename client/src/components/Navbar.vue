@@ -71,7 +71,7 @@ export default {
                 class="rounded-circle"
               />
             </a>
-            <ul class="dropdown-menu text-small shadow">
+            <ul class="dropdown-menu text-small shadow dropdown-options">
               <li>
                 <router-link to="/new-post" class="dropdown-item" href="#"
                   >New Post</router-link

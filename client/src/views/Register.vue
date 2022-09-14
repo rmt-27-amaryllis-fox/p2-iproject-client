@@ -53,7 +53,7 @@ export default {
                   </div>
 
                   <h5
-                    class="fw-bold mb-3 card-title"
+                    class="fw-bold mb-3 card-title title"
                     style="letter-spacing: 1px"
                   >
                     Sign up an account

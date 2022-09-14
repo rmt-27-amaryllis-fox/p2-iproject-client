@@ -44,15 +44,15 @@ export default {
                 />
                 <button
                   type="button"
-                  class="btn btn-outline-dark"
-                  data-mdb-ripple-color="dark"
+                  class="btn btn-dark"
+                  data-mdb-ripple-color="primary"
                   style="z-index: 1"
                   @click="editProfileComponent"
                 >
                   Edit profile
                 </button>
               </div>
-              <div class="ms-3 mb-2" style="margin-top: 110px">
+              <div class="ms-3 mb-2 title-big" style="margin-top: 110px">
                 <h3>{{ userProfile.username }}</h3>
                 <h5>{{ userProfile.location }}</h5>
               </div>
@@ -60,16 +60,21 @@ export default {
             <div class="p-4 text-black" style="background-color: #f1f1f1">
               <div class="d-flex justify-content-end text-center py-1">
                 <div>
-                  <p class="mb-1 h3">{{ userProfile.Posts.length }}</p>
+                  <p class="mb-1 h3 title-big">
+                    {{ userProfile.Posts.length }}
+                  </p>
                   <p class="large text-muted mb-0">Posts</p>
                 </div>
               </div>
             </div>
             <div class="card-body p-4 text-black">
               <div class="mb-5">
-                <p class="lead fw-bold mb-1">About me</p>
+                <p class="lead fw-bold mb-1 title">About me</p>
                 <div class="p-4" style="background-color: #f1f1f1">
-                  <p class="font-italic mb-1" style="text-align: justify">
+                  <p
+                    class="font-italic mb-1 caption"
+                    style="text-align: justify"
+                  >
                     {{ userProfile.description }}
                   </p>
                 </div>
@@ -77,7 +82,7 @@ export default {
               <div
                 class="d-flex justify-content-between align-items-center mb-4"
               >
-                <p class="lead fw-bold mb-0">Posts</p>
+                <p class="lead fw-bold mb-0 title">Posts</p>
               </div>
 
               <div class="row row-cols-md-3 g-2">

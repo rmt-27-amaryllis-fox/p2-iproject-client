@@ -48,15 +48,17 @@ export default {
         </div>
         <div class="col-md-6 mt-1">
           <div class="col location">
-            <h2 class="display-5 fw-bolder">{{ post.location }}</h2>
+            <h2 class="display-6 fw-bolder card-weather-desc">
+              {{ post.location }}
+            </h2>
           </div>
-          <div class="row d-flex align-items-center">
-            <h3>{{ post.weatherMain }}</h3>
+          <div class="row d-flex align-items-center card-weather-desc">
+            <h4>{{ post.weatherMain }}</h4>
           </div>
-          <div class="fs-5 mb-3 content">
+          <div class="fs-5 mb-3 content card-weather-desc">
             <span>{{ post.weatherDescription }}</span>
           </div>
-          <div class="product-description">
+          <div class="post-detail-caption">
             <p class="lead">{{ post.caption }}</p>
           </div>
           <div class="d-flex mt-3">
@@ -71,7 +73,7 @@ export default {
               Back
             </button>
           </div>
-          <div class="d-flex flex-row-reverse mt-4">
+          <div class="d-flex flex-row-reverse mt-4 card-created-at">
             <p>Posted by : {{ post.User.username }} ({{ formattedDate }})</p>
           </div>
         </div>

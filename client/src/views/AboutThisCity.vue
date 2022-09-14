@@ -19,13 +19,13 @@ export default {
 
 <template>
   <!-- About this city section-->
-  <section class="page" style="background-color: #fff">
+  <section class="page">
     <div
       class="container-fluid d-flex justify-content-center align-items-center h-100"
     >
-      <div class="row d-flex post-detail" style="border: 0.1rem white solid">
+      <div class="row d-flex post-detail">
         <div class="col-md-12">
-          <h2 class="display-6 fw-bolder">{{ post.location }}</h2>
+          <h2 class="display-6 fw-bolder title-big">{{ post.location }}</h2>
           <img
             class="card-img-top mb-md-0 image mx-auto"
             :src="cityThumbnail"
@@ -33,7 +33,7 @@ export default {
           />
         </div>
         <div class="col location"></div>
-        <p class="mt-3 paragraph">{{ cityParagraph }}</p>
+        <p class="mt-3 paragraph caption">{{ cityParagraph }}</p>
 
         <div class="d-flex mt-3">
           <button class="btn btn-dark" type="button" @click="$router.go(-1)">

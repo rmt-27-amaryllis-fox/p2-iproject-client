@@ -30,12 +30,15 @@
                     />
                   </div>
 
-                  <h4 class="fw-bold mb-3 pb-3" style="letter-spacing: 1px">
+                  <h4
+                    class="fw-bold mb-3 pb-3 title-big"
+                    style="letter-spacing: 1px"
+                  >
                     Take only pictures, <br />
                     leave only footprints.
                   </h4>
 
-                  <p style="text-align: justify">
+                  <p style="text-align: justify" class="caption">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                     Nesciunt quam aperiam perferendis commodi autem cumque
                     veritatis tenetur nobis dolorum! Repellat temporibus laborum

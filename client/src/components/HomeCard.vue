@@ -39,7 +39,7 @@ export default {
               style="border: black 0.5pt solid"
             />
             <div class="mt-2">
-              <h4 class="fw-bolder">{{ post.location }}</h4>
+              <h4 class="fw-bolder card-location">{{ post.location }}</h4>
             </div>
           </div>
           <div class="col mt-2">
@@ -50,7 +50,7 @@ export default {
             />
           </div>
         </div>
-        <h6 class="weather-description">
+        <h6 class="weather-description card-weather-desc">
           {{ post.weatherMain }}, {{ post.weatherDescription }}
         </h6>
         <p class="card-caption mb-4">
