@@ -34,13 +34,26 @@ export default{
         this.currentPage = 'detail-plan'
     },
     methods: {
-        ...mapActions(useProductStore, ['fetchAllPlan', 'fetchSpecifiedPlan']),
+        ...mapActions(useProductStore, ['fetchAllPlan', 'fetchSpecifiedPlan', 'changingSpecifiedPlan']),
         async changeDetail(num){
-            this.$router.push(`/detail-plan/${num}`)
-            this.targetedId = num
+            // this.$router.push(`/detail-plan/${num}`)
+            // this.targetedId = num
+            // let list = this.AllPlan.map((el)=>{
+            //     return el.id
+            // })
+            // for (let i = 0; i < list.length; i++) {
+            //     let key = list[i]
+            //     if(i+1 == this.targetedId){
+            //         this.listId[key] = 'selected'
+            //     } else{
+            //         this.listId[key] = ''
+            //     } 
+            // }
+            await this.changingSpecifiedPlan(num)
             let list = this.AllPlan.map((el)=>{
                 return el.id
             })
+            this.targetedId = num
             for (let i = 0; i < list.length; i++) {
                 let key = list[i]
                 if(i+1 == this.targetedId){
@@ -49,7 +62,7 @@ export default{
                     this.listId[key] = ''
                 } 
             }
-            
+            console.log(this.listId);
         }
 
     },

@@ -15,29 +15,49 @@ export default{
         return{
             targetedId:0,
             pricing:0,
-            productlist: [],
         }
     },
     async created(){
         this.targetedId = this.$route.params.planId
+        await this.changingSpecifiedPlan(this.targetedId)
+
         await this.fetchSpecifiedPlan(this.targetedId)
         this.pricing = this.selectedPlan.price.toLocaleString('id-ID')
-        this.productlist = (this.selectedPlan.Products).map((e)=>{
-            let product = {
-                name: e.name,
-                image_url: e.image_url
-            }
-            return product
-        })
+        // this.productlist = (this.selectedPlan.Products).map((e)=>{
+        //     let product = {
+        //         id: e.id,
+        //         name: e.name,
+        //         image_url: e.image_url
+        //     }
+        //     return product
+        // })
+        console.log(this.selectedPlan, 'didetail');
     },
     methods:{
-        ...mapActions(useProductStore, ['fetchSpecifiedPlan']),
-        toDetail(){
-
+        ...mapActions(useProductStore, ['fetchSpecifiedPlan', 'changingSpecifiedPlan', 'addMyPlan']),
+        toCart(num){
+            this.addMyPlan(num)
+            this.$router.push('/CartPage')
+        },
+        async toAlaCarte(num){
+            console.log(num, 'tes');
+            let target = num + 5
+            this.changingSpecifiedPlan(target)
+            this.$router.push(`/detail-plan/${target}`)
+            await this.fetchSpecifiedPlan(target)
+            this.pricing = this.selectedPlan.price.toLocaleString('id-ID')
+            this.productlist = (this.selectedPlan.Products).map((e)=>{
+                let product = {
+                    id: e.id,
+                    name: e.name,
+                    image_url: e.image_url
+                }
+            return product
+        })
         }
     },
     computed:{
-        ...mapState(useProductStore, ['selectedPlan']),
+        ...mapState(useProductStore, ['selectedPlan','productlist']),
         ...mapWritableState(useCustomerStore, ['currentPage'])
     }
 }
@@ -80,7 +100,7 @@ export default{
 					<div class="details col-md-6">
 						<h3 class="product-title">{{selectedPlan.name}}</h3>
 						<p class="product-description">{{selectedPlan.description}}</p>
-						<h6 class="price">Current Price: <span>Rp. {{pricing}}</span><button class="butonDetail">add to MyPlan</button></h6>
+						<h6 class="price">Current Price: <span>Rp. {{pricing}}</span><button @click="toCart(selectedPlan.id)" class="butonDetail">add to MyPlan</button></h6>
 						<h6 class="price">Package: </h6>
 
 						<h6 class="listpro" v-for="(e, i) in productlist" :key="i">
@@ -89,7 +109,7 @@ export default{
                                  
                             </li>
                             <img :src=e.image_url style="width:60px; ">
-                            <button @click="toDetail" class="butonDetail">buy ala carte</button>
+                            <button v-if="productlist.length>1" @click="toAlaCarte(e.id)" class="butonDetail">buy ala carte</button>
                             <br>
                             <br>
                         </h6>
