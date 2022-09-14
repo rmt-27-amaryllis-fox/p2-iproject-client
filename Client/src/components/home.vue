@@ -10,18 +10,20 @@
     </div>
     <!-- SEARCH BAR -->
     <section>
-      <div class="container w-25">
+      <div class="container w-50">
         <div class="input-group">
-          <form @submit.prevent="anime">
+          <form @submit.prevent="anime" class="w-40 d-flex">
             <input
               type="search"
-              class="form-control rounded"
+              class="form-control rounded d-flex justify-content-center"
+              style="width: 300px"
               placeholder="Search"
-              aria-label="Search"
-              aria-describedby="search-addon"
               v-model="search"
             />
-            <button type="submit" class="btn btn-outline-primary">
+            <button
+              type="submit"
+              class="btn btn-dark d-flex justify-content-center"
+            >
               search
             </button>
           </form>
@@ -42,6 +44,8 @@
       </Carousel>
     </div>
     <!-- end of carousell -->
+
+    <!-- card -->
     <h5 class="text-center text-light"></h5>
     <div class="row ml-5 mt-5">
       <div
@@ -51,7 +55,7 @@
         style="width: 18rem"
       >
         <img
-          class="card-img-top mt-4 shadow p-3 mb-3 bg-body rounded"
+          class="card-img-top mt-4 rounded mx-auto d-block"
           :src="e.images.jpg.large_image_url"
           alt="Card image cap"
         />
@@ -61,14 +65,34 @@
           <p class="card-text text-center">Released Year: {{ e.year }}</p>
           <button
             @click="openTrailer(e.title, e.trailer.url)"
-            class="btn btn-primary mt-auto text-center"
+            class="btn btn-primary mt-auto text-center mb-1"
           >
             Watch Movie
           </button>
         </div>
         <!-- start sharing social media -->
-
-        <!-- end sharing social media -->
+        <span class="d-flex justify-content-center mt-0"> Share on :</span>
+        <div class="container d-flex justify-content-center">
+          <ShareNetwork
+            network="facebook"
+            url="https://youtu.be/{{e.trailer.youtube_id}}"
+            title="Say Hi to ANIMEDORO."
+            description="Ayo nonton {{e.title}} di ANIMEDORO sekaligus Judi!"
+            quote="super ANIMEDORO"
+            hashtags="jud,online,anime"
+            class="fa fa-facebook mt-1"
+          >
+          </ShareNetwork>
+          <ShareNetwork
+            network="twitter"
+            url="https://youtu.be/{{e.trailer.youtube_id}}"
+            title="Say Hi to ANIMEDORO."
+            quote="super ANIMEDORO"
+            hashtags="jud,online,anime"
+            class="fa fa-twitter"
+          >
+          </ShareNetwork>
+        </div>
       </div>
     </div>
 
@@ -103,6 +127,8 @@ import { useCounterStore } from "../stores/counter";
 import Swal from "sweetalert2";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide } from "vue3-carousel";
+import VueSocialSharing from "vue-social-sharing";
+
 export default {
   name: "App",
   components: {
@@ -149,15 +175,15 @@ export default {
       ) {
         let image = this.getRandomItem();
         console.log(image, "image");
-        setTimeout(() => {
-          Swal.fire({
-            html: `<img src="${image}" width="600" height='500'>`,
-            width: 600,
-            background: "#2A363B",
-            footer: `<a class="btn btn-primary" href="https://mesin-mpo.com/register/76B1F7A9">Mulai Menghasilkan Uang Secara Instant!</a>`,
-          });
-          this.checkPremium();
-        }, 10000);
+        // setTimeout(() => {
+        //   Swal.fire({
+        //     html: `<img src="${image}" width="600" height='500'>`,
+        //     width: 600,
+        //     background: "#2A363B",
+        //     footer: `<a class="btn btn-primary" href="https://mesin-mpo.com/register/76B1F7A9">Mulai Menghasilkan Uang Secara Instant!</a>`,
+        //   });
+        //   this.checkPremium();
+        // }, 10000);
       }
     },
     openTrailer(anime, videoUrl) {
@@ -193,7 +219,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .card-img-top {
   width: 100%;
   height: 15vw;

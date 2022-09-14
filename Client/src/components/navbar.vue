@@ -14,27 +14,28 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <router-link to="/"
-          ><li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
+          ><li class="nav-item active text-decoration-none">
+            <a class="nav-link text-decoration-none" href="#">Home</a>
           </li></router-link
         >
         <router-link to="/register" v-if="!isLogin">
           <li class="nav-item">
-            <a class="nav-link" href="#">Register</a>
+            <a class="nav-link text-decoration-none" href="#">Register</a>
           </li>
         </router-link>
 
         <router-link to="/login" v-if="!isLogin">
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link text-decoration-none" href="#">Login</a>
           </li>
         </router-link>
         <button
           @click.prevent="logoutAction"
           style="background: transparent"
+          class=""
           v-if="isLogin"
         >
-          <li class="nav-item">
+          <li class="nav-item nav navbar-nav navbar-right">
             <a class="nav-link" href="#">Log Out</a>
           </li>
         </button>
