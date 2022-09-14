@@ -37,11 +37,15 @@ export const useCounterStore = defineStore("Counter", {
       this.isLogin = false;
       router.push("/login");
     },
-    async getAnime(page) {
+    async getAnime(page, search) {
+      console.log(search, "<<<");
       try {
         let result = await axios({
           method: "get",
           url: this.apiUrl + `?page=${page}`,
+          params: {
+            letter: search,
+          },
         });
         console.log(result.data.data, "ini result");
         if (result) {
