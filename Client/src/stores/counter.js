@@ -1,11 +1,11 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import router from "../router";
-
+import Swal from "sweetalert2";
 export const useCounterStore = defineStore("Counter", {
   state: () => ({
     isLogin: false,
-    baseUrl: `http://localhost:3000`,
+    baseUrl: `https://anime-doro.herokuapp.com`,
     apiUrl: `https://api.jikan.moe/v4/anime`,
     dataAnime: [],
   }),
@@ -21,7 +21,10 @@ export const useCounterStore = defineStore("Counter", {
           },
         });
         if (result) {
+          console.log(result, "<<<");
           localStorage.setItem("access_token", result.data.access_token);
+          localStorage.setItem("paid", result.data.paid);
+          localStorage.setItem("paymentProof", result.data.paymentProof);
           this.isLogin = true;
           router.push("/");
         }
@@ -62,6 +65,7 @@ export const useCounterStore = defineStore("Counter", {
         });
 
         if (result) {
+          Swal.fire("Virtual Account Number has Been Sent to Your Email!");
           router.push("/login");
         }
       } catch (error) {
@@ -72,6 +76,12 @@ export const useCounterStore = defineStore("Counter", {
       if (localStorage.access_token) {
         this.isLogin = true;
       }
+    },
+    showAddsFalse() {
+      this.showAdds = false;
+    },
+    showAddsTrue() {
+      this.showAdds = true;
     },
   },
 });

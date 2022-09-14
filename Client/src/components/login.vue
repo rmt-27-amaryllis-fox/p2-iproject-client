@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { useCounterStore } from "../stores/counter";
 export default {
   data() {
@@ -32,6 +32,9 @@ export default {
       password: "",
     };
   },
+  //   computed: {
+  //     ...mapState(useCounterStore, ["showAdds"]),
+  //   },
   methods: {
     ...mapActions(useCounterStore, ["loginAction", "logoutAction"]),
     async login() {
@@ -40,6 +43,9 @@ export default {
       let password = this.password;
       this.loginAction(email, password);
     },
+  },
+  created() {
+    // this.showAddsFalse();
   },
 };
 </script>

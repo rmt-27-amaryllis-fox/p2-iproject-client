@@ -25,12 +25,12 @@
           <h5 class="card-title text-center">{{ e.title }}</h5>
           <p class="card-text text-center">{{ e.title_japanese }}</p>
           <p class="card-text text-center">Released Year: {{ e.year }}</p>
-          <a
-            :href="e.trailer.url"
-            target="”_blank”"
+          <button
+            @click="openTrailer(e.title, e.trailer.url)"
             class="btn btn-primary mt-auto text-center"
-            >Watch Trailer</a
           >
+            Watch Movie
+          </button>
         </div>
       </div>
     </div>
@@ -69,31 +69,53 @@ export default {
     return {
       page: 1,
       isPremium: false,
+      showAdds: true,
     };
   },
   computed: {
     ...mapState(useCounterStore, ["dataAnime"]),
   },
   methods: {
-    ...mapActions(useCounterStore, ["getAnime", "checkLogin"]),
+    ...mapActions(useCounterStore, ["getAnime", "checkLogin", "showAddsTrue"]),
     async changePage(page) {
       this.page = this.page + page;
       console.log(this.page, "asdfkj");
       await this.getAnime(this.page);
     },
     checkPremium() {
-      //   if (!this.isPremium) {
-      //     setTimeout(() => {
-      //       Swal.fire({
-      //         html: `<img src="https://assets.promediateknologi.com/crop/0x0:0x0/x/photo/2022/09/11/163415533.jpg" alt="">`,
-      //       });
-      //       this.checkPremium();
-      //     }, 3000);
-      //   }
+      if (
+        (localStorage.getItem("paid") === "false" &&
+          this.showAdds &&
+          this.$route.fullPath === "/") ||
+        (!localStorage.getItem("paid") &&
+          this.showAdds &&
+          this.$route.fullPath === "/")
+      ) {
+        // setTimeout(() => {
+        //   Swal.fire({
+        //     html: `<img src="https://assets.promediateknologi.com/crop/0x0:0x0/x/photo/2022/09/11/163415533.jpg" alt="">`,
+        //   });
+        //   this.checkPremium();
+        // }, 3000);
+      }
+    },
+    openTrailer(anime, videoUrl) {
+      videoUrl = `https://www.youtube.com/embed/${videoUrl.split("=")[1]}`;
+      console.log(videoUrl, "<<");
+      Swal.fire({
+        title: `<strong>${anime} Trailer</strong>`,
+        html: `<iframe width="1500" height="500" src="${videoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        width: 1500,
+      });
     },
   },
   created() {
     this.getAnime(this.page);
+    // this.showAdds = true;
+    // this.showAddsTrue();
     this.checkPremium();
   },
 };

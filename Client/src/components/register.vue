@@ -121,7 +121,7 @@
 </template>
 
 <script>
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { useCounterStore } from "../stores/counter";
 export default {
   data() {
@@ -132,8 +132,11 @@ export default {
       bank: "",
     };
   },
+  //   computed: {
+  //     ...mapState(useCounterStore, ["showAdds"]),
+  //   },
   methods: {
-    ...mapActions(useCounterStore, ["registerAction"]),
+    ...mapActions(useCounterStore, ["registerAction", "showAddsFalse"]),
     async register_Action() {
       let email = this.email;
       let password = this.password;
@@ -141,6 +144,10 @@ export default {
       let bank = this.bank;
       await this.registerAction(email, password, phoneNumber, bank);
     },
+  },
+  created() {
+    // this.showAdds = false;
+    // this.showAddsFalse();
   },
 };
 </script>
