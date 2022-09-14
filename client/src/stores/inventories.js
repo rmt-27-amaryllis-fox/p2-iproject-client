@@ -19,9 +19,9 @@ export const useInventoriesStore = defineStore({
   }),
   getters: {
     filterCategories(state) {
-      console.log(state, "<< ini state dari getter");
-      console.log(state.filter1, "maasuk state");
-      console.log(this.filter1);
+      // console.log(state, "<< ini state dari getter");
+      // console.log(state.filter1, "maasuk state");
+      // console.log(this.filter1);
       if (state.filter1) {
         return state.inventories.filter((el) => el.CategoryId == state.filter1);
       } else {
@@ -46,7 +46,7 @@ export const useInventoriesStore = defineStore({
         this.currentPage = data.currentPage;
         this.totalItems = data.totalItems;
         this.totalPages = data.totalPages - 1;
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -61,7 +61,7 @@ export const useInventoriesStore = defineStore({
           },
         });
         this.categories = data;
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         console.log(error);
       }
