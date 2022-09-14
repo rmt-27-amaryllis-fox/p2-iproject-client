@@ -1,11 +1,13 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import swal from 'sweetalert2'
 
 export const useUserStore = defineStore('user', {
     state : () => ({
         email : '',
         password : '',
-        baseUrl : 'http://localhost:3000',
+        // baseUrl : 'http://localhost:3000',
+        baseUrl : 'https://cryptoverse-server.herokuapp.com',
         isLoggedIn : false,
         inLoginPage : false,
         newUser : {
@@ -29,10 +31,19 @@ export const useUserStore = defineStore('user', {
 
                 this.isLoggedIn = true
                 this.router.push('/')
-                console.log(data)
                 localStorage.access_token = data.access_token
+
+                swal.fire({
+                    icon : 'success',
+                    title : 'Success Login !'
+                })
             } catch (error) {
                 console.log(error)
+                swal.fire({
+                    icon : 'error',
+                    title : 'Oops..',
+                    text : error.response.data.message
+                })
             }
         },
 
@@ -40,6 +51,10 @@ export const useUserStore = defineStore('user', {
             localStorage.clear()
             this.isLoggedIn = false
             this.router.push('/login')
+            swal.fire({
+                icon : 'success',
+                title : 'Success Logout !'
+            })
         },
 
         moveToLogin(){
@@ -69,9 +84,18 @@ export const useUserStore = defineStore('user', {
                     }
                 })
 
+                swal.fire({
+                    icon : 'success',
+                    title : 'Success register !'
+                })
                 this.router.push('/login')
             } catch (error) {
                 console.log(error)
+                swal.fire({
+                    icon : 'error',
+                    title : 'Oops..',
+                    text : error.response.data.message
+                })
             }
         }
     }

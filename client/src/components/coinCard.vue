@@ -9,7 +9,7 @@
       },
       props : ['coin'],
       methods : {
-        ...mapActions(useCoinStore, ['getOneCoin', 'getCurrentIDRPrice'])
+        ...mapActions(useCoinStore, ['getOneCoin', 'getCurrentIDRPrice', 'toBuyPage'])
       },
       created(){
         this.getCurrentIDRPrice()
@@ -24,7 +24,7 @@
         <div class="card-body">
           <h5 class="card-title">{{coin.name}}</h5>
           <p class="card-text">Price : <b>Rp. {{(coin.price * rupiahValue).toLocaleString('ID', 'id', {type : 'currency', currency : 'IDR'})}}</b></p>
-          <button class="btn btn-primary" @click="getOneCoin(coin.uuid)" v-if="isLoggedIn">Buy</button>
+          <button class="btn btn-primary" @click="toBuyPage(coin.uuid)" v-if="isLoggedIn">Buy</button>
         </div>
       </div>
     </div>

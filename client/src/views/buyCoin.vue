@@ -6,11 +6,21 @@
         ...mapWritableState(useCoinStore, ['coinToBuy', 'quantity', 'rupiahValue'])
       },
       methods : {
-        ...mapActions(useCoinStore, ['buyCoin', 'getCurrentIDRPrice'])
+        ...mapActions(useCoinStore, ['buyCoin', 'getCurrentIDRPrice', 'getOneCoin'])
       },
       created(){
         this.getCurrentIDRPrice()
+      },
+      watch : {
+        "$route.params.uuid" : {
+          handler(value){
+            this.getOneCoin(value)
+          },
+          immediate : true
+        }
       }
+
+
     }
 </script>
 

@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-
+import swal from "sweetalert2";
 export const useCoinStore = defineStore('coin', {
     state : () => ({
         coins : [],
-        baseUrl : 'http://localhost:3000',
+        // baseUrl : 'http://localhost:3000',
+        baseUrl : 'https://cryptoverse-server.herokuapp.com',
         myWallet : [],
         sumPrice : 0,
         coinToBuy : '',
@@ -77,7 +78,7 @@ export const useCoinStore = defineStore('coin', {
                 })
 
                 this.coinToBuy = data
-                this.router.push(`/buy/${uuid}`)
+                // this.router.push(`/buy/${uuid}`)
             } catch (error) {
                 console.log(error)
             }
@@ -97,10 +98,19 @@ export const useCoinStore = defineStore('coin', {
                 })
 
                 console.log(data)
+                this.quantity = ''
+                swal.fire({
+                    icon : 'success',
+                    title : 'Success Buy !'
+                })
                 this.router.push('/wallet')
             } catch (error) {
                 console.log(error)
             }
+        },
+
+        toBuyPage(uuid){
+            this.router.push(`/buy/${uuid}`)
         },
 
         async getCurrentIDRPrice(){
