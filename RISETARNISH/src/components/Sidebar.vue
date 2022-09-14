@@ -31,7 +31,6 @@ export default {
   <div class="row filter-card">
     <div class="filter-area">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Hello. {{ username }}</li>
         <li class="list-group-item">
           <router-link to="/customize">Customize</router-link>
         </li>
