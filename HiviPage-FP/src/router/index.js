@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "../views/HomePage.vue";
 import PlaylistPage from "../views/PlaylistPage.vue";
+import SchedulePage from "../views/SchedulePage.vue";
+import NotFound from "../views/NotFound.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -14,6 +16,12 @@ const router = createRouter({
       name: "playlists",
       component: PlaylistPage,
     },
+    {
+      path: "/gigs",
+      name: "schedules",
+      component: SchedulePage,
+    },
+    { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
   ],
 });
 
