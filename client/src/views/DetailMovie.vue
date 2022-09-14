@@ -173,18 +173,18 @@ export default {
                             </div>
                         </div>
 
-                        <div class="card card-body bg-transparent border-light">
+                        <div v-if="detail.provider.length > 0" class="card card-body bg-transparent border-light">
                             <h5 class="text-light">Where to watch</h5>
                             <!-- card -->
-                            <div class="col text-light">
+                            <div v-for="(p, idx) in detail.provider" :key="idx" class="col text-light">
                                 <div class="d-table bg-dark rounded-3 p-3">
-                                    <a href=""
-                                        ><img
-                                            src="https://www.themoviedb.org/t/p/original/7Fl8ylPDclt3ZYgNbW2t7rbZE9I.jpg"
+                                    <img
+                                            :src="p.img"
                                             width="48"
                                             alt="Icon"
-                                            class="rounded"
-                                    /></a>
+                                            class="rounded mb-2"
+                                    />
+                                    <p>{{p.name}}</p>
                                 </div>
                             </div>
                         </div>
