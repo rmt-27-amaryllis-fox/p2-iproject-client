@@ -13,7 +13,7 @@ export const useEmployeesStore = defineStore({
       try {
         //! udah oke
         let { data } = await axios({
-          url: "http://localhost:3000/employees",
+          url: "https://laksana-baru.herokuapp.com/employees",
           method: "get",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -30,7 +30,7 @@ export const useEmployeesStore = defineStore({
         //! udah oke
         console.log(id);
         let { data } = await axios({
-          url: `http://localhost:3000/employees/${id}`,
+          url: `https://laksana-baru.herokuapp.com/employees/${id}`,
           method: "get",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -48,7 +48,7 @@ export const useEmployeesStore = defineStore({
         //! udah oke
         console.log(id);
         let { data } = await axios({
-          url: `http://localhost:3000/employees/${id}`,
+          url: `https://laksana-baru.herokuapp.com/employees/${id}`,
           method: "delete",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -81,7 +81,7 @@ export const useEmployeesStore = defineStore({
         console.log(formData);
         console.log(formData.imageUrl);
         let { data } = await axios({
-          url: "http://localhost:3000/employees",
+          url: "https://laksana-baru.herokuapp.com/employees",
           method: "post",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -131,7 +131,7 @@ export const useEmployeesStore = defineStore({
         console.log(formData);
         console.log(formData.imageUrl);
         let { data } = await axios({
-          url: `http://localhost:3000/employees/${this.oneEmployee.cloudinary_id}`,
+          url: `https://laksana-baru.herokuapp.com/employees/${this.oneEmployee.cloudinary_id}`,
           method: "put",
           headers: {
             access_token: localStorage.getItem("access_token"),

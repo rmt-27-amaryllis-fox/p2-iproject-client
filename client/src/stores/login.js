@@ -12,7 +12,7 @@ export const useLoginStore = defineStore({
     async loginAja(email, password) {
       try {
         let { data } = await axios({
-          url: "http://localhost:3000/login",
+          url: "https://laksana-baru.herokuapp.com/login",
           method: "post",
           data: {
             email: email,
@@ -41,7 +41,7 @@ export const useLoginStore = defineStore({
     async register(username, email, password) {
       try {
         let { data } = await axios({
-          url: "http://localhost:3000/register",
+          url: "https://laksana-baru.herokuapp.com/register",
           method: "post",
           data: {
             email: email,

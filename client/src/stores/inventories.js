@@ -30,7 +30,7 @@ export const useInventoriesStore = defineStore({
     async getInventories() {
       try {
         let { data } = await axios({
-          url: "http://localhost:3000/inventories",
+          url: "https://laksana-baru.herokuapp.com/inventories",
           method: "get",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -46,7 +46,7 @@ export const useInventoriesStore = defineStore({
     async getCategories() {
       try {
         let { data } = await axios({
-          url: "http://localhost:3000/categories",
+          url: "https://laksana-baru.herokuapp.com/categories",
           method: "get",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -61,7 +61,7 @@ export const useInventoriesStore = defineStore({
     async deleteProduct(id) {
       try {
         let { data } = await axios({
-          url: `http://localhost:3000/inventories/${id}`,
+          url: `https://laksana-baru.herokuapp.com/inventories/${id}`,
           method: "delete",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -85,7 +85,7 @@ export const useInventoriesStore = defineStore({
       try {
         console.log(id, "<< id get inventories");
         let { data } = await axios({
-          url: `http://localhost:3000/inventories/${id}`,
+          url: `https://laksana-baru.herokuapp.com/inventories/${id}`,
           method: "get",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -101,7 +101,7 @@ export const useInventoriesStore = defineStore({
     async addProduct(name, image, stock, CategoryId) {
       try {
         let { data } = await axios({
-          url: "http://localhost:3000/inventories",
+          url: "https://laksana-baru.herokuapp.com/inventories",
           method: "post",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -136,7 +136,7 @@ export const useInventoriesStore = defineStore({
     async editProduct(name, image, stock, CategoryId) {
       try {
         let { data } = await axios({
-          url: `http://localhost:3000/inventories/${this.oneProduct.id}`,
+          url: `https://laksana-baru.herokuapp.com/inventories/${this.oneProduct.id}`,
           method: "put",
           headers: {
             access_token: localStorage.getItem("access_token"),
