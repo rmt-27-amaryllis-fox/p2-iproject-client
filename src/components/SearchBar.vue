@@ -17,8 +17,8 @@ export default {
 
 <template>
   <form class="d-flex mb-4" role="search" @submit.prevent="onSearchHandler">
-    <input class="form-control me-2" type="search" placeholder="ex: AAPL" aria-label="Search" v-model="value">
-    <button class="btn btn-outline-primary" type="submit">Search</button>
+    <input class="form-control me-2 rounded-0" type="search" placeholder="ex: AAPL" aria-label="Search" v-model="value">
+    <button class="btn btn-outline-primary rounded-0" type="submit">Search</button>
   </form>
 </template>
 
