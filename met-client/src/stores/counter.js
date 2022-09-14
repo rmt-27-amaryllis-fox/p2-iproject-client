@@ -6,7 +6,7 @@ const baseUrl = "http://localhost:3000/"
 
 export const useCounterStore = defineStore({
   id: "counter",
-  state: () => ({paintings: [], products: [], productById: null, page:[], filter: 0, totalPages: 0, isLogin: false, qrImage: ""}),
+  state: () => ({paymentToken: "",paintings: [], products: [], productById: [], page:[], filter: 0, totalPages: 0, isLogin: false, qrImage: "", isLoading: false}),
   getters: {
     doubleCount: (state) => state.count * 2,
     filterProduct(state){
@@ -17,12 +17,43 @@ export const useCounterStore = defineStore({
     increment(){
       this.count++
     },
-    async getPainting (req, res, next) {
+
+    async addFavourite(id){
       try {
+        console.log("<<< MASUK COUNTER ADD");
+        console.log(id, "<<<IDNYA");
+        const response = await axios({
+          method: "POST",
+          url: baseUrl + `favourites/${id}`,
+          headers: {
+            access_token: localStorage.access_token
+          },
+        })
+        console.log(response.data.trans_token);
+        console.log(response, "Success add favourite");
+        
+        console.log(this.paymentToken, "<<<SEBELUM");
+        this.paymentToken = response.data.trans_token
+        console.log(this.paymentToken, "<<<SESUDAH");
+        
+      } catch (error) {
+        console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.message,
+          footer: 'please login first'
+        })
+      }
+    },
+    async getPainting (name, next) {
+      try {
+        console.log(name);
+       this.isLoading = true
        const paintings = []
        const {data} = await axios({
            method: "GET",
-           url: "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=da vinci"
+           url: `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${name}`
        })
   
        paintings.push(data.objectIDs)
@@ -67,16 +98,20 @@ export const useCounterStore = defineStore({
   
        this.paintings = imgUrls
        console.log(this.paintings);
+       
   
   
       } catch (error) {
        next(error)
        console.log(error);
+      } finally {
+        this.isLoading = false
       }
    },
    async getProductById(id){
     console.log(id, "<<< masuk product by id di counter");
     try {
+      this.isLoading = true
       const {data} = await axios({
         method: "GET",
         url: `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,
@@ -84,6 +119,17 @@ export const useCounterStore = defineStore({
           access_token: localStorage.access_token
         }
       })
+      console.log(data);
+      let painting = {
+        title: data.title,
+        artist: data.artistDisplayName,
+        price: (new Date().getFullYear()  - data.objectEndDate) * 10000,
+        image: data.primaryImage,
+        created: data.objectEndDate,
+        id: data.objectID
+      } 
+      this.productById = painting;
+      console.log(painting, "LOG PAINTING");
 
       const qr = await axios({
         url: "https://api.happi.dev/v1/qrcode",
@@ -99,23 +145,20 @@ export const useCounterStore = defineStore({
 
       this.qrImage = qr.data.qrcode
 
-      console.log(data)
-
-      let painting = {
-        title: data.title,
-        artist: data.artistDisplayName,
-        image: data.primaryImage,
-        created: data.objectEndDate,
-        id: data.objectID,
-        price: (new Date().getFullYear()  - data.objectEndDate) * 10000
-    } 
-      this.productById = painting;
+     
+     
     } catch (error) {
+      this.isLoading = false
       console.log(error)
+    } finally {
+      console.log("MASUK FINALLY");
+      this.isLoading = false
+      
     }
   },
     async loginHandler(value){
       try {
+        this.isLogin = false
         console.log(value, "sampai ke store loginHandler");
 
         const {data} = await axios({
@@ -127,13 +170,17 @@ export const useCounterStore = defineStore({
         console.log(data);
 
         localStorage.access_token = data.access_token
-        this.isLogin = true
-        this.router.push('/home')
+        
+
         Swal.fire(
           'Success Login!',
           'Enjoy our services!',
           'success'
         )
+          console.log("SWAL UDAH LEWAT");
+          this.router.push('/')
+          this.isLogin = true
+        // this.router.push("/register")
       } catch (error) {
         console.log(error);
       }
@@ -152,7 +199,7 @@ export const useCounterStore = defineStore({
           const {access_token} = response.data
           localStorage.access_token = access_token
           this.isLogin=true
-          this.router.push('/home')
+          this.router.push('/')
           Swal.fire(
             'Success Login!',
             'Enjoy our services!',
@@ -202,9 +249,12 @@ export const useCounterStore = defineStore({
         console.log("masuk register sini juga");
         console.log(data);
 
-        
+        Swal.fire(
+          'Success Register!',
+          'Please login to continue!',
+          'success'
+        )
         this.router.push('/login')
-
       } catch (error) {
         console.log(error);
       }
@@ -293,7 +343,7 @@ export const useCounterStore = defineStore({
         })
 
         console.log(data, "<<<< DATA DI FAVOURITES")
-        this.products = data;
+        // this.paintings = data;
       } catch (error) {
         console.log(error)
         Swal.fire({
@@ -305,37 +355,7 @@ export const useCounterStore = defineStore({
       }
     },
 
-    async addFavourite(id){
-      try {
-        console.log("<<< MASUK COUNTER ADD");
-        console.log(id, "<<<IDNYA");
-        console.log();
-        const {data} = await axios({
-          method: "POST",
-          url: baseUrl + `favourites/${id}`,
-          headers: {
-            access_token: localStorage.access_token
-          },
- 
-          
-        })
-        console.log("Success add favourite");
-        Swal.fire(
-          'Success,',
-          'Added to Favourites!',
-          'success'
-        )
-        
-      } catch (error) {
-        console.log(error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: error.response.data.message,
-          footer: '<a href="">Why do I have this issue?</a>'
-        })
-      }
-    },
+    
     async qrCode() {
       try {
           const apikey = "dd4571pqJwlqcv1dmD4m2FEJLuHAY8rcyiJqXqBEe9ZtPoff0EeN682B"
@@ -353,6 +373,7 @@ export const useCounterStore = defineStore({
           this.alertError(error)
       }
   },
+  
   
 
   }
