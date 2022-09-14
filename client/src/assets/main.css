@@ -167,7 +167,7 @@ form {
 }
 
 .col {
-    z-index: -2;
+    z-index: 0;
 }
 
 .card > img {
@@ -177,9 +177,18 @@ form {
     margin-top: 10px;
 }
 
+nav {
+    z-index: 2;
+}
+
+.card > .btn {
+    z-index: 1;
+}
+
 
 .card {
     height: fit-content;
+    margin-top: 20px;
 }
 
 .coin-title {
@@ -266,7 +275,8 @@ form {
 
 .add-coin {
     width: 100%;
-    height: 100vh;
+    height: fit-content;
+    margin-top: 12vh;
 }
 
 .add-container {
@@ -323,11 +333,23 @@ form {
 }
 
 .wallet-name {
-    width: 100px;
+    width: 150px;
     margin-left: 10px;
 }
 
 .wallet-price {
-    margin-left: 40%;
+    margin-left: 35%;
     font-weight: 1000;
+}
+
+.logo-navbar {
+    width: 80px;
+    margin-left: 20px;
+}
+
+.logo-text {
+    margin-left: 10px;
+    transform: translateY(10px);
+    display: inline-block;
+    font-size: 40px;
 }

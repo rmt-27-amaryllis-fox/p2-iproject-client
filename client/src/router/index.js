@@ -10,7 +10,7 @@ const routes = [
     {path : '/', component : home, name : 'homePage'},
     {path : '/login', component : loginPage, name : 'loginPage'},
     {path : '/register', component : registerPage, name : 'registerPage'},
-    {path : '/buy', component : buyCoin, name : 'buyCoinPage'},
+    {path : '/buy/:uuid', component : buyCoin, name : 'buyCoinPage'},
     {path : '/wallet', component : walletPage, name : 'walletPage'},
 ]
 

@@ -6,12 +6,15 @@ export const useCoinStore = defineStore('coin', {
         coins : [],
         baseUrl : 'http://localhost:3000',
         myWallet : [],
-        sumPrice : 0
+        sumPrice : 0,
+        coinToBuy : '',
+        quantity : '',
+        rupiahValue : 0
     }),
 
     getters : {
         convertToIdr(){
-            return (this.sumPrice * 14500).toLocaleString('id', 'ID', {type : 'currency', currency : 'IDR'})
+            return this.sumPrice.toLocaleString('id', 'ID', {type : 'currency', currency : 'IDR'})
         }
     },
 
@@ -28,7 +31,7 @@ export const useCoinStore = defineStore('coin', {
                         access_token : localStorage.access_token
                     }
                 })
-
+                console.log(data)
                 this.coins = data
             } catch (error) {
                 console.log(error)
@@ -60,6 +63,55 @@ export const useCoinStore = defineStore('coin', {
             }
             console.log(allAssets)
             this.sumPrice = allAssets
+        },
+
+        async getOneCoin(uuid){
+            try {
+                let {data} = await axios({
+                    method : 'GET',
+                    url : this.baseUrl + `/coin/coin/${uuid}`,
+                    headers : {
+                        access_token : localStorage.access_token
+                    }
+                })
+
+                this.coinToBuy = data
+                this.router.push(`/buy/${uuid}`)
+            } catch (error) {
+                console.log(error)
+            }
+        },
+
+        async buyCoin(uuid){
+            try {
+                let {data} = await axios({
+                    method : 'POST',
+                    url : this.baseUrl + `/wallet/${uuid}`,
+                    params : {
+                        quantity : this.quantity
+                    },
+                    headers : {
+                        access_token : localStorage.access_token
+                    }
+                })
+
+                console.log(data)
+                this.router.push('/wallet')
+            } catch (error) {
+                console.log(error)
+            }
+        },
+
+        async getCurrentIDRPrice(){
+            try {
+                let conversion = await axios({
+                    method : 'GET',
+                    url : this.baseUrl + '/coin/rupiah'
+                })
+                this.rupiahValue = conversion.data.curs
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 })
