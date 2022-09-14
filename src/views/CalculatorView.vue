@@ -58,8 +58,8 @@ export default {
   <LoadingBar v-if="!invisible"/>
 
   <div class="container mt-4 d-flex flex-column align-items-center">
-    <div class="card mb-2" style="width: 50%">
-      <div class="card-body">
+    <div class="card mb-2 rounded-0" style="width: 50%">
+      <div class="card-body rounded-0">
         <form action="" @submit.prevent="onCalculateLumpSumHandler">
           <div class="mb-3">
             <label for="investment-fund" class="form-label">Investment Fund (Rp)</label>
@@ -84,14 +84,14 @@ export default {
             <input type="number" class="form-control" id="estimated-return" :value="estimatedReturn" disabled>
           </div>
           <div class="mb-3 d-flex justify-content-end">
-            <button class="btn btn-outline-danger me-2" @click.prevent="onClearHandler">Clear</button>
-            <button class="btn btn-outline-primary">Calculate</button>
+            <button class="btn btn-outline-danger me-2 rounded-0" @click.prevent="onClearHandler">Clear</button>
+            <button class="btn btn-outline-primary rounded-0">Calculate</button>
           </div>
         </form>
       </div>
     </div>
-    <div v-if="targetReturn" class="card mb-2" style="width: 50%">
-      <div class="card-body">
+    <div v-if="targetReturn" class="card mb-2 rounded-0" style="width: 50%">
+      <div class="card-body rounded-0">
         <p class="mb-4 fw-bold text-center">Calculation Result</p>
         <div class="row">
           <div class="col-md-8 fw-bold">
