@@ -39,7 +39,14 @@ export default {
         </div>
 
         <div class="text px-2 rounded mt-4">
-          Statistics :
+          <div class="container">
+            Games : <br />
+            Win : {{ totalWin }} <br />
+            Lose : {{ totalLose }} <br />
+          </div>
+        </div>
+
+        <div class="text px-2 rounded mt-4">
           <div class="container">
             Cards Gained : <br />
             Monster Cards : {{ totalMonsterCard }} <br />
@@ -49,10 +56,9 @@ export default {
           </div>
         </div>
 
-        <div class="px-2 rounded mt-4">
-          Latest 3 cards :
-          <br />
+        <div class="text px-2 rounded mt-4">Latest 3 Cards :</div>
 
+        <div class="px-2 rounded mt-4">
           <div class="container d-flex justify-content-center">
             <CardTCG v-for="card in cardList" :key="card.id" :card="card" />
           </div>
@@ -69,7 +75,6 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  justify-content: center;
 }
 
 body {
