@@ -1,5 +1,5 @@
 <script>
-import { mapWritableState, mapActions } from "pinia";
+import { mapActions } from "pinia";
 import { useUserStore } from "../stores/user";
 
 export default {
@@ -28,7 +28,7 @@ export default {
     <div id="intro" class="bg-image shadow-2-strong vh-100">
       <div
         class="mask d-flex align-items-center h-100"
-        style="background-color: rgba(0, 0, 0, 0.8)"
+        style="background-color: #0f3d3e"
       >
         <div class="container">
           <div class="row justify-content-center">
@@ -86,7 +86,7 @@ export default {
                     class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
                     type="submit"
                   >
-                    Sign in
+                    Sign up
                   </button>
                 </div>
               </form>

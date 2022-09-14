@@ -1,5 +1,5 @@
 <script>
-import { mapWritableState, mapActions } from "pinia";
+import { mapActions } from "pinia";
 import { useUserStore } from "../stores/user";
 
 export default {
@@ -26,7 +26,7 @@ export default {
     <div id="intro" class="bg-image shadow-2-strong vh-100">
       <div
         class="mask d-flex align-items-center h-100"
-        style="background-color: rgba(0, 0, 0, 0.8)"
+        style="background-color: #0f3d3e"
       >
         <div class="container">
           <div class="row justify-content-center">
@@ -65,6 +65,12 @@ export default {
                   >
                     Sign in
                   </button>
+                  <button
+                    class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                    type="button"
+                  >
+                    Sign in with twitter
+                  </button>
                   <!-- <div class="text-center">
                     <router-link to="/register" class="small" href="#"
                       >Create your account here</router-link
@@ -80,3 +86,9 @@ export default {
   </section>
   <!-- End of login section -->
 </template>
+
+<style>
+#intro {
+  margin-top: 4rem;
+}
+</style>

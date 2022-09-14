@@ -6,6 +6,7 @@ export const usePostStore = defineStore("post", {
     baseUrl: "http://localhost:3000",
     posts: [],
     weatherData: [],
+    post: {},
   }),
   getters: {},
   actions: {
@@ -89,6 +90,21 @@ export const usePostStore = defineStore("post", {
         });
 
         this.router.push("/");
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async fetchPost(id) {
+      try {
+        const result = await axios({
+          method: "GET",
+          url: `${this.baseUrl}/posts/${id}`,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        this.post = result.data;
       } catch (err) {
         console.log(err);
       }

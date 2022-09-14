@@ -26,7 +26,7 @@ export default {
 <template>
   <!-- Navbar section -->
   <section>
-    <header class="py-3 border-bottom" v-show="isLogin">
+    <header class="py-3 border-bottom fixed-top navbar-top" v-show="isLogin">
       <div
         class="container-fluid d-grid gap-3 align-items-center"
         style="grid-template-columns: 1fr 2fr"
@@ -82,7 +82,7 @@ export default {
             <input
               type="search"
               class="form-control"
-              placeholder="Search..."
+              placeholder="Search by city..."
               aria-label="Search"
             />
           </form>
@@ -90,7 +90,7 @@ export default {
       </div>
     </header>
 
-    <header class="py-3 border-bottom" v-show="!isLogin">
+    <header class="py-3 border-bottom fixed-top navbar-top" v-show="!isLogin">
       <div
         class="container-fluid d-grid gap-3 align-items-center"
         style="grid-template-columns: 1fr 2fr"
@@ -110,6 +110,9 @@ export default {
 </template>
 
 <style scoped>
+.navbar-top {
+  background-color: white;
+}
 .navbar-logo {
   width: 230px;
 }
