@@ -4,6 +4,7 @@ import loginPage from '../views/loginPage.vue';
 import registerPage from '../views/registerPage.vue';
 import walletPage from '../views/walletPage.vue';
 import buyCoin from '../views/buyCoin.vue';
+import notFoundPage from '../views/notFoundPage.vue'
 
 
 const routes = [
@@ -12,6 +13,8 @@ const routes = [
     {path : '/register', component : registerPage, name : 'registerPage'},
     {path : '/buy/:uuid', component : buyCoin, name : 'buyCoinPage'},
     {path : '/wallet', component : walletPage, name : 'walletPage'},
+    {path: '/:pathMatch(.*)*', name: 'NotFound', component: notFoundPage },
+
 ]
 
 const router = createRouter({

@@ -9,7 +9,8 @@ export const useCoinStore = defineStore('coin', {
         sumPrice : 0,
         coinToBuy : '',
         quantity : '',
-        rupiahValue : 0
+        rupiahValue : 0,
+        page : 1
     }),
 
     getters : {
@@ -25,7 +26,7 @@ export const useCoinStore = defineStore('coin', {
                     method : 'GET',
                     url : this.baseUrl + '/coin/coins',
                     params : {
-                        page : 1
+                        page : this.page
                     },
                     headers : {
                         access_token : localStorage.access_token
@@ -112,6 +113,21 @@ export const useCoinStore = defineStore('coin', {
             } catch (error) {
                 console.log(error)
             }
+        },
+        
+        getPage(page){
+            this.page = page
+            this.fetchCoin()
+        },
+
+        previousPage(){
+            this.page = this.page - 1
+            this.fetchCoin()
+        },
+
+        nextPage(){
+            this.page = this.page + 1
+            this.fetchCoin()
         }
     }
 })

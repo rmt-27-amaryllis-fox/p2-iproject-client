@@ -7,7 +7,7 @@
             coinCard
         },
         methods : {
-          ...mapActions(useCoinStore, ['fetchCoin'])
+          ...mapActions(useCoinStore, ['fetchCoin', 'getPage', 'previousPage', 'nextPage'])
         },
         computed : {
           ...mapState(useCoinStore, ['coins'])
@@ -36,14 +36,41 @@
 
 <!-- HOME > COIN SECTION / MARKET -->
 
+
+
 <div class="coin-section">
 
   <h1 class="coin-title">Coins</h1>
+
+  <nav aria-label="Page navigation example pagination-bar">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous" @click.prevent="previousPage">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+
+        <li class="page-item pages">
+          <a class="page-link" href="#" @click.prevent="getPage(1)">1</a>
+          <a class="page-link" href="#" @click.prevent="getPage(2)">2</a>
+          <a class="page-link" href="#" @click.prevent="getPage(3)">3</a>
+        </li>
+
+
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next" @click.prevent="nextPage">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+</nav>
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
 
     <coinCard v-for="coin in coins" :key="coin.uuid" :coin="coin" />
 
   </div>
+
+  
 </div>
 </template>

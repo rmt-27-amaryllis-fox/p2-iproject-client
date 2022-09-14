@@ -353,3 +353,33 @@ nav {
     display: inline-block;
     font-size: 40px;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination > .pages {
+    display: flex;
+}
+
+.page-item > a{
+    color: #ac9a69;
+}
+
+.page-link:hover {
+    background-color: #EDDFB3;
+    transition: 0.5s all;
+    color: #ac9a69;
+}
+
+.not-found {
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
