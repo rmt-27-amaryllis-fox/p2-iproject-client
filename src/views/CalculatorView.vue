@@ -57,11 +57,11 @@ export default {
           <div class="mb-3">
             <label for="investment-fund" class="form-label">Investment Fund (Rp)</label>
             <input type="number" class="form-control" id="investment-fund" placeholder="1.000.000"
-                   v-model="investmentFund">
+                   v-model="investmentFund" required>
           </div>
           <div class="mb-3">
             <label for="period" class="form-label">Period (Month)</label>
-            <input type="number" class="form-control" id="period" placeholder="24" v-model="period">
+            <input type="number" class="form-control" id="period" placeholder="24" v-model="period" required>
           </div>
           <div class="mb-3">
             <label for="profile-risk" class="form-label">Profile Risk</label>
