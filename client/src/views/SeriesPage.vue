@@ -1,4 +1,21 @@
-<script></script>
+<script>
+import { mapActions, mapWritableState } from "pinia";
+import { useCounterStore } from "../stores/counter";
+import SeriesCard from "../components/SeriesCard.vue";
+
+export default {
+    methods: {
+        ...mapActions(useCounterStore, ["fetchSeries"]),
+    },
+    computed: {
+        ...mapWritableState(useCounterStore, ["series", "page"]),
+    },
+    created() {
+        this.fetchSeries();
+    },
+    components: { SeriesCard }
+};
+</script>
 <template>
     <main class="page-wrapper">
         <!-- Page content-->
@@ -86,271 +103,7 @@
                     <!-- Page Content-->
                     <div class="row">
                         <!-- Item-->
-                        <div class="col-sm-3 mb-4">
-                            <div class="card card-light card-hover h-100">
-                                <div class="card-img-top card-img-hover">
-                                    <a class="img-overlay" href=""></a>
-
-                                    <div
-                                        class="content-overlay end-0 top-0 pt-3 pe-3"
-                                    >
-                                        <button
-                                            class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="left"
-                                            title=""
-                                            data-bs-original-title="Add to Watchlist"
-                                            aria-label="Add to Watchlist"
-                                        >
-                                            <i
-                                                class="bi bi-bookmark-heart-fill"
-                                            ></i>
-                                        </button>
-                                    </div>
-                                    <img
-                                        src="https://www.themoviedb.org/t/p/w440_and_h660_face/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg"
-                                        alt="Image"
-                                    />
-                                </div>
-                                <div class="card-body">
-                                    <div
-                                        class="d-flex align-items-center justify-content-between pb-1"
-                                    >
-                                        <span class="fs-sm text-light me-3"
-                                            >1995</span
-                                        >
-                                    </div>
-                                    <h3 class="h6 mb-1">
-                                        <a class="nav-link-light" href=""
-                                            >Thor: Love and Thunder</a
-                                        >
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item-->
-                        <div class="col-sm-3 mb-4">
-                            <div class="card card-light card-hover h-100">
-                                <div class="card-img-top card-img-hover">
-                                    <a class="img-overlay" href=""></a>
-
-                                    <div
-                                        class="content-overlay end-0 top-0 pt-3 pe-3"
-                                    >
-                                        <button
-                                            class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="left"
-                                            title=""
-                                            data-bs-original-title="Add to Watchlist"
-                                            aria-label="Add to Watchlist"
-                                        >
-                                            <i
-                                                class="bi bi-bookmark-heart-fill"
-                                            ></i>
-                                        </button>
-                                    </div>
-                                    <img
-                                        src="https://www.themoviedb.org/t/p/w440_and_h660_face/rugyJdeoJm7cSJL1q4jBpTNbxyU.jpg"
-                                        alt="Image"
-                                    />
-                                </div>
-                                <div class="card-body">
-                                    <div
-                                        class="d-flex align-items-center justify-content-between pb-1"
-                                    >
-                                        <span class="fs-sm text-light me-3"
-                                            >2022</span
-                                        >
-                                    </div>
-                                    <h3 class="h6 mb-1">
-                                        <a class="nav-link-light" href=""
-                                            >Dragon Ball Super: Super Hero</a
-                                        >
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item-->
-                        <div class="col-sm-3 mb-4">
-                            <div class="card card-light card-hover h-100">
-                                <div class="card-img-top card-img-hover">
-                                    <a class="img-overlay" href=""></a>
-
-                                    <div
-                                        class="content-overlay end-0 top-0 pt-3 pe-3"
-                                    >
-                                        <button
-                                            class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="left"
-                                            title=""
-                                            data-bs-original-title="Add to Watchlist"
-                                            aria-label="Add to Watchlist"
-                                        >
-                                            <i
-                                                class="bi bi-bookmark-heart-fill"
-                                            ></i>
-                                        </button>
-                                    </div>
-                                    <img
-                                        src="https://www.themoviedb.org/t/p/w440_and_h660_face/c5OwwBNyJkwyroIOIJL9IiRjydR.jpg"
-                                        alt="Image"
-                                    />
-                                </div>
-                                <div class="card-body">
-                                    <div
-                                        class="d-flex align-items-center justify-content-between pb-1"
-                                    >
-                                        <span class="fs-sm text-light me-3"
-                                            >2022</span
-                                        >
-                                    </div>
-                                    <h3 class="h6 mb-1">
-                                        <a class="nav-link-light" href=""
-                                            >Fullmetal Alchemist: The Revenge of
-                                            Scar</a
-                                        >
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item-->
-                        <div class="col-sm-3 mb-4">
-                            <div class="card card-light card-hover h-100">
-                                <div class="card-img-top card-img-hover">
-                                    <a class="img-overlay" href=""></a>
-
-                                    <div
-                                        class="content-overlay end-0 top-0 pt-3 pe-3"
-                                    >
-                                        <button
-                                            class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="left"
-                                            title=""
-                                            data-bs-original-title="Add to Watchlist"
-                                            aria-label="Add to Watchlist"
-                                        >
-                                            <i
-                                                class="bi bi-bookmark-heart-fill"
-                                            ></i>
-                                        </button>
-                                    </div>
-                                    <img
-                                        src="https://www.themoviedb.org/t/p/w440_and_h660_face/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg"
-                                        alt="Image"
-                                    />
-                                </div>
-                                <div class="card-body">
-                                    <div
-                                        class="d-flex align-items-center justify-content-between pb-1"
-                                    >
-                                        <span class="fs-sm text-light me-3"
-                                            >1995</span
-                                        >
-                                    </div>
-                                    <h3 class="h6 mb-1">
-                                        <a class="nav-link-light" href=""
-                                            >Thor: Love and Thunder</a
-                                        >
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item-->
-                        <div class="col-sm-3 mb-4">
-                            <div class="card card-light card-hover h-100">
-                                <div class="card-img-top card-img-hover">
-                                    <a class="img-overlay" href=""></a>
-
-                                    <div
-                                        class="content-overlay end-0 top-0 pt-3 pe-3"
-                                    >
-                                        <button
-                                            class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="left"
-                                            title=""
-                                            data-bs-original-title="Add to Watchlist"
-                                            aria-label="Add to Watchlist"
-                                        >
-                                            <i
-                                                class="bi bi-bookmark-heart-fill"
-                                            ></i>
-                                        </button>
-                                    </div>
-                                    <img
-                                        src="https://www.themoviedb.org/t/p/w440_and_h660_face/rugyJdeoJm7cSJL1q4jBpTNbxyU.jpg"
-                                        alt="Image"
-                                    />
-                                </div>
-                                <div class="card-body">
-                                    <div
-                                        class="d-flex align-items-center justify-content-between pb-1"
-                                    >
-                                        <span class="fs-sm text-light me-3"
-                                            >2022</span
-                                        >
-                                    </div>
-                                    <h3 class="h6 mb-1">
-                                        <a class="nav-link-light" href=""
-                                            >Dragon Ball Super: Super Hero</a
-                                        >
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item-->
-                        <div class="col-sm-3 mb-4">
-                            <div class="card card-light card-hover h-100">
-                                <div class="card-img-top card-img-hover">
-                                    <a class="img-overlay" href=""></a>
-
-                                    <div
-                                        class="content-overlay end-0 top-0 pt-3 pe-3"
-                                    >
-                                        <button
-                                            class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
-                                            type="button"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="left"
-                                            title=""
-                                            data-bs-original-title="Add to Watchlist"
-                                            aria-label="Add to Watchlist"
-                                        >
-                                            <i
-                                                class="bi bi-bookmark-heart-fill"
-                                            ></i>
-                                        </button>
-                                    </div>
-                                    <img
-                                        src="https://www.themoviedb.org/t/p/w440_and_h660_face/c5OwwBNyJkwyroIOIJL9IiRjydR.jpg"
-                                        alt="Image"
-                                    />
-                                </div>
-                                <div class="card-body">
-                                    <div
-                                        class="d-flex align-items-center justify-content-between pb-1"
-                                    >
-                                        <span class="fs-sm text-light me-3"
-                                            >2022</span
-                                        >
-                                    </div>
-                                    <h3 class="h6 mb-1">
-                                        <a class="nav-link-light" href=""
-                                            >Fullmetal Alchemist: The Revenge of
-                                            Scar</a
-                                        >
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
+                        <SeriesCard v-for="s in series" :key="s.id" :s="s" />
                     </div>
                     <!-- Pagination-->
                     <div

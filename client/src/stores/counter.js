@@ -8,8 +8,10 @@ export const useCounterStore = defineStore("counter", {
         isLogin: false,
         isVerified: false,
         movies: [],
+        series: [],
         page: "1",
-        detail: {},
+        movieData: {},
+        seriesData: {},
         watchlists: []
     }),
     getters: {},
@@ -66,22 +68,57 @@ export const useCounterStore = defineStore("counter", {
                 console.log(err.response.data);
             }
         },
+        async fetchSeries() {
+            try {
+                const { data } = await axios({
+                    method: "GET",
+                    url: this.baseUrl + "/series/",
+                    params: { page: this.page },
+                });
+                this.series = data.series;
+            } catch (err) {
+                console.log(err.response.data);
+            }
+        },
         async detailMovie(id) {
             try {
                 const { data } = await axios({
                     method: "GET",
                     url: this.baseUrl + "/movies/" + id
                 })
-                this.detail = data
+                this.movieData = data
             } catch (err) {
                 console.log(err.response.data);
             }
         },
-        async createWatchlist(id) {
+        async detailSeries(id) {
+            try {
+                const { data } = await axios({
+                    method: "GET",
+                    url: this.baseUrl + "/series/" + id
+                })
+                this.seriesData = data
+            } catch (err) {
+                console.log(err.response.data);
+            }
+        },
+        async createMovieWatchlist(id) {
             try {
                 await axios({
                     method: "POST",
-                    url: this.baseUrl + "/watchlists/" + id,
+                    url: this.baseUrl + "/watchlists/movies/" + id,
+                    headers: { access_token: localStorage.access_token }
+                })
+                this.router.push("/watchlist")
+            } catch (err) {
+                console.log(err.response.data);
+            }
+        },
+        async createSeriesWatchlist(id) {
+            try {
+                await axios({
+                    method: "POST",
+                    url: this.baseUrl + "/watchlists/series/" + id,
                     headers: { access_token: localStorage.access_token }
                 })
                 this.router.push("/watchlist")

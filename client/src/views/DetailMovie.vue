@@ -1,15 +1,17 @@
 <script>
 import { mapActions, mapWritableState } from "pinia";
 import { useCounterStore } from "../stores/counter";
-import CastCard from "../components/CastCard.vue";
 import SimiliarCard from "../components/SimiliarCard.vue";
+import MoviesCard from "../components/MoviesCard.vue";
+import CastCard from "../components/CastCard.vue";
+import ProviderCard from "../components/ProviderCard.vue";
 
 export default {
     computed: {
-        ...mapWritableState(useCounterStore, ["detail"]),
+        ...mapWritableState(useCounterStore, ["movieData"]),
     },
     methods: {
-        ...mapActions(useCounterStore, ["detailMovie", "createWatchlist"]),
+        ...mapActions(useCounterStore, ["detailMovie", "createMovieWatchlist"]),
     },
     watch: {
         "$route.params.id": {
@@ -19,11 +21,11 @@ export default {
             immediate: true,
         },
     },
-    components: { CastCard, SimiliarCard },
+    components: { SimiliarCard, MoviesCard, CastCard, ProviderCard },
 };
 </script>
 <template>
-    <main class="page-wrapper" v-if="detail.movie">
+    <main class="page-wrapper" v-if="movieData.movie">
         <!-- Page content-->
         <div class="container mt-5 mb-md-4 py-5">
             <!-- Breadcrumb-->
@@ -38,7 +40,7 @@ export default {
                     </li>
                     <i class="bi bi-arrow-right-short mx-2"></i>
                     <li class="breadcrumb-item active">
-                        {{ detail.movie.title }}
+                        {{ movieData.movie.title }}
                     </li>
                 </ol>
             </nav>
@@ -49,8 +51,8 @@ export default {
             >
                 <div class="me-3">
                     <h1 class="h2 text-light mb-md-0">
-                        {{ detail.movie.title }} ({{
-                            new Date(detail.movie.release_date).getFullYear()
+                        {{ movieData.movie.title }} ({{
+                            new Date(movieData.movie.release_date).getFullYear()
                         }})
                     </h1>
                 </div>
@@ -61,7 +63,7 @@ export default {
                     <div class="card card-light card-hover">
                         <div class="card-img-top card-img-hover">
                             <img
-                                :src="detail.movie.backdrop_path"
+                                :src="movieData.movie.backdrop_path"
                                 alt="Image"
                             />
                         </div>
@@ -71,7 +73,7 @@ export default {
                     <div class="py-3 mb-3">
                         <h2 class="h4 text-light mb-4">Overview</h2>
                         <p>
-                            {{ detail.movie.overview }}
+                            {{ movieData.movie.overview }}
                         </p>
                         <div class="row text-light">
                             <div class="col-sm-6 col-md-12 col-lg-6">
@@ -79,20 +81,20 @@ export default {
                                     <li class="mb-2">
                                         <strong>Director:</strong
                                         ><span class="opacity-70 ms-1">{{
-                                            detail.director
+                                            movieData.director
                                         }}</span>
                                     </li>
                                     <li class="mb-2">
                                         <strong>Status:</strong
                                         ><span class="opacity-70 ms-1">{{
-                                            detail.movie.status
+                                            movieData.movie.status
                                         }}</span>
                                     </li>
                                     <li class="mb-2">
                                         <strong>Released Date:</strong
                                         ><span class="opacity-70 ms-1">{{
                                             new Date(
-                                                detail.movie.release_date
+                                                movieData.movie.release_date
                                             ).toLocaleDateString("id-ID", {
                                                 year: "numeric",
                                                 month: "long",
@@ -105,7 +107,7 @@ export default {
                                         ><span class="opacity-70 ms-1"
                                             >$
                                             {{
-                                                detail.movie.budget.toLocaleString(
+                                                movieData.movie.budget.toLocaleString(
                                                     "id-ID"
                                                 )
                                             }},00</span
@@ -116,7 +118,7 @@ export default {
                                         ><span class="opacity-70 ms-1"
                                             >$
                                             {{
-                                                detail.movie.revenue.toLocaleString(
+                                                movieData.movie.revenue.toLocaleString(
                                                     "id-ID"
                                                 )
                                             }},00</span
@@ -125,7 +127,7 @@ export default {
                                     <li class="mb-2">
                                         <strong>Genre:</strong
                                         ><span class="opacity-70 ms-1">{{
-                                            detail.movie.genres
+                                            movieData.movie.genres
                                         }}</span>
                                     </li>
                                 </ul>
@@ -139,7 +141,7 @@ export default {
                         >
                             <!-- card -->
                             <CastCard
-                                v-for="(c, idx) in detail.cast"
+                                v-for="(c, idx) in movieData.cast"
                                 :key="idx"
                                 :c="c"
                             />
@@ -165,7 +167,7 @@ export default {
                                         class="btn btn-primary btn-lg"
                                         href=""
                                         data-bs-toggle="collapse"
-                                        @click.prevent="createWatchlist(detail.movie.id)"
+                                        @click.prevent="createMovieWatchlist(movieData.movie.id)"
                                         ><i
                                             class="bi bi-bookmark-star-fill me-2"
                                         ></i
@@ -175,20 +177,10 @@ export default {
                             </div>
                         </div>
 
-                        <div v-if="detail.provider.length > 0" class="card card-body bg-transparent border-light">
+                        <div v-if="movieData.provider.length > 0" class="card card-body bg-transparent border-light">
                             <h5 class="text-light">Where to watch</h5>
                             <!-- card -->
-                            <div v-for="(p, idx) in detail.provider" :key="idx" class="col text-light">
-                                <div class="d-table bg-dark rounded-3 p-3">
-                                    <img
-                                            :src="p.img"
-                                            width="48"
-                                            alt="Icon"
-                                            class="rounded mb-2"
-                                    />
-                                    <p>{{p.name}}</p>
-                                </div>
-                            </div>
+                            <ProviderCard v-for="(p, idx) in movieData.provider" :key="idx" :p="p" />
                         </div>
                     </div>
                 </div>
@@ -200,7 +192,7 @@ export default {
             >
                 <!-- Item-->
                 <SimiliarCard
-                    v-for="(s, idx) in detail.similiar"
+                    v-for="(s, idx) in movieData.similiar"
                     :key="idx"
                     :s="s"
                 />

@@ -1,8 +1,7 @@
 <script>
-
 export default {
     props: {
-        m: Object
+        s: Object,
     },
 };
 </script>
@@ -10,9 +9,9 @@ export default {
     <div class="col-sm-3 mb-4">
         <div class="card card-light card-hover h-100">
             <div class="card-img-top card-img-hover">
-                <a class="img-overlay" href="" @click="$router.push('/movie/' + m.id)"></a>
+                <a href="" @click="$router.push('/series/' + s.id)" class="img-overlay"></a>
                 <img
-                    :src="m.poster"
+                    :src="s.poster"
                     alt="Image"
                 />
             </div>
@@ -20,10 +19,10 @@ export default {
                 <div
                     class="d-flex align-items-center justify-content-between pb-1"
                 >
-                    <span class="fs-sm text-light me-3">{{new Date(m.release_date).toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}}</span>
+                    <span class="fs-sm text-light me-3">{{s.first_air_date}}</span>
                 </div>
                 <h3 class="h6 mb-1">
-                    <a href="" @click.prevent="$router.push('/movie/' + m.id)" class="nav-link-light">{{m.title}}</a>
+                    <a class="nav-link-light" href="">{{s.name}}</a>
                 </h3>
             </div>
         </div>

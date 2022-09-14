@@ -43,7 +43,8 @@ import {useCounterStore} from '../stores/counter';
                     <span class="fs-sm text-light me-3">{{new Date(w.release_year).getFullYear()}}</span>
                 </div>
                 <h3 class="h6 mb-1">
-                    <a @click="$router.push('/movie/' + w.movie_id)" class="nav-link-light" href="" >{{w.title}}</a>
+                    <a v-if="w.kind == 'movie'" @click="$router.push('/movie/' + w.movie_id)" class="nav-link-light" href="" >{{w.title}}</a>
+                    <a v-else-if="w.kind == 'series'" @click="$router.push('/series/' + w.movie_id)" class="nav-link-light" href="" >{{w.title}}</a>
                 </h3>
             </div>
         </div>
