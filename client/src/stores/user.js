@@ -7,6 +7,7 @@ export const useUserStore = defineStore("user", {
     isLogin: false,
     loggedInUsername: "",
     navbarProfilePicture: "",
+    userProfile: [],
   }),
   getters: {},
   actions: {
@@ -39,10 +40,6 @@ export const useUserStore = defineStore("user", {
             password: payload.password,
           },
         });
-
-        // localStorage.setItem("access_token", data.access_token);
-        // localStorage.setItem("loggedInUsername", data.loggedInUsername);
-        // localStorage.setItem("navbarProfilePicture", data.profilePicture);
         localStorage.access_token = data.access_token;
         localStorage.loggedInUsername = data.loggedInUsername;
         localStorage.navbarProfilePicture = data.profilePicture;
@@ -62,11 +59,20 @@ export const useUserStore = defineStore("user", {
       this.router.push("/login");
     },
 
-    // async fetchUserData() {
-    //   try {
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
+    async fetchUserData() {
+      try {
+        const result = await axios({
+          method: "GET",
+          url: `${this.baseUrl}/users/profile`,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+
+        this.userProfile = result.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 });
