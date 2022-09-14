@@ -1,14 +1,13 @@
 <script>
 import { mapState, mapActions, mapWritableState } from 'pinia'
 import io from 'socket.io-client'
+import { useUserStore } from '../stores/user'
 
 export default {
   name: 'ChatApp',
   components: { },
   data() { 
     return {
-      joinend: false,
-      currentUser: '',
       text: '',
       messages: [
         {
@@ -19,7 +18,11 @@ export default {
       ]
     }
   },
-  computed: { },
+  computed: {
+    ...mapState(useUserStore, {
+      username: 'username'
+    })
+  },
   methods: {
     join() {
       console.log(this.currentUser)
@@ -41,7 +44,7 @@ export default {
       const message = {
         id: new Date().getTime(), //biar unique aja
         text: this.text,
-        user: this.currentUser
+        user: this.username
       }
 
       this.messages = this.messages.concat(message)
@@ -54,12 +57,7 @@ export default {
 </script>
 
 <template>
-  <h1>chat app test</h1>
-  <div v-if="!joinend" class="name-container">
-    <input v-model="currentUser" type="text" class="username">
-    <button @click="join" class="btn-join">join</button>
-  </div>
-  <div v-if="joinend">
+  <div>
     <div>
       <div v-for="message in messages" :key="message.id">
         <b>
@@ -68,28 +66,12 @@ export default {
         : {{ message.text }}
       </div>
     </div>
-    <div>
-      <textarea v-model="text" @keyup.enter="sendMessage" id="text-message" cols="30" rows="10"></textarea>
+    <div class="text-input-container">
+      <textarea v-model="text" @keyup.enter="sendMessage" class="text-message"></textarea>
     </div>
   </div>
 </template>
 
 <style scoped>
-div.name-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding-top: 150px;
-  margin-bottom: 200px;
-}
-
-.username {
-  height: 30px;
-  font-size: 20px;
-  padding: 5px;
-  margin-bottom: 5px;
-}
 </style>
   

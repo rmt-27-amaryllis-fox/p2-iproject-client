@@ -10,6 +10,7 @@ import HomeShield from '../views/HomeShield.vue'
 import Shield from '../views/Shield.vue'
 import Talisman from '../views/Talisman.vue'
 import Customize from '../views/Customize.vue'
+import Form from '../views/Form.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -63,6 +64,16 @@ const router = createRouter({
       path: '/customize',
       name: 'customize',
       component: Customize
+    },
+    {
+      path: '/add',
+      name: 'add',
+      component: Form,
+      beforeEnter: (to, from) => {
+        if (!localStorage.getItem('access_token') && to.name == 'add') {
+          return { name: 'weapon' }
+        }
+      }
     },
     {
       path: '/weapon/:category',

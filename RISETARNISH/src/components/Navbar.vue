@@ -1,13 +1,19 @@
 <script>
 import { mapState, mapActions, mapWritableState } from 'pinia'
+import { useUserStore } from '../stores/user';
 
 export default {
   name: '',
   components: { },
   data() { },
-  computed: { },
+  computed: {
+    ...mapWritableState(useUserStore, {
+      isLogin: 'isLogin'
+    })
+  },
   methods: { },
-  created() { },
+  created() {
+  },
 }
 </script>
 
@@ -26,10 +32,10 @@ export default {
           <router-link to="/" class="btn-nav">Home</router-link>
         </div>
         <div class="col-md-auto">
-          <router-link to="/login" class="btn-nav">Login</router-link>
+          <router-link v-if="!isLogin" to="/login" class="btn-nav">Login</router-link>
         </div>
         <div class="col-md-auto">
-          <router-link to="/register" class="btn-nav">Register</router-link>
+          <router-link v-if="!isLogin" to="/register" class="btn-nav">Register</router-link>
         </div>
       </div>
     </nav>

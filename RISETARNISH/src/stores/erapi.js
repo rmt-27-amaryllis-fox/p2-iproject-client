@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 // import router from '../router/index'
 // markrow
 
 export const useErapiStore = defineStore('erapi', {
   state: () => ({
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'https://h8omoring.herokuapp.com',
     weapons: [],
     WeaponsByCategory: [],
     armors: [],

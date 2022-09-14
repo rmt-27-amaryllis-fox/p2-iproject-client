@@ -6,9 +6,10 @@ import Swal from 'sweetalert2'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'https://h8omoring.herokuapp.com',
+    bookmarks: '',
     username: '',
-    qr: {},
+    id: '',
     isLogin: false
   }),
 
@@ -18,10 +19,11 @@ export const useUserStore = defineStore('user', {
       try {
         const { data } = await axios({
           method: 'GET',
-          url: `${this.baseUrl}/users`,
+          url: `${this.baseUrl}/user`,
           headers: { access_token: localStorage.getItem("access_token") }
         })
         this.username = data.username
+        this.id = data.id
       } catch (err) { }
     },
 
@@ -37,6 +39,7 @@ export const useUserStore = defineStore('user', {
         this.isLogin = true
         this.router.push('/weapon')
       } catch (err) {
+        console.log(err)
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -53,6 +56,14 @@ export const useUserStore = defineStore('user', {
           url: `${this.baseUrl}/register`,
           data: { username, email, password },
         })
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'SUCCESS',
+          title: 'Your data has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
         this.router.push('/login')
       } catch (err) {
         Swal.fire({
@@ -63,21 +74,43 @@ export const useUserStore = defineStore('user', {
       }
     },
 
-    async getQR(input) {
+    async getBookmark() {
       try {
         const { data } = await axios({
           method: 'GET',
-          url: `https://api.happi.dev/v1/qrcode`,
-          headers: {  
-            "x-happi-key": '21cb91R6lk1ZYCeYdDJ69416RHdF3A646alLhhAn73EgFDUVanoq6syP'
-          },
-          params: { data: input }
+          url: `${this.baseUrl}/bookmark`,
         })
-        this.qr = data
+        this.bookmarks = data
       } catch (err) {
         console.log(err)
       }
     },
+
+    async addBookmark(title, rightHand, leftHand, helmet, chestArmor, gauntlet, legArmor) {
+      try {
+        await axios({
+          method: "POST",
+          url: `${this.baseUrl}/bookmark`,
+          data: { title, rightHand, leftHand, helmet, chestArmor, gauntlet, legArmor },
+          headers: { access_token: localStorage.getItem("access_token") }
+        })
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'SUCCESS',
+          title: 'Your data has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.router.push('/customize')
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${err.response.data.message}`
+        })
+      }
+    }
   },
 
 
