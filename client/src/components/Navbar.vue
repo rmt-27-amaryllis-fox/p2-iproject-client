@@ -44,7 +44,6 @@ import {useCounterStore} from '../stores/counter';
             >
 
             <a
-                @click.prevent=""
                 class="btn btn-link border border-primary btn-light btn-primary btn-sm d-none d-lg-block order-lg-3 mx-2"
                 href=""
                 v-if="isLogin"

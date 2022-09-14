@@ -104,7 +104,7 @@ export default {};
                                 </button>
                             </div>
                             <img
-                                src="https://www.themoviedb.org/t/p/w440_and_h660_face/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg"
+                                src="https://image.tmdb.org/t/p/original/ujr5pztc1oitbe7ViMUOilFaJ7s.jpg"
                                 alt="Image"
                             />
                         </div>

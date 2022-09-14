@@ -86,7 +86,7 @@
                     <!-- Page Content-->
                     <div class="row">
                         <!-- Item-->
-                        <div class="col-sm-4 mb-4">
+                        <div class="col-sm-3 mb-4">
                             <div class="card card-light card-hover h-100">
                                 <div class="card-img-top card-img-hover">
                                     <a class="img-overlay" href=""></a>
@@ -130,7 +130,7 @@
                             </div>
                         </div>
                         <!-- Item-->
-                        <div class="col-sm-4 mb-4">
+                        <div class="col-sm-3 mb-4">
                             <div class="card card-light card-hover h-100">
                                 <div class="card-img-top card-img-hover">
                                     <a class="img-overlay" href=""></a>
@@ -174,7 +174,7 @@
                             </div>
                         </div>
                         <!-- Item-->
-                        <div class="col-sm-4 mb-4">
+                        <div class="col-sm-3 mb-4">
                             <div class="card card-light card-hover h-100">
                                 <div class="card-img-top card-img-hover">
                                     <a class="img-overlay" href=""></a>
@@ -219,7 +219,7 @@
                             </div>
                         </div>
                         <!-- Item-->
-                        <div class="col-sm-4 mb-4">
+                        <div class="col-sm-3 mb-4">
                             <div class="card card-light card-hover h-100">
                                 <div class="card-img-top card-img-hover">
                                     <a class="img-overlay" href=""></a>
@@ -263,7 +263,7 @@
                             </div>
                         </div>
                         <!-- Item-->
-                        <div class="col-sm-4 mb-4">
+                        <div class="col-sm-3 mb-4">
                             <div class="card card-light card-hover h-100">
                                 <div class="card-img-top card-img-hover">
                                     <a class="img-overlay" href=""></a>
@@ -307,7 +307,7 @@
                             </div>
                         </div>
                         <!-- Item-->
-                        <div class="col-sm-4 mb-4">
+                        <div class="col-sm-3 mb-4">
                             <div class="card card-light card-hover h-100">
                                 <div class="card-img-top card-img-hover">
                                     <a class="img-overlay" href=""></a>
