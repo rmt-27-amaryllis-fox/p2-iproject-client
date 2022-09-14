@@ -8,7 +8,7 @@ export const usePaymentStore = defineStore('payment', {
   actions: {
     paymentHandler(packageId) {
       const access_token = localStorage.getItem('access_token');
-      return axios.post(`${this.baseUrl}/payment/${packageId}`, null, {
+      return axios.post(`${this.baseUrl}/payments/${packageId}`, null, {
         headers: {access_token}
       });
     },

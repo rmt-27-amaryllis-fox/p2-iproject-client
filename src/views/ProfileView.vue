@@ -27,7 +27,6 @@ export default {
     async onPaymentHandler(packageId) {
       try {
         const {data: {transactionToken}} = await this.paymentHandler(packageId);
-        console.log(transactionToken)
         snap.pay(transactionToken);
       } catch (e) {
         console.log(e);
