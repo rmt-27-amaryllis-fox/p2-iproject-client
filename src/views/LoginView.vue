@@ -69,7 +69,7 @@ export default {
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="text" class="form-control rounded-0" id="password"
+            <input type="password" class="form-control rounded-0" id="password"
                    placeholder="password" v-model="password">
           </div>
           <div class="d-flex justify-content-end">
