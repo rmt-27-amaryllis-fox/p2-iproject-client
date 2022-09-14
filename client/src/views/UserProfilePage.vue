@@ -2,11 +2,13 @@
 import { mapActions, mapWritableState } from "pinia";
 import { useUserProfileMethodStore } from "../stores/userProfileMethod";
 import CardTCG from "../components/CardTCG.vue";
+import Chart from "chart.js/auto";
 
 export default {
   methods: {
     ...mapActions(useUserProfileMethodStore, ["getUserProfile"]),
   },
+
   computed: {
     ...mapWritableState(useUserProfileMethodStore, [
       "username",
@@ -19,9 +21,88 @@ export default {
       "cardList",
     ]),
   },
+
+  data() {
+    return {
+      trap: this.totalTrapCard,
+      spell: this.totalSpellCard,
+      monster: this.totalMonsterCard,
+    };
+  },
+
   created() {
     this.getUserProfile();
   },
+
+  updated() {
+    // total stats win/lose
+
+    const dataGamesUser = {
+      labels: ["Win", "Lose"],
+      datasets: [
+        {
+          data: [this.totalWin, this.totalLose],
+          backgroundColor: ["rgb(255, 99, 132)", "rgb(102, 255, 178)"],
+          hoverOffset: 4,
+        },
+      ],
+    };
+
+    const chartStatGame = document.getElementById("chart-game");
+    const visualkanGameStat = new Chart(chartStatGame, {
+      type: "bar",
+      data: dataGamesUser,
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: "Games History :",
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+
+    // card gained viz
+    const dataCardsUser = {
+      labels: ["Trap", "Spell", "Monster"],
+      datasets: [
+        {
+          legend: "Cards Collected",
+          data: [
+            this.totalTrapCard,
+            this.totalSpellCard,
+            this.totalMonsterCard,
+          ],
+          backgroundColor: [
+            "rgb(255, 99, 132)",
+            "rgb(102, 255, 178)",
+            "rgb(255, 205, 86)",
+          ],
+          hoverOffset: 4,
+        },
+      ],
+    };
+
+    const chartCardsStat = document.getElementById("chart-kartu");
+    const visualisasiCardStat = new Chart(chartCardsStat, {
+      type: "pie",
+      data: dataCardsUser,
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: "Cards Collected :",
+          },
+        },
+      },
+    });
+  },
+
   components: { CardTCG },
 };
 </script>
@@ -44,16 +125,18 @@ export default {
             Win : {{ totalWin }} <br />
             Lose : {{ totalLose }} <br />
           </div>
+          <canvas id="chart-game" width="300" height="300"></canvas>
         </div>
 
         <div class="text px-2 rounded mt-4">
-          <div class="container">
+          <!-- <div class="container">
             Cards Gained : <br />
             Monster Cards : {{ totalMonsterCard }} <br />
             Trap Cards :
             {{ totalTrapCard }} <br />
             Spell Cards : {{ totalSpellCard }}
-          </div>
+          </div> -->
+          <canvas id="chart-kartu" width="300" height="300"></canvas>
         </div>
 
         <div class="text px-2 rounded mt-4">Latest 3 Cards :</div>
