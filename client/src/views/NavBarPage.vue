@@ -39,9 +39,13 @@ export default {
       </a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- Link -->
-        <li class="nav-item">
+        <li v-if="isLogin === false" class="nav-item">
           <router-link to="/" class="nav-link">Landing</router-link>
         </li>
+        <li v-if="isLogin === true" class="nav-item">
+          <router-link to="/myhome" class="nav-link">myhome</router-link>
+        </li>
+
         <li v-if="isLogin === true" class="nav-item">
           <router-link to="/myprofile" class="nav-link">myprofile</router-link>
         </li>
