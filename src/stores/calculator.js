@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const useCalculatorStore = defineStore('calculator', {
   state: () => ({
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'https://kantongsaham-api.herokuapp.com',
     targetReturn : 0
   }),
   actions: {

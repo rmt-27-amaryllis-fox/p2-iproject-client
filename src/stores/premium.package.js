@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const usePremiumPackageStore = defineStore('premiumPackage', {
   state: () => ({
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'https://kantongsaham-api.herokuapp.com',
     packages: []
   }),
   actions: {

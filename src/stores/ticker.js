@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const useTickerStore = defineStore('ticker', {
   state: () => ({
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'https://kantongsaham-api.herokuapp.com',
     data: {
       financial: {},
       detail: {},

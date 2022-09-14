@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const useWatchlistStore = defineStore('watchlist', {
   state: () => ({
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'https://kantongsaham-api.herokuapp.com',
     watchlists: []
   }),
   actions: {
