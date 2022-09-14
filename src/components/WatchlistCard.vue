@@ -10,8 +10,8 @@ export default {
 
 <template>
   <div class="col-md-9">
-    <div class="card">
-      <div class="card-body">
+    <div class="card rounded-0">
+      <div class="card-body rounded-0">
         <div class="row">
           <WatchlistItem v-for="watchlist in data"
                          :key="watchlist.id"

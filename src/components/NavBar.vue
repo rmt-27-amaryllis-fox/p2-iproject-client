@@ -67,7 +67,7 @@ export default {
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
               {{ identity }}
             </a>
-            <ul class="dropdown-menu dropdown-menu-end">
+            <ul class="dropdown-menu dropdown-menu-end rounded-0">
               <li>
                 <div>
                   <router-link class="dropdown-item" :to="{name: 'profile'}">My Profile</router-link>

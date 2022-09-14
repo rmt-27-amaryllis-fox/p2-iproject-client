@@ -3,15 +3,18 @@ import {mapActions, mapState} from "pinia";
 import {usePremiumPackageStore} from "../stores/premium.package";
 import {usePaymentStore} from "../stores/payment";
 import {useUserStore} from "../stores/user";
+import LoadingBar from "../components/LoadingBar.vue";
 
 export default {
   name: "ProfileView",
+  components: {LoadingBar},
   data() {
     return {
       name: '',
       email: '',
       premium: '',
-      page: 'profile'
+      page: 'profile',
+      invisible: true
     }
   },
   computed: {
@@ -26,7 +29,9 @@ export default {
     },
     async onPaymentHandler(packageId) {
       try {
+        this.invisible = false;
         const {data: {transactionToken}} = await this.paymentHandler(packageId);
+        this.invisible = true;
         snap.pay(transactionToken);
       } catch (e) {
         console.log(e);
@@ -50,6 +55,8 @@ export default {
 </script>
 
 <template>
+  <LoadingBar v-if="!invisible"/>
+
   <div class="container my-4">
     <div class="row">
       <div class="col-md-3 p-0">
