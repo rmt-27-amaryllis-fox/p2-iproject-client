@@ -12,6 +12,7 @@
     "pinia": "^2.0.21",
     "swal": "^0.1.0",
     "sweetalert2": "^11.4.32",
+    "swiper": "^8.4.0",
     "vue": "^3.2.38",
     "vue-carousel": "^0.18.0",
     "vue-router": "^4.1.5",

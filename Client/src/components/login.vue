@@ -32,9 +32,9 @@ export default {
       password: "",
     };
   },
-  //   computed: {
-  //     ...mapState(useCounterStore, ["showAdds"]),
-  //   },
+  computed: {
+    ...mapState(useCounterStore, ["showAdds"]),
+  },
   methods: {
     ...mapActions(useCounterStore, ["loginAction", "logoutAction"]),
     async login() {

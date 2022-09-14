@@ -8,6 +8,7 @@ export const useCounterStore = defineStore("Counter", {
     baseUrl: `https://anime-doro.herokuapp.com`,
     apiUrl: `https://api.jikan.moe/v4/anime`,
     dataAnime: [],
+    isLoading: true,
   }),
   actions: {
     async loginAction(email, password) {
@@ -30,6 +31,7 @@ export const useCounterStore = defineStore("Counter", {
         }
       } catch (error) {
         console.log(error, "eror");
+        Swal.fire("INVALID EMAIL/PASSWORD");
       }
     },
     async logoutAction() {
@@ -38,7 +40,7 @@ export const useCounterStore = defineStore("Counter", {
       router.push("/login");
     },
     async getAnime(page, search) {
-      console.log(search, "<<<");
+      // console.log(search, "<<<");
       try {
         let result = await axios({
           method: "get",
@@ -67,7 +69,7 @@ export const useCounterStore = defineStore("Counter", {
             bank,
           },
         });
-
+        Swal.fire("LOADING...");
         if (result) {
           Swal.fire("Virtual Account Number has Been Sent to Your Email!");
           router.push("/login");
@@ -87,20 +89,11 @@ export const useCounterStore = defineStore("Counter", {
     showAddsTrue() {
       this.showAdds = true;
     },
-    loading() {
-      Swal.fire({
-        title: "Please Enjoy The Cat While Loading...",
-        width: 600,
-        padding: "3em",
-        color: "#716add",
-        background: "#fff url(/images/trees.png)",
-        backdrop: `
-          rgba(0,0,123,0.4)
-          url("/images/nyan-cat.gif")
-          left top
-          no-repeat
-        `,
-      });
+    isLoadingTrue() {
+      this.isLoading = true;
+    },
+    isLoadingFalse() {
+      this.isLoading = false;
     },
   },
 });

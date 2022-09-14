@@ -9,11 +9,12 @@
       </h1>
     </div>
     <!-- SEARCH BAR -->
-    <section>
-      <div class="container w-50">
+    <section class="d-flex justify-content-center ml-5">
+      <div class="d-flex justify-content-center ml-5">
         <div class="input-group">
           <form @submit.prevent="anime" class="w-40 d-flex">
             <input
+              v-on:change="anime"
               type="search"
               class="form-control rounded d-flex justify-content-center"
               style="width: 300px"
@@ -31,23 +32,16 @@
       </div>
     </section>
     <!-- END OF SEARCH BAR -->
-    <!-- carousell -->
-    <div>
-      <Carousel>
-        <Slide v-for="slide in slides" :key="slide">
-          <div class="carousel__item">{{ slide }}</div>
-        </Slide>
-
-        <template #addons="{ slidesCount }">
-          <Navigation v-if="slidesCount > 1" />
-        </template>
-      </Carousel>
-    </div>
-    <!-- end of carousell -->
-
     <!-- card -->
     <h5 class="text-center text-light"></h5>
-    <div class="row ml-5 mt-5">
+
+    <div v-if="isLoading">
+      <img
+        src="https://raw.githubusercontent.com/gist/s-shivangi/7b54ec766cf446cafeb83882b590174d/raw/8957088c2e31dba6d72ce86c615cb3c7bb7f0b0c/nyan-cat.gif"
+      />
+      <h1>ENJOY THE CAT WHILE LOADING...</h1>
+    </div>
+    <div class="row ml-5 mt-5" v-if="!isLoading">
       <div
         v-for="(e, i) in dataAnime"
         :key="i"
@@ -65,13 +59,13 @@
           <p class="card-text text-center">Released Year: {{ e.year }}</p>
           <button
             @click="openTrailer(e.title, e.trailer.url)"
-            class="btn btn-primary mt-auto text-center mb-1"
+            class="btn btn-primary mt-auto text-center"
           >
             Watch Movie
           </button>
         </div>
         <!-- start sharing social media -->
-        <span class="d-flex justify-content-center mt-0"> Share on :</span>
+        <span class="d-flex justify-content-center"> Share on :</span>
         <div class="container d-flex justify-content-center">
           <ShareNetwork
             network="facebook"
@@ -126,15 +120,9 @@ import { mapActions, mapState } from "pinia";
 import { useCounterStore } from "../stores/counter";
 import Swal from "sweetalert2";
 import "vue3-carousel/dist/carousel.css";
-import { Carousel, Slide } from "vue3-carousel";
 import VueSocialSharing from "vue-social-sharing";
 
 export default {
-  name: "App",
-  components: {
-    Carousel,
-    Slide,
-  },
   data() {
     return {
       page: 1,
@@ -151,10 +139,16 @@ export default {
     };
   },
   computed: {
-    ...mapState(useCounterStore, ["dataAnime"]),
+    ...mapState(useCounterStore, ["dataAnime", "isLoading"]),
   },
   methods: {
-    ...mapActions(useCounterStore, ["getAnime", "checkLogin", "showAddsTrue"]),
+    ...mapActions(useCounterStore, [
+      "getAnime",
+      "checkLogin",
+      "showAddsTrue",
+      "isLoadingTrue",
+      "isLoadingFalse",
+    ]),
     async changePage(page) {
       this.page = this.page + page;
       console.log(this.page, "asdfkj");
@@ -175,15 +169,15 @@ export default {
       ) {
         let image = this.getRandomItem();
         console.log(image, "image");
-        // setTimeout(() => {
-        //   Swal.fire({
-        //     html: `<img src="${image}" width="600" height='500'>`,
-        //     width: 600,
-        //     background: "#2A363B",
-        //     footer: `<a class="btn btn-primary" href="https://mesin-mpo.com/register/76B1F7A9">Mulai Menghasilkan Uang Secara Instant!</a>`,
-        //   });
-        //   this.checkPremium();
-        // }, 10000);
+        setTimeout(() => {
+          Swal.fire({
+            html: `<img src="${image}" width="600" height='500'>`,
+            width: 750,
+            background: "#2A363B",
+            footer: `<a class="btn btn-primary" href="https://mesin-mpo.com/register/76B1F7A9">Mulai Menghasilkan Uang Secara Instant!</a>`,
+          });
+          this.checkPremium();
+        }, 10000);
       }
     },
     openTrailer(anime, videoUrl) {
@@ -193,8 +187,9 @@ export default {
         title: `<strong>${anime} Trailer</strong>`,
         html: `<iframe width="1500" height="500" src="${videoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
         showCloseButton: true,
-        showCancelButton: true,
-        focusConfirm: false,
+        // showCancelButton: true,
+        showConfirmButton: false,
+        // focusConfirm: false,
         footer: `<a class="btn btn-primary" href="https://mesin-mpo.com/register/76B1F7A9">Judi Mulai Rp 100K jadi Rp 1Jt</a>`,
         width: 1500,
       });
@@ -210,7 +205,9 @@ export default {
     },
   },
   created() {
+    this.isLoadingTrue();
     this.getAnime(this.page);
+    this.isLoadingFalse();
     // this.showAdds = true;
     // this.showAddsTrue();
     this.checkPremium();
