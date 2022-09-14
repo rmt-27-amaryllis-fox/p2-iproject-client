@@ -1,15 +1,18 @@
 <script>
 import {mapActions, mapWritableState} from "pinia";
 import {useCalculatorStore} from "../stores/calculator";
+import LoadingBar from "../components/LoadingBar.vue";
 
 export default {
   name: "CalculatorView",
+  components: {LoadingBar},
   data() {
     return {
       investmentFund: '',
       period: '',
       profileRisk: 0,
-      estimatedReturn: 0
+      estimatedReturn: 0,
+      invisible: true
     }
   },
   watch: {
@@ -34,12 +37,14 @@ export default {
       this.profileRisk = 6;
       this.targetReturn = 0;
     },
-    onCalculateLumpSumHandler() {
-      this.lumpSumHandler({
+    async onCalculateLumpSumHandler() {
+      this.invisible = false;
+      await this.lumpSumHandler({
         investmentFund: this.investmentFund,
         period: this.period,
         annualReturn: this.estimatedReturn
       });
+      this.invisible = true;
     },
   },
   created() {
@@ -50,6 +55,8 @@ export default {
 </script>
 
 <template>
+  <LoadingBar v-if="!invisible"/>
+
   <div class="container mt-4 d-flex flex-column align-items-center">
     <div class="card mb-2" style="width: 50%">
       <div class="card-body">

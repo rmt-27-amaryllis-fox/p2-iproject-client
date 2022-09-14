@@ -7,11 +7,11 @@ export default {
 
 <template>
   <div class="col-md-4 mb-4">
-    <div class="card">
+    <div class="card rounded-0">
       <div class="card-header bg-transparent d-flex justify-content-center">
         <span style="">Created : {{ new Date(date).toDateString() }}</span>
       </div>
-      <div class="card-body" style="height: 120px">
+      <div class="card-body rounded-0" style="height: 120px">
         <div class="row">
           <div class="col-md-8">
             <h5 class="card-title">{{ ticker }}</h5>

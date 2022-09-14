@@ -4,13 +4,15 @@ import WatchlistInfo from "../components/WatchlistInfo.vue";
 import WatchlistLock from "../components/WatchlistLock.vue";
 import {mapActions, mapState} from "pinia";
 import {useWatchlistStore} from "../stores/watchlist";
+import LoadingBar from "../components/LoadingBar.vue";
 
 export default {
   name: "WatchlistView",
-  components: {WatchlistLock, WatchlistInfo, WatchlistCard},
+  components: {LoadingBar, WatchlistLock, WatchlistInfo, WatchlistCard},
   data() {
     return {
-      premium: ''
+      premium: '',
+      invisible: true
     }
   },
   computed: {
@@ -19,10 +21,12 @@ export default {
   methods: {
     ...mapActions(useWatchlistStore, ['fetchWatchlists'])
   },
-  created() {
+  async created() {
+    this.invisible = false;
     const premium = localStorage.getItem('premium')
     if (+premium === 1) {
-      this.fetchWatchlists();
+      await this.fetchWatchlists();
+      this.invisible = true;
     }
     this.premium = premium;
   }
@@ -30,6 +34,8 @@ export default {
 </script>
 
 <template>
+  <LoadingBar v-if="!invisible"/>
+
   <div class="container-fluid mt-4">
     <div class="row">
       <WatchlistCard v-if="+premium === 1" :data="watchlists"/>
