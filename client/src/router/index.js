@@ -5,6 +5,7 @@ import RegisterPage from '../views/RegisterPage.vue'
 import LoginPage from '../views/LoginPage.vue'
 import DetailPlan from '../views/DetailPlan.vue'
 import CartPage from '../views/CartPage.vue'
+import InVoice from '../views/InVoice.vue'
 
 
 const router = createRouter({
@@ -34,6 +35,11 @@ const router = createRouter({
       path: '/detail-plan/:planId',
       name: 'detail-plan',
       component: DetailPlan
+    },
+    {
+      path: '/invoice/:id',
+      name: 'invoice',
+      component: InVoice
     },
     {
       path: '/:pathMatch(.*)*',

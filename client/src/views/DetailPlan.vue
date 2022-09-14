@@ -94,7 +94,7 @@ export default{
 				<div class="wrapper row">
 					<div class="preview col-md-6">
 						<div class="preview-pic tab-content">
-						  <div class="tab-pane active" id="pic-1"><img :src=selectedPlan.Products[0].image_url style="width:400px" /></div>
+						  <div class="tab-pane active" id="pic-1"><img v-if="selectedPlan.Products" :src=selectedPlan.Products[0].image_url style="width:400px" /></div>
 						</div>
 					</div>
 					<div class="details col-md-6">

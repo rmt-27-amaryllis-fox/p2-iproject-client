@@ -10,7 +10,11 @@ export const useProductStore = defineStore({
         pageNumber:0,
         selectedPlan: {},
         productlist: [],
-        MyPlanList: []
+        MyPlanList: [],
+        CheckOutItem:{},
+        CheckOutList:[],
+        tokenPayment:'',
+        invoiceNo:0
     }),
     getters: {
 
@@ -18,7 +22,7 @@ export const useProductStore = defineStore({
     actions: {
         async fetchPlan(){
             try {
-                console.log(this.pageNumber);
+                // console.log(this.pageNumber);
                 let result = await axios({
                     method: 'GET',
                     url: this.baseUrl+ '/plan',
@@ -104,7 +108,7 @@ export const useProductStore = defineStore({
         },
         async addMyPlan(targetedId){
             try {
-                console.log('sampe ke store');
+                // console.log('sampe ke store');
                 let newAddedPlan = await axios({
                     method: 'POST',
                     url: this.baseUrl+ '/orderItem/' + targetedId,
@@ -117,8 +121,121 @@ export const useProductStore = defineStore({
                 console.log(error);
             }
         },
-        async createOrder(){
-            
+        async delMyPlan(targetedId){
+            try {
+                let delWish = await axios({
+                    method: 'DELETE',
+                    url: this.baseUrl + '/orderItem/' + targetedId,
+                    headers: {
+                        access_token : localStorage.getItem('access_token')
+                    }
+                })
+                await this.getMyPlan()
+            } catch (error) {
+                Swal.fire({
+                    icon: "error",
+                    title: `ERROR`,
+                    text: error.response.data.message
+                })
+            }
+        },
+
+        async upQty(targetedId, num){
+            try {
+                let updatedOrder = await axios({
+                    method: 'PUT',
+                    url: this.baseUrl+ '/orderItem/' + targetedId,
+                    headers: {
+                        access_token : localStorage.getItem('access_token')
+                    },
+                    params: {
+                        quantity: num
+                    }
+                })
+                await this.getMyPlan()
+            } catch (error) {
+                Swal.fire({
+                    icon: "error",
+                    title: `ERROR`,
+                    text: error.response.data.message
+                }) 
+            }
+        },
+
+        async createOrder(num){
+            try {
+                console.log('sampe store');
+                console.log(num);
+                let invoice = await axios({
+                    method: 'POST',
+                    url: this.baseUrl+ '/order',
+                    params:{
+                        totalPrice: num
+                    },
+                    headers: {
+                        access_token : localStorage.getItem('access_token')
+                    }
+                })
+                this.invoiceNo = invoice.id
+                
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        async inputOrderId(){
+            try {
+                let result = await axios({
+                    method: 'PATCH',
+                    url: this.baseUrl+ '/orderItem',
+                    headers: {
+                        access_token : localStorage.getItem('access_token')
+                    },
+                    params: {
+                        order: this.invoiceNo
+                    }
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        // async showInvoice(targetedId){
+        //     try {
+        //         let invoice = await axios({
+        //             method: 'GET',
+        //             url: this.baseUrl+ '/order/'+targetedId,
+        //             headers: {
+        //                 access_token : localStorage.getItem('access_token')
+        //             }
+        //         })
+        //         this.CheckOutItem = invoice.Plans.map(list=>{
+        //             let item = {
+        //                 name:list.name,
+        //                 price:list.price,
+        //                 quantity:list.OrderItem.quantity,
+        //                 priceSum:list.OrderItem.priceSum
+        //             }
+        //             return item
+        //         })
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // },
+
+        async payment(targetedId){
+            try {
+                let result = await axios({
+                    method: "GET",
+                    url: this.baseUrl + '/payment/'+ targetedId,
+                    headers: {
+                        access_token : localStorage.getItem('access_token')
+                    }
+                })
+                this.tokenPayment = result.data.token_payment
+            } catch (error) {
+                console.log(error);
+            }
         }
     
 

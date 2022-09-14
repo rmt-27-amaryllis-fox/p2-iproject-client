@@ -3,18 +3,18 @@
     import { mapActions, mapState, mapWritableState } from 'pinia'
     import { useProductStore } from '../stores/product';
     import { useCustomerStore } from '../stores/customer';
-import OrderItems from '../components/OrderItems.vue';
-import PrimaryButton from '../components/PrimaryButton.vue';
+    import OrderItems from '../components/OrderItems.vue';
+    import PrimaryButton from '../components/PrimaryButton.vue';
     
     export default{
         name: 'CartPage',
         components:{
-    NavBar,
-    OrderItems,
-    PrimaryButton
-},
+            NavBar,
+            OrderItems,
+            PrimaryButton
+        },
         computed:{
-            ...mapState(useProductStore, ['PlanList', 'MyPlanList']),
+            ...mapState(useProductStore, ['PlanList', 'MyPlanList', 'CheckOutItem']),
             ...mapWritableState(useProductStore, ['pageNumber']),
             ...mapWritableState(useCustomerStore, ['currentPage'])
         },
@@ -28,9 +28,15 @@ import PrimaryButton from '../components/PrimaryButton.vue';
             })
         },
         methods:{
-            ...mapActions(useProductStore, ['getMyPlan']),
-            checkOut(){
+            ...mapActions(useProductStore, ['getMyPlan', 'createOrder', 'inputOrderId']),
+            async checkOut(){
+                await this.createOrder(this.totalPrice)
+                this.inputOrderId()
                 
+                this.totalPrice = 0
+                let idOrder = this.CheckOutItem.id
+                console.log(idOrder,'idorder');
+                this.$router.push(`/invoice/${idOrder}`)
             }
         },
         data(){
