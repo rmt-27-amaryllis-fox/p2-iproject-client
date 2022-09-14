@@ -19,7 +19,7 @@ export default {
 
 <template>
   <!-- About this city section-->
-  <section class="page" style="background-color: #0f3d3e">
+  <section class="page" style="background-color: #fff">
     <div
       class="container-fluid d-flex justify-content-center align-items-center h-100"
     >
@@ -29,7 +29,7 @@ export default {
           <img
             class="card-img-top mb-md-0 image mx-auto"
             :src="cityThumbnail"
-            alt="product-image"
+            alt="city-image"
           />
         </div>
         <div class="col location"></div>

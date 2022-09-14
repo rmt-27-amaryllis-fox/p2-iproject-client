@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const usePostStore = defineStore("post", {
   state: () => ({
@@ -28,7 +29,10 @@ export const usePostStore = defineStore("post", {
 
         this.posts = result.data;
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: `${err.response.data.message}`,
+        });
       }
     },
 
@@ -61,8 +65,17 @@ export const usePostStore = defineStore("post", {
         });
 
         this.router.push("/");
+
+        Swal.fire({
+          icon: "success",
+          title: "Post created",
+          text: `Post successfully created`,
+        });
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: `${err.response.data.message}`,
+        });
       }
     },
 
@@ -96,8 +109,17 @@ export const usePostStore = defineStore("post", {
         });
 
         this.router.push("/");
+
+        Swal.fire({
+          icon: "success",
+          title: "Post created",
+          text: `Post successfully created`,
+        });
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: `${err.response.data.message}`,
+        });
       }
     },
 
@@ -113,23 +135,33 @@ export const usePostStore = defineStore("post", {
 
         this.post = result.data;
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: `${err.response.data.message}`,
+        });
       }
     },
 
     async about(id) {
-      const city = this.post.location;
+      try {
+        const city = this.post.location;
+        const result = await axios({
+          method: "GET",
+          url: `https://en.wikipedia.org/w/api.php?action=query&titles=${city}&prop=extracts%7Cpageimages%7Cinfo&pithumbsize=400&inprop=url&redirects=&format=json&origin=*&exintro=1`,
+        });
 
-      const result = await axios({
-        method: "GET",
-        url: `https://en.wikipedia.org/w/api.php?action=query&titles=${city}&prop=extracts%7Cpageimages%7Cinfo&pithumbsize=400&inprop=url&redirects=&format=json&origin=*&exintro=1`,
-      });
+        const key = Object.keys(result.data.query.pages)[0];
+        const paragraph = result.data.query.pages[key].extract;
+        const clearParagraph = paragraph.replace(/(<([^>]+)>)/gi, "");
 
-      const key = Object.keys(result.data.query.pages)[0];
-      const paragraph = result.data.query.pages[key].extract;
-      const clearParagraph = paragraph.replace(/(<([^>]+)>)/gi, "");
-      this.cityParagraph = clearParagraph;
-      this.cityThumbnail = result.data.query.pages[key].thumbnail.source;
+        this.cityParagraph = clearParagraph;
+        this.cityThumbnail = result.data.query.pages[key].thumbnail.source;
+      } catch (err) {
+        Swal.fire({
+          icon: "error",
+          title: `${err.response.data.message}`,
+        });
+      }
     },
   },
 });
