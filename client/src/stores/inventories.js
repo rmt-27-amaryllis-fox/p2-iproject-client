@@ -13,7 +13,7 @@ export const useInventoriesStore = defineStore({
     // total: 0,
     // product:[],
     filter1: "",
-    currentPage: 1,
+    currentPage: 0,
     totalItems: 0,
     totalPages: 0,
   }),
@@ -45,7 +45,7 @@ export const useInventoriesStore = defineStore({
         this.inventories = data.Inventory;
         this.currentPage = data.currentPage;
         this.totalItems = data.totalItems;
-        this.totalPages = data.totalPages;
+        this.totalPages = data.totalPages - 1;
         console.log(data);
       } catch (error) {
         console.log(error);
