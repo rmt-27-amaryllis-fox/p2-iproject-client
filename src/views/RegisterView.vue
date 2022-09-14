@@ -51,29 +51,29 @@ export default {
   <LoadingBar v-if="!invisible"/>
 
   <div class="container mt-4">
-    <div class="card m-auto" style="width: 50%">
+    <div class="card m-auto rounded-0" style="width: 50%">
       <img
           src="https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          class="card-img-top" alt="..." style="height: 240px">
-      <div class="card-body">
+          class="card-img-top rounded-0" alt="..." style="height: 240px">
+      <div class="card-body rounded-0">
         <form action="" @submit.prevent="onRegisterHandler">
           <div class="mb-3">
             <label for="name" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="name"
+            <input type="text" class="form-control rounded-0" id="name"
                    placeholder="Seorina" v-model="name">
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email"
+            <input type="email" class="form-control rounded-0" id="email"
                    placeholder="name@example.com" v-model="email">
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="text" class="form-control" id="password"
+            <input type="password" class="form-control rounded-0" id="password"
                    placeholder="password" v-model="password">
           </div>
           <div class="d-flex justify-content-end">
-            <button class="btn btn-outline-primary">Register</button>
+            <button class="btn btn-outline-primary rounded-0">Register</button>
           </div>
         </form>
       </div>
