@@ -26,9 +26,9 @@ export default {
     const premium = localStorage.getItem('premium')
     if (+premium === 1) {
       await this.fetchWatchlists();
-      this.invisible = true;
     }
     this.premium = premium;
+    this.invisible = true;
   }
 }
 </script>
