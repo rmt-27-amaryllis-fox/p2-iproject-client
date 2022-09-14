@@ -43,6 +43,10 @@ export default {
           <router-link to="/" class="nav-link">Landing</router-link>
         </li>
         <li v-if="isLogin === true" class="nav-item">
+          <router-link to="/game" class="nav-link">game</router-link>
+        </li>
+
+        <li v-if="isLogin === true" class="nav-item">
           <router-link to="/myhome" class="nav-link">myhome</router-link>
         </li>
 

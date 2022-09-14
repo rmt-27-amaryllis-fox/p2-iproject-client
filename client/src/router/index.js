@@ -4,6 +4,7 @@ import RegisterPage from '../views/RegisterPage.vue'
 import UserProfilePage from '../views/UserProfilePage.vue'
 import LandingPage from '../views/LandingPage.vue'
 import HomePage from '../views/HomePage.vue'
+import GamePage from '../views/GamePage.vue'
 import Swal from "sweetalert2";
 
 const router = createRouter({
@@ -34,6 +35,12 @@ const router = createRouter({
       path: '/myprofile',
       name: 'myprofile',
       component: UserProfilePage
+    },
+
+    {
+      path: '/game',
+      name: 'game',
+      component: GamePage
     },
   ],
 });
@@ -67,6 +74,14 @@ router.beforeEach((to, from, next) => {
     next({ name: 'myhome' });;
   }
   else if (!localStorage.getItem("access_token") && to.name === "myhome") {
+    Swal.fire({
+      icon: "error",
+      title: `Please login to access this feature`,
+    });
+    next({ path: '/login' });
+  }
+
+  else if (!localStorage.getItem("access_token") && to.name === "game") {
     Swal.fire({
       icon: "error",
       title: `Please login to access this feature`,

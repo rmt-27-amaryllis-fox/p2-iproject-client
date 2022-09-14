@@ -4,6 +4,7 @@ import LoginPage from "./views/LoginPage.vue";
 import RegisterPage from "./views/RegisterPage.vue";
 import UserProfilePage from "./views/UserProfilePage.vue";
 import HomePage from "./views/HomePage.vue";
+import GamePage from "./views/GamePage.vue";
 // import RegisterPage from "./views/RegisterPage.vue";
 export default {
   components: {
@@ -12,6 +13,7 @@ export default {
     RegisterPage,
     UserProfilePage,
     HomePage,
+    GamePage,
   },
 };
 </script>
@@ -27,7 +29,7 @@ export default {
   <NoFoundPage />
   <WishListPage /> -->
   <!-- <RouterView /> -->
-
+  <!-- <GamePage /> -->
   <router-view></router-view>
 </template>
 
