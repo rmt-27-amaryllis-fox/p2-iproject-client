@@ -1,6 +1,6 @@
 <script>
 import CardHome from "./CardHome.vue";
-import { mapActions, mapState } from "pinia";
+import { mapActions, mapState, mapWritableState } from "pinia";
 import { useInventoriesStore } from "../stores/inventories";
 export default {
   components: {
@@ -10,7 +10,14 @@ export default {
     ...mapActions(useInventoriesStore, ["getInventories"]),
   },
   computed: {
-    ...mapState(useInventoriesStore, ["inventories"]),
+    ...mapState(useInventoriesStore, ["inventories", "filterCategories"]),
+    ...mapWritableState(useInventoriesStore, ["filter1"]),
+  },
+
+  data() {
+    return {
+      filter: "",
+    };
   },
   created() {
     this.getInventories();
@@ -18,8 +25,23 @@ export default {
 };
 </script>
 <template>
-  <div class="container shadow rounded mt-5">
-    <div class="row mt-3">
+  <div
+    style="margin-bottom: 5vh"
+    class="container-fluid home shadow rounded mb-2 mt-5"
+  >
+    <div class="mt-5 mb-2 mt-2 filter">
+      <select
+        v-model="filter1"
+        class="form-select"
+        mb-3
+        aria-label="Default select example"
+      >
+        <option value="" selected disabled>Filter By Categories</option>
+        <option value="1">Pakaian</option>
+        <option value="2">Warehouse</option>
+      </select>
+    </div>
+    <div style="margin-bottom: 5vh" class="row mt-3">
       <div
         id="carouselExampleDark"
         class="carousel rounded carousel-dark slide"
@@ -54,7 +76,7 @@ export default {
               class="d-block w-100"
               alt="..."
             />
-            <div class="carousel-caption d-none d-md-block">
+            <div class="title carousel-caption d-none d-md-block">
               <h5>LAKSANA BARU SWALAYAN</h5>
               <p>Senyum salam sapa santun</p>
             </div>
@@ -65,7 +87,7 @@ export default {
               class="d-block w-100"
               alt="..."
             />
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption title d-none d-md-block">
               <h5>LAKSANA BARU SWALAYAN</h5>
               <p>Senyum salam sapa santun</p>
             </div>
@@ -91,12 +113,9 @@ export default {
         </button>
       </div>
 
-      <div class="d-flex justify-content-center">
-        <h4>Home Page</h4>
-      </div>
       <!-- CardHome -->
-      <CardHome v-for="el in inventories" :key="el.id" :data="el" />
-      <div class="container d-flex text-align-center justify-content-center">
+      <CardHome v-for="el in filterCategories" :key="el.id" :data="el" />
+      <!-- <div class="container d-flex text-align-center justify-content-center">
         <nav aria-label="Page navigation example" class="mt-5">
           <ul class="pagination">
             <li @click="previousPage" class="page-item">
@@ -104,18 +123,36 @@ export default {
             </li>
 
             <li class="page-item">
-              <!-- <a class="page-link">{{ currentPage }}</a> -->
+              <a class="page-link">{{ currentPage }}</a>
             </li>
 
             <li @click="nextPage" class="page-item">
               <a class="page-link" href="#">Next</a>
             </li>
             <li class="page-item">
-              <!-- <a class="page-link">{{ totalPages }}</a> -->
+              <a class="page-link">{{ totalPages }}</a>
             </li>
           </ul>
         </nav>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
+<style>
+.home {
+  margin-top: 200px;
+}
+.title {
+  font-family: "Roboto";
+}
+.title h5 {
+  color: white;
+  font-size: 3em;
+  -webkit-text-stroke: 1px black;
+}
+.title p {
+  color: white;
+  font-size: 2em;
+  -webkit-text-stroke: 1px black;
+}
+</style>

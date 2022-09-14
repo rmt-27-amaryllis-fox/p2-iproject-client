@@ -23,7 +23,7 @@ export default {
 };
 </script>
 <template>
-  <div class="container mt-3">
+  <div class="container mt-5">
     <div class="row">
       <div class="col-12 col-md-6 offset-md-3">
         <form @submit.prevent="addProduk" class="shadow">
@@ -62,3 +62,4 @@ export default {
     </div>
   </div>
 </template>
+<style></style>

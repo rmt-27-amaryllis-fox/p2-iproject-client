@@ -11,7 +11,21 @@ export const useInventoriesStore = defineStore({
     // totalPakaian: 0,
     // totalWarehouse: 0,
     // total: 0,
+    // product:[],
+    filter1: "",
   }),
+  getters: {
+    filterCategories(state) {
+      console.log(state, "<< ini state dari getter");
+      console.log(state.filter1, "maasuk state");
+      console.log(this.filter1);
+      if (state.filter1) {
+        return state.inventories.filter((el) => el.CategoryId == state.filter1);
+      } else {
+        return state.inventories;
+      }
+    },
+  },
   actions: {
     async getInventories() {
       try {

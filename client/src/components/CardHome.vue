@@ -18,7 +18,11 @@ export default {
 <template>
   <div class="col-12 col-md-3 mt-3">
     <div class="card shadow">
-      <img :src="data.image" class="card-img-top" />
+      <img
+        style="width: auto; height: 520px; object-fit: cover"
+        :src="data.image"
+        class="card-img-top"
+      />
       <div class="card-body">
         <h5 class="card-title">{{ data.name }}</h5>
         <h5 class="card-text">stock: {{ data.stock }}</h5>
@@ -40,3 +44,11 @@ export default {
     </div>
   </div>
 </template>
+<!-- <style scoped>
+.card {
+  width: 100%;
+  /* height: 110px; */
+  position: relative;
+  overflow: hidden;
+}
+</style> -->

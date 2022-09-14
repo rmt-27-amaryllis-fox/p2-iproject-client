@@ -35,7 +35,7 @@ export default {
     this.getEmployeesById(this.$route.params.id).then((result) => {
       this.name = result.name;
       this.imageUrl = result.imageUrl;
-      this.birthDate = result.birthDate;
+      this.birthDate = result.birthDate.split("T")[0];
       this.status = result.status;
       this.department = result.department;
     });
@@ -55,14 +55,10 @@ export default {
         >
           <div class="card">
             <div class="card-body">
-              <h3 class="card-title mb-3 text-center">Add Employee</h3>
+              <h3 class="card-title mb-3 text-center">Edit Employee</h3>
               <div class="mb-3">
                 <label for="text" class="form-label">Name</label>
-                <input
-                  v-model="oneEmployee.name"
-                  type="text"
-                  class="form-control"
-                />
+                <input v-model="name" type="text" class="form-control" />
               </div>
               <div class="mb-3">
                 <label class="form-label">imageUrl</label>
@@ -78,15 +74,11 @@ export default {
               </div>
               <div class="mb-3">
                 <label class="form-label">birthDate</label>
-                <input
-                  v-model="oneEmployee.birthDate"
-                  type="date"
-                  class="form-control"
-                />
+                <input v-model="birthDate" type="date" class="form-control" />
               </div>
               <div class="mb-3">
                 <label class="form-label">status</label>
-                <select v-model="oneEmployee.status" class="form-select">
+                <select v-model="status" class="form-select">
                   <option value="" selected disabled>Choose Status</option>
                   <option value="Permanent">Permanent</option>
                   <option value="Contract">Contract</option>
@@ -94,7 +86,7 @@ export default {
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">department</label>
-                <select v-model="oneEmployee.department" class="form-select">
+                <select v-model="department" class="form-select">
                   <option value="" selected disabled>Choose Status</option>
                   <option value="Fashion">Fashion</option>
                   <option value="Warehouse">Warehouse</option>

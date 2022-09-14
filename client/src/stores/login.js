@@ -6,6 +6,7 @@ export const useLoginStore = defineStore({
   id: "login",
   state: () => ({
     inventories: [],
+    isLogin: false,
   }),
   actions: {
     async loginAja(email, password) {
@@ -20,6 +21,7 @@ export const useLoginStore = defineStore({
         });
         localStorage.setItem("access_token", data.access_token);
         this.router.push("/");
+        this.isLogin = true;
         Swal.fire({
           position: "top-end",
           icon: "success",

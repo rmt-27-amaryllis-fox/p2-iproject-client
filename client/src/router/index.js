@@ -8,6 +8,7 @@ import AddEmployee from "../components/AddEmployee.vue";
 import EditEmployee from "../components/EditEmployee.vue";
 import AddProduct from "../components/AddProduct.vue";
 import EditProduct from "../components/EditProduct.vue";
+import NotFound from "../components/NotFound.vue";
 import Swal from "sweetalert2";
 
 const router = createRouter({
@@ -43,7 +44,7 @@ const router = createRouter({
       component: Register,
       beforeEnter: (to, from) => {
         // reject the navigation
-        if (!localStorage.getItem("access_token")) {
+        if (localStorage.getItem("access_token")) {
           return true;
         }
         return "/";
@@ -68,25 +69,25 @@ const router = createRouter({
         );
       },
     },
-    {
-      path: "/categories",
-      name: "categories",
-      component: Category,
-      beforeEnter: (to, from) => {
-        // reject the navigation
-        if (localStorage.getItem("access_token")) {
-          return true;
-        }
-        return (
-          "/login",
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Login First!",
-          })
-        );
-      },
-    },
+    // {
+    //   path: "/categories",
+    //   name: "categories",
+    //   component: Category,
+    //   beforeEnter: (to, from) => {
+    //     // reject the navigation
+    //     if (localStorage.getItem("access_token")) {
+    //       return true;
+    //     }
+    //     return (
+    //       "/login",
+    //       Swal.fire({
+    //         icon: "error",
+    //         title: "Oops...",
+    //         text: "Login First!",
+    //       })
+    //     );
+    //   },
+    // },
     {
       path: "/addemployee",
       name: "addemployee",
@@ -163,6 +164,12 @@ const router = createRouter({
         );
       },
     },
+    {
+      path: "/Notfound",
+      name: "Notfound",
+      component: NotFound,
+    },
+    { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
   ],
 });
 

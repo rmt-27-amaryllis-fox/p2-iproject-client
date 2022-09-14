@@ -33,8 +33,4 @@ export default {
   <RouterView />
 </template>
 
-<style>
-.body {
-  font-family: monospace;
-}
-</style>
+<style></style>
