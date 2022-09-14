@@ -3,6 +3,7 @@ import LoginPage from '../views/LoginPage.vue'
 import RegisterPage from '../views/RegisterPage.vue'
 import UserProfilePage from '../views/UserProfilePage.vue'
 import LandingPage from '../views/LandingPage.vue'
+import Swal from "sweetalert2";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,4 +32,30 @@ const router = createRouter({
   ],
 });
 
+router.beforeEach((to, from, next) => {
+  // navigation guard apabila udah login/logout biar ga berabe
+  if (!localStorage.getItem("access_token") && to.name === "myprofile") {
+    Swal.fire({
+      icon: "error",
+      title: `Please login to access this feature`,
+    });
+    next({ path: '/login' });
+  } else if (localStorage.getItem("access_token") && to.name === "register") {
+    Swal.fire({
+      icon: "error",
+      title: `You already have registered, bro`,
+    });
+    next({ name: 'landing' });;
+  } else if (localStorage.getItem("access_token") && to.name === "login") {
+    Swal.fire({
+      icon: "error",
+      title: `You already have login, bro`,
+    });
+    next({ name: 'landing' });;
+  }
+  else {
+    next()
+  }
+
+});
 export default router;
