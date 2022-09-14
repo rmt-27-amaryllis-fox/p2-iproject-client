@@ -1,8 +1,19 @@
 <script>
+    import { mapActions, mapState } from 'pinia';
     import coinCard from '../components/coinCard.vue';
+    import { useCoinStore } from '../stores/coin';
     export default {
         components : {
             coinCard
+        },
+        methods : {
+          ...mapActions(useCoinStore, ['fetchCoin'])
+        },
+        computed : {
+          ...mapState(useCoinStore, ['coins'])
+        },  
+        created(){
+          this.fetchCoin()
         }
     }
 </script>
@@ -31,7 +42,7 @@
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
 
-    <coinCard />
+    <coinCard v-for="coin in coins" :key="coin.uuid" :coin="coin" />
 
   </div>
 </div>
