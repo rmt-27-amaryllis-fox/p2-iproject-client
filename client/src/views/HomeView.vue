@@ -13,33 +13,36 @@ export default {
     PrimaryButton,
   },
   computed:{
-        ...mapState(useProductStore, ['PlanList']),
-        ...mapWritableState(useProductStore, ['pageNumber']),
-        ...mapWritableState(useCustomerStore, ['currentPage'])
-      },
-      methods: {
-        ...mapActions(useProductStore, ['fetchPlan']),
-        changePageNum(num){
-          if(num == -1 && this.pageNumber == 0){
-            this.pageNumber = 0
-          } else {
-            this.pageNumber += num
-          }
-          this.fetchPlan()
-        },
-      },
-      data(){
-        return{
-          // isActive: false,
-          // pageOne:'',
-          // pageTwo:'',
-          // pageThree:'',
-        }
-      },
-      created(){
-        this.fetchPlan()
-        this.currentPage = 'home'
+    ...mapState(useProductStore, ['PlanList']),
+    ...mapWritableState(useProductStore, ['pageNumber']),
+    ...mapWritableState(useCustomerStore, ['currentPage'])
+  },
+  methods: {
+    ...mapActions(useProductStore, ['fetchPlan']),
+    changePageNum(num){
+      if(num == -1 && this.pageNumber == 0){
+        this.pageNumber = 0
+      } else {
+        this.pageNumber += num
       }
+      this.fetchPlan()
+    },
+    localfunc(){
+      this.$router.push('/detail-plan/1')
+    }
+  },
+  data(){
+    return{
+      // isActive: false,
+      // pageOne:'',
+      // pageTwo:'',
+      // pageThree:'',
+    }
+  },
+  created(){
+    this.fetchPlan()
+    this.currentPage = 'home'
+  }
   
   
 }
@@ -52,12 +55,15 @@ export default {
       <img id="hero-image" class="opacity-75" style="width: 600px; height: 350px;" src="https://images.unsplash.com/photo-1592178036775-70c41f818c13?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
       <div class="centered">
         <h1 class="box">Plan Plenty Plant</h1>
-        <PrimaryButton msg='Plan Now'/>
+        <PrimaryButton msg='Plan Now' @click="localfunc"/>
       </div>
     </div>
     <div class="row">
       <h1 class="swipe col-1 mt-5 ms-auto" @click="changePageNum(-1)">&laquo;</h1>
-      <PlanCard msg="Buy" v-for="el in PlanList" :key="el.id" :el="el" />
+      <PlanCard msg="See Detail" v-for="el in PlanList" :key="el.id" :el="el" />
+      <div style="display: flex; align-items:center; justify-content: center" class="col-9" v-show="PlanList.length==0">
+          <img src="https://blog.myorbit.id/_default_upload_bucket/image-thumb__320__article/error%20404%20not%20found%20website_1.webp" style="width: 350px;" alt="">
+        </div>
       <h1 class="swipe col-1 mt-5 ms-auto" @click="changePageNum(1)">&raquo;</h1>
     </div>
   </main>
@@ -93,6 +99,7 @@ export default {
 
   .swipe{
     font-size: 5rem;
+    cursor: pointer;
   }
   
 </style>

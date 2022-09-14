@@ -3,6 +3,8 @@ import HomeView from "../views/HomeView.vue";
 import NotFound from "../views/NotFound.vue";
 import RegisterPage from '../views/RegisterPage.vue'
 import LoginPage from '../views/LoginPage.vue'
+import DetailPlan from '../views/DetailPlan.vue'
+import CartPage from '../views/CartPage.vue'
 
 
 const router = createRouter({
@@ -22,6 +24,16 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginPage
+    },
+    {
+      path: '/CartPage',
+      name: 'CartPage',
+      component: CartPage
+    },
+    {
+      path: '/detail-plan/:planId',
+      name: 'detail-plan',
+      component: DetailPlan
     },
     {
       path: '/:pathMatch(.*)*',

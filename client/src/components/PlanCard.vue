@@ -22,7 +22,7 @@ export default{
     },
     methods:{
         buttonClick(targetedId){
-
+            this.$router.push(`/detail-plan/${targetedId}`)
         },
         toDetailPage(targetedId){
 
@@ -51,9 +51,9 @@ export default{
                 </div>
                 <div class="details col-md-6">
                     <h6 class="product-title">{{el.name}}</h6>
-                    <li class="product-list" v-for="(el, i) in productlist" :key="i">{{el.name}}</li>
+                    <li class="product-list" v-for="(e, i) in productlist" :key="i">{{e.name}}</li>
 
-                    <PrimaryButton :msg="msg"/>
+                    <PrimaryButton @click="buttonClick(el.id)" :msg="msg"/>
                 </div>
             </div>
         </div>

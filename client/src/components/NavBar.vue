@@ -38,9 +38,9 @@ export default{
                     <li class="nav-item"><router-link id="navigate" class=" nav-link active" to="/login">Log in</router-link></li>
                 </div>
                 <div style="display:flex" v-else >
-                    <li class="nav-item" v-if="currentPage=='home'"><router-link id="navigate" class="nav-link active"  to="/wishlist">MyPlan</router-link></li>
+                    <li class="nav-item" v-if="currentPage=='home'||currentPage=='detail-plan'"><router-link id="navigate" class="nav-link active"  to="/CartPage">MyPlan</router-link></li>
 
-                    <li class="nav-item" v-else-if="currentPage=='wishlist'||currentPage=='detailTransport'"><router-link id="navigate" class="navigate nav-link active" to="/">Home</router-link></li>
+                    <li class="nav-item" v-else-if="currentPage=='CartPage'||currentPage=='detailTransport'"><router-link id="navigate" class="navigate nav-link active" to="/">Home</router-link></li>
 
                     <li class="nav-item" @click="loggingOut"><div style="cursor:pointer; margin-left: 30px;" id="navigate" class="nav-link active">Log out</div>
                         </li>
