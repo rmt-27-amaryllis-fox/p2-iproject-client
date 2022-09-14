@@ -14,6 +14,7 @@ export default {
 </script>
 
 <template>
+  {{value}}
   <div class="col-md-3">
     <div class="card border-primary mb-3 rounded-0" style="max-width: 18rem;">
       <div class="card-header text-light border-primary bg-primary rounded-0">{{title}}</div>

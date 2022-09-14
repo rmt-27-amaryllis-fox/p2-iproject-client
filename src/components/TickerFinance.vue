@@ -41,11 +41,6 @@ export default {
                    :unit="data.financials ? data.financials.income_statement.gross_profit.unit : ''"
                    :order="data.financials ? data.financials.income_statement.gross_profit.order : 0"
       />
-      <FinanceCard title="Non Operating Income/Loss"
-                   :value="data.financials ? data.financials.income_statement.nonoperating_income_loss.value: 0"
-                   :unit="data.financials ? data.financials.income_statement.nonoperating_income_loss.unit : ''"
-                   :order="data.financials ? data.financials.income_statement.nonoperating_income_loss.order : 0"
-      />
       <FinanceCard title="Basic Eranings Per Share"
                    :value="data.financials ? data.financials.income_statement.basic_earnings_per_share.value: 0"
                    :unit="data.financials ? data.financials.income_statement.basic_earnings_per_share.unit : ''"
