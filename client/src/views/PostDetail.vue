@@ -10,7 +10,11 @@ export default {
     },
   },
   methods: {
-    ...mapActions(usePostStore, ["fetchPost"]),
+    ...mapActions(usePostStore, ["fetchPost", "about"]),
+    async aboutComponent() {
+      this.about(this.post.id);
+      this.$router.push(`/about/${this.post.id}`);
+    },
   },
   data() {
     return {
@@ -28,20 +32,21 @@ export default {
   <!-- Post detail section-->
   <section class="vh-100 page" style="background-color: #0f3d3e">
     <div
-      class="container d-flex justify-content-center align-items-center h-100"
+      class="container-fluid d-flex justify-content-center align-items-center h-100"
     >
       <div
         class="row d-flex align-items-center post-detail rounded-3"
         style="border: 0.1rem white solid"
       >
-        <div class="col-md-5">
+        <div class="col-md-6">
           <img
-            class="card-img-top mb-md-0 product-detail-image"
+            class="card-img-top mb-md-0 post-image"
             :src="post.imageUrl"
-            alt="product-image"
+            alt="post-image"
+            style="width: 300px; height: 300px"
           />
         </div>
-        <div class="col-md-7 mt-1">
+        <div class="col-md-6 mt-1">
           <div class="col location">
             <h2 class="display-5 fw-bolder">{{ post.location }}</h2>
           </div>
@@ -55,10 +60,18 @@ export default {
             <p class="lead">{{ post.caption }}</p>
           </div>
           <div class="d-flex mt-3">
-            <button class="btn btn-dark" type="button">Click me</button>
+            <button class="btn btn-dark" type="button" @click="aboutComponent">
+              About this city
+            </button>
+            <button
+              class="btn btn-dark ms-2"
+              type="button"
+              @click="$router.go(-1)"
+            >
+              Back
+            </button>
           </div>
-          <div class="d-flex flex-row-reverse">
-            <!-- <img class="qr-code" src="" alt="qr-code" /> -->
+          <div class="d-flex flex-row-reverse mt-4">
             <p>Posted by : {{ post.User.username }} ({{ formattedDate }})</p>
           </div>
         </div>
@@ -76,5 +89,10 @@ export default {
 
 .page {
   margin-top: 4.7rem;
+}
+
+.close-button {
+  color: red;
+  z-index: 1;
 }
 </style>

@@ -38,7 +38,7 @@ export default {
               class="flag-icon"
               style="border: black 0.5pt solid"
             />
-            <div class="mt-3">
+            <div class="mt-2">
               <h4 class="fw-bolder">{{ post.location }}</h4>
             </div>
           </div>
@@ -79,5 +79,9 @@ export default {
 
 .card-caption {
   text-align: justify;
+}
+
+.card-img-top {
+  height: 250px;
 }
 </style>

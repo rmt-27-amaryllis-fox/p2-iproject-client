@@ -8,6 +8,7 @@ export const useUserStore = defineStore("user", {
     loggedInUsername: "",
     navbarProfilePicture: "",
     userProfile: [],
+    editUserProfile: [],
   }),
   getters: {},
   actions: {
@@ -46,7 +47,7 @@ export const useUserStore = defineStore("user", {
 
         this.navbarProfilePicture = data.profilePicture;
         this.isLogin = true;
-        this.router.push("/");
+        this.router.push("/home");
       } catch (err) {
         console.log(err);
       }
@@ -56,7 +57,7 @@ export const useUserStore = defineStore("user", {
       localStorage.clear();
       this.isLogin = false;
       this.navbarProfilePicture = "";
-      this.router.push("/login");
+      this.router.push("/");
     },
 
     async fetchUserData() {
@@ -70,6 +71,30 @@ export const useUserStore = defineStore("user", {
         });
 
         this.userProfile = result.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async editProfile(payload) {
+      try {
+        const result = await axios({
+          method: "PUT",
+          url: `${this.baseUrl}/users/editprofile`,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+          data: {
+            username: payload.username,
+            email: payload.email,
+            password: payload.password,
+            profilePicture: payload.profilePicture,
+            location: payload.location,
+            description: payload.description,
+          },
+        });
+        this.navbarProfilePicture = payload.profilePicture;
+        this.router.push("/profile");
       } catch (err) {
         console.log(err);
       }

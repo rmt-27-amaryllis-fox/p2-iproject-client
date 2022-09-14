@@ -10,6 +10,9 @@ export default {
   },
   methods: {
     ...mapActions(useUserStore, ["fetchUserData"]),
+    async editProfileComponent() {
+      this.$router.push("/edit-profile");
+    },
   },
   computed: {
     ...mapWritableState(useUserStore, ["userProfile"]),
@@ -44,6 +47,7 @@ export default {
                   class="btn btn-outline-dark"
                   data-mdb-ripple-color="dark"
                   style="z-index: 1"
+                  @click="editProfileComponent"
                 >
                   Edit profile
                 </button>
@@ -76,7 +80,7 @@ export default {
                 <p class="lead fw-bold mb-0">Posts</p>
               </div>
 
-              <div class="row g-2">
+              <div class="row row-cols-md-3 g-2">
                 <PostCard
                   v-for="post in userProfile.Posts"
                   :key="post.id"

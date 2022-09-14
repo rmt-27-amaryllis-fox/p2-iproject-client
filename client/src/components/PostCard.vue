@@ -15,6 +15,16 @@ export default {
 
 <template>
   <div class="col-6 mb-2" @click="fetchPostComponent">
-    <img :src="post.imageUrl" alt="image-post" class="w-100 rounded-3" />
+    <img
+      :src="post.imageUrl"
+      alt="image-post"
+      class="post-card w-100 rounded-3"
+    />
   </div>
 </template>
+
+<style scoped>
+.post-card {
+  height: 280px;
+}
+</style>

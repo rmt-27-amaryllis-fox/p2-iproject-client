@@ -22,62 +22,91 @@ export default {
 
 <template>
   <!-- Login section -->
-  <section>
-    <div id="intro" class="bg-image shadow-2-strong vh-100">
-      <div
-        class="mask d-flex align-items-center h-100"
-        style="background-color: #0f3d3e"
-      >
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-xl-5 col-md-8">
-              <!-- Sign In Form -->
-              <form
-                class="bg-dark rounded-5 shadow-5-strong p-5"
-                @submit.prevent="loginHandlerComponent"
-              >
-                <h2 style="color: white; text-align: center">Login</h2>
-                <div class="form-floating mb-3 mt-5">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="floatingInput"
-                    placeholder="username"
-                    v-model="loginData.username"
-                  />
-                  <label for="floatingInput">Username</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="floatingPassword"
-                    placeholder="Password"
-                    v-model="loginData.password"
-                  />
-                  <label for="floatingPassword">Password</label>
-                </div>
+  <section
+    class="vh-100 page"
+    style="background-color: #0f3d3e"
+    id="login-section"
+  >
+    <div class="container py-4 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+          <div class="card" style="border-radius: 1rem">
+            <div class="row g-0">
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                <img
+                  src="../assets/edit-profile.jpg"
+                  alt="login form"
+                  class="img-fluid"
+                  style="border-radius: 1rem 0 0 1rem"
+                />
+              </div>
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+                  <div class="d-flex align-items-center mb-2 pb-1">
+                    <img
+                      src="../assets/weathernow-logo.png"
+                      alt="ITEA-logo"
+                      class="d-inline-block me-2 rounded logo mb-2"
+                    />
+                  </div>
 
-                <div class="d-grid">
-                  <button
-                    class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
-                    type="submit"
+                  <h5
+                    class="fw-bold mb-3 pb-3 card-title"
+                    style="letter-spacing: 1px"
                   >
-                    Sign in
-                  </button>
-                  <button
-                    class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
-                    type="button"
+                    Sign into your account
+                  </h5>
+
+                  <form
+                    id="login-form"
+                    @submit.prevent="loginHandlerComponent"
+                    novalidate
                   >
-                    Sign in with twitter
-                  </button>
-                  <!-- <div class="text-center">
-                    <router-link to="/register" class="small" href="#"
-                      >Create your account here</router-link
+                    <div class="form-outline mb-4">
+                      <label class="form-label">Username</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-md"
+                        placeholder="Enter your username"
+                        v-model="loginData.username"
+                      />
+                    </div>
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="login-password"
+                        >Password</label
+                      >
+                      <input
+                        type="password"
+                        id="login-password"
+                        class="form-control form-control-md"
+                        placeholder="Enter your password"
+                        v-model="loginData.password"
+                      />
+                    </div>
+
+                    <div class="pt-1 mb-4">
+                      <router-link
+                        to="/"
+                        class="btn btn-dark btn-md btn-block button"
+                        >Cancel</router-link
+                      >
+                      <button
+                        class="btn btn-dark btn-md btn-block mx-2 button"
+                        type="submit"
+                      >
+                        Login
+                      </button>
+                    </div>
+                  </form>
+
+                  <p class="mb-2 pb-lg-2 content" style="color: #000000">
+                    Don't have an account?
+                    <router-link to="/register" style="color: #393f81"
+                      >Register here</router-link
                     >
-                  </div> -->
+                  </p>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -87,8 +116,8 @@ export default {
   <!-- End of login section -->
 </template>
 
-<style>
-#intro {
-  margin-top: 4rem;
+<style scoped>
+.logo {
+  width: 230px;
 }
 </style>

@@ -23,66 +23,88 @@ export default {
 
 <template>
   <!-- Add new post by city section -->
-  <section>
-    <div id="intro" class="bg-image shadow-2-strong vh-100">
-      <div
-        class="mask d-flex align-items-center h-100"
-        style="background-color: rgba(0, 0, 0, 0.8)"
-      >
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-xl-5 col-md-8">
-              <!-- Add Post Form -->
-              <form
-                class="bg-dark rounded-5 shadow-5-strong p-5"
-                @submit.prevent="addPost"
-              >
-                <h2 style="color: white; text-align: center">Add Post</h2>
-                <!-- Nanti ganti jadi upload file -->
-                <div class="form-floating mb-3 mt-5">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="floatingImagePost"
-                    placeholder="ImageUrl"
-                    v-model="newPostData.imageUrl"
-                  />
-                  <label for="floatingPassword">Image URL</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <textarea
-                    class="form-control"
-                    placeholder="Enter post caption here"
-                    id="floatingTextarea"
-                    style="height: 120px"
-                    v-model="newPostData.caption"
-                  ></textarea>
-                  <label for="floatingTextarea">Caption</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="floatingLocation"
-                    placeholder="Location"
-                    v-model="newPostData.location"
-                  />
-                  <label for="floatingLocation">City location</label>
-                </div>
-                <div class="text-center mb-3">
-                  <router-link to="/new-post2" class="small" href="#"
-                    >Didn't know your location? Click here!</router-link
+  <section
+    class="vh-100 page"
+    style="background-color: #0f3d3e"
+    id="login-section"
+  >
+    <div class="container py-4 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+          <div class="card" style="border-radius: 1rem">
+            <div class="row g-0">
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                <img
+                  src="../assets/add-post.jpg"
+                  alt="login form"
+                  class="img-fluid"
+                  style="border-radius: 1rem 0 0 1rem"
+                />
+              </div>
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-4 text-black">
+                  <h3
+                    class="fw-bold mb-3 card-title"
+                    style="letter-spacing: 1px"
                   >
+                    Add new post
+                  </h3>
+
+                  <form @submit.prevent="addPost" novalidate>
+                    <div class="form-outline mb-2">
+                      <label class="form-label">Image URL</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-md"
+                        placeholder="Enter your image URL"
+                        v-model="newPostData.imageUrl"
+                      />
+                    </div>
+                    <div class="form-outline mb-1">
+                      <label class="form-label">Caption</label>
+                      <input
+                        type="textarea"
+                        class="form-control form-control-md"
+                        placeholder="Enter your caption here"
+                        style="height: 120px"
+                        v-model="newPostData.caption"
+                      />
+                    </div>
+                    <div class="form-outline mb-2">
+                      <label class="form-label" for="register-location"
+                        >City location</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control form-control-md"
+                        placeholder="Enter your current city location"
+                        v-model="newPostData.location"
+                      />
+                    </div>
+
+                    <p class="mb-1 pb-lg-2 content" style="color: #000000">
+                      Didn't know your current location?
+                      <router-link to="/new-post2" style="color: #393f81"
+                        >Click here!</router-link
+                      >
+                    </p>
+
+                    <div class="pt-1">
+                      <router-link
+                        to="/home"
+                        class="btn btn-dark btn-md btn-block button"
+                        >Cancel</router-link
+                      >
+                      <button
+                        class="btn btn-dark btn-md btn-block mx-2 button"
+                        type="submit"
+                      >
+                        Post
+                      </button>
+                    </div>
+                  </form>
                 </div>
-                <div class="d-grid">
-                  <button
-                    class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
-                    type="submit"
-                  >
-                    Add post
-                  </button>
-                </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -91,3 +113,5 @@ export default {
   </section>
   <!-- End of Add new post by city section -->
 </template>
+
+<style scoped></style>

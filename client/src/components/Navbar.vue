@@ -1,6 +1,7 @@
 <script>
 import { mapWritableState, mapActions } from "pinia";
 import { useUserStore } from "../stores/user";
+import { usePostStore } from "../stores/post";
 
 export default {
   computed: {
@@ -10,8 +11,21 @@ export default {
       "navbarProfilePicture",
     ]),
   },
+  data() {
+    return {
+      filter: {
+        search: "",
+      },
+    };
+  },
   methods: {
     ...mapActions(useUserStore, ["logoutHandler"]),
+    ...mapActions(usePostStore, ["fetchAllPost"]),
+
+    searchByLocation() {
+      const search = this.filter.search;
+      this.fetchAllPost(search);
+    },
   },
   created() {
     if (localStorage.getItem("access_token")) {
@@ -31,7 +45,7 @@ export default {
         class="container-fluid d-grid gap-3 align-items-center"
         style="grid-template-columns: 1fr 2fr"
       >
-        <router-link to="/" class="">
+        <router-link to="/home" class="">
           <a class="navbar-brand" href="#"
             ><img
               src="../assets/weathernow-logo.png"
@@ -78,12 +92,19 @@ export default {
           </div>
 
           <!-- Search form -->
-          <form class="w-40 me-3" role="search">
+          <form
+            class="w-40 me-3"
+            role="search"
+            @submit.prevent="searchByLocation"
+            v-show="$route.name == 'home'"
+            id="search"
+          >
             <input
               type="search"
               class="form-control"
               placeholder="Search by city..."
               aria-label="Search"
+              v-model="filter.search"
             />
           </form>
         </div>

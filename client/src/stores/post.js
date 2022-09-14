@@ -7,16 +7,22 @@ export const usePostStore = defineStore("post", {
     posts: [],
     weatherData: [],
     post: {},
+    aboutThisCity: {},
+    cityParagraph: {},
+    cityThumbnail: "",
   }),
   getters: {},
   actions: {
-    async fetchAllPost() {
+    async fetchAllPost(filter) {
       try {
         const result = await axios({
           method: "GET",
           url: `${this.baseUrl}/posts`,
           headers: {
             access_token: localStorage.access_token,
+          },
+          params: {
+            filter,
           },
         });
 
@@ -25,6 +31,7 @@ export const usePostStore = defineStore("post", {
         console.log(err);
       }
     },
+
     async addPostByCity(payload) {
       try {
         const weather = await axios({
@@ -58,6 +65,7 @@ export const usePostStore = defineStore("post", {
         console.log(err);
       }
     },
+
     async addPostByCoordinate(payload) {
       try {
         const weather = await axios({
@@ -69,8 +77,6 @@ export const usePostStore = defineStore("post", {
             appid: `69969cbfe1345c918afc08dc68f4f327`,
           },
         });
-
-        console.log(weather, "INI HASIL HIT");
 
         await axios({
           method: "POST",
@@ -94,6 +100,7 @@ export const usePostStore = defineStore("post", {
         console.log(err);
       }
     },
+
     async fetchPost(id) {
       try {
         const result = await axios({
@@ -108,6 +115,21 @@ export const usePostStore = defineStore("post", {
       } catch (err) {
         console.log(err);
       }
+    },
+
+    async about(id) {
+      const city = this.post.location;
+
+      const result = await axios({
+        method: "GET",
+        url: `https://en.wikipedia.org/w/api.php?action=query&titles=${city}&prop=extracts%7Cpageimages%7Cinfo&pithumbsize=400&inprop=url&redirects=&format=json&origin=*&exintro=1`,
+      });
+
+      const key = Object.keys(result.data.query.pages)[0];
+      const paragraph = result.data.query.pages[key].extract;
+      const clearParagraph = paragraph.replace(/(<([^>]+)>)/gi, "");
+      this.cityParagraph = clearParagraph;
+      this.cityThumbnail = result.data.query.pages[key].thumbnail.source;
     },
   },
 });
