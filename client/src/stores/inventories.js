@@ -13,6 +13,9 @@ export const useInventoriesStore = defineStore({
     // total: 0,
     // product:[],
     filter1: "",
+    currentPage: 0,
+    totalItems: 0,
+    totalPages: 0,
   }),
   getters: {
     filterCategories(state) {
@@ -35,10 +38,15 @@ export const useInventoriesStore = defineStore({
           headers: {
             access_token: localStorage.getItem("access_token"),
           },
+          params: {
+            page: this.currentPage,
+          },
         });
-        this.inventories = data;
-        this.total = data.length;
-        this.console.log(data);
+        this.inventories = data.Inventory;
+        this.currentPage = data.currentPage;
+        this.totalItems = data.totalItems;
+        this.totalPages = data.totalPages;
+        console.log(data);
       } catch (error) {
         console.log(error);
       }

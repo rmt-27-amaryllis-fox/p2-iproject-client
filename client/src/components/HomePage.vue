@@ -2,16 +2,48 @@
 import CardHome from "./CardHome.vue";
 import { mapActions, mapState, mapWritableState } from "pinia";
 import { useInventoriesStore } from "../stores/inventories";
+import Swal from "sweetalert2";
 export default {
   components: {
     CardHome,
   },
   methods: {
     ...mapActions(useInventoriesStore, ["getInventories"]),
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage += 1;
+        this.getInventories();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Next ..",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    },
+    previousPage() {
+      if (this.currentPage > 0) {
+        this.currentPage -= 1;
+        this.getInventories();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Back ..",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    },
   },
   computed: {
     ...mapState(useInventoriesStore, ["inventories", "filterCategories"]),
-    ...mapWritableState(useInventoriesStore, ["filter1"]),
+    ...mapWritableState(useInventoriesStore, [
+      "filter1",
+      "currentPage",
+      "totalItems",
+      "totalPages",
+    ]),
   },
 
   data() {
@@ -115,26 +147,26 @@ export default {
 
       <!-- CardHome -->
       <CardHome v-for="el in filterCategories" :key="el.id" :data="el" />
-      <!-- <div class="container d-flex text-align-center justify-content-center">
+      <div class="container d-flex text-align-center justify-content-center">
         <nav aria-label="Page navigation example" class="mt-5">
           <ul class="pagination">
-            <li @click="previousPage" class="page-item">
-              <a class="page-link" href="#">Previous</a>
+            <li class="page-item">
+              <a @click="previousPage" class="page-link" href="#">Previous</a>
             </li>
 
             <li class="page-item">
               <a class="page-link">{{ currentPage }}</a>
             </li>
 
-            <li @click="nextPage" class="page-item">
-              <a class="page-link" href="#">Next</a>
+            <li class="page-item">
+              <a @click="nextPage" class="page-link" href="#">Next</a>
             </li>
             <li class="page-item">
               <a class="page-link">{{ totalPages }}</a>
             </li>
           </ul>
         </nav>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
