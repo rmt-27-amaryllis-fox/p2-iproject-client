@@ -8,12 +8,11 @@ export default {
   components: { ChatAppVue },
   data() { },
   computed: {
-    ...mapState(useUserStore, {
+    ...mapWritableState(useUserStore, {
+      isLogin: 'isLogin',
       username: 'username',
       id:'id'
-    }),
-    ...mapWritableState(useUserStore, {
-      isLogin: 'isLogin'
+
     })
   },
   methods: {
@@ -26,12 +25,17 @@ export default {
       this.isLogin = true
       this.getUser()
     }
+  },
+  updated() {
+    if (localStorage.getItem('access_token')) {
+      this.getUser()
+    }
   }
 }
 </script>
 
 <template>
-  <!-- <ChatAppVue /> -->
+  <ChatAppVue />
 
   <RouterView />
 </template>

@@ -59,7 +59,7 @@ import { useUserStore } from '../stores/user';
                 <input v-model="rightHand" type="text" class="form-control" placeholder="Enter Right Hand" autocomplete="off" />
               </div>
               <div class="mb-3">
-                <label for="types-name">Left Hand (Armor)</label>
+                <label for="types-name">Left Hand (Shield)</label>
                 <input v-model="leftHand" type="text" class="form-control" placeholder="Enter Left Hand" autocomplete="off" />
               </div>
               <div class="mb-3">
