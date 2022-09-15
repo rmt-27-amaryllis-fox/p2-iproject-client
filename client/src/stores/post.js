@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 export const usePostStore = defineStore("post", {
   state: () => ({
     // baseUrl: "http://localhost:3000",
-    baseUrl: "https://p2-weathernow.herokuapp.com/",
+    baseUrl: "https://p2-weathernow.herokuapp.com",
     posts: [],
     weatherData: [],
     post: {},
