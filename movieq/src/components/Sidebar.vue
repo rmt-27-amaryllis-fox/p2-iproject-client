@@ -56,7 +56,7 @@ export default {
       this.isLogin = true
     }
 
-    if (paid == true) {
+    if (paid) {
       console.log("masuk bang")
       this.isPaid = true
     } else {
