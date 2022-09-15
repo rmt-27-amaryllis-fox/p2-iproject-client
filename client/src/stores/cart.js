@@ -88,7 +88,7 @@ export const useCartStore = defineStore("cart", {
           },
           data: {
             destination: value,
-            weight: 2000,
+            weight: 500,
             courier: "jne",
           },
         });
