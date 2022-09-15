@@ -37,6 +37,7 @@ export const useUserStore = defineStore('user', {
         })
         localStorage.setItem('access_token', data.access_token)
         this.isLogin = true
+        await this.getUser()
         this.router.push('/weapon')
       } catch (err) {
         console.log(err)

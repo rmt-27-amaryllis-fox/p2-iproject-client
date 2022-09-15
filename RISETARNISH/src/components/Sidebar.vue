@@ -8,16 +8,15 @@ export default {
   components: { },
   data() { },
   computed: {
-    ...mapState(useUserStore, {
-      username: 'username'
-    }),
     ...mapWritableState(useUserStore, {
-      isLogin: 'isLogin'
+      isLogin: 'isLogin',
+      username: 'username'
     })
   },
   methods: {
     logout () {
       this.isLogin = false
+      this.username = ''
       localStorage.clear()
       this.$router.push('/')
     }
