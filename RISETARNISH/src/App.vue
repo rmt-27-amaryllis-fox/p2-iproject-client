@@ -25,6 +25,7 @@ export default {
     if (localStorage.getItem('access_token')) {
       this.isLogin = true
       this.getUser()
+      console.log(this.username)
     }
   }
 }

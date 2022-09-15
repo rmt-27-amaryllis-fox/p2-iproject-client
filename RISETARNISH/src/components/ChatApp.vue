@@ -118,9 +118,9 @@ div.grid-one-by-one {
 
 .chat-popup {
   width: 17em;
-  height: 500px;
+  height: auto;
   position: fixed;
-  bottom: 2em;
+  bottom: 0.5em;
   left: 0.5em;
   border: 3px solid #f1f1f1;
   z-index: 9;
