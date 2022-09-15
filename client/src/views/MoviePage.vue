@@ -4,10 +4,26 @@ import { useCounterStore } from "../stores/counter";
 import MoviesCard from "../components/MoviesCard.vue";
 
 export default {
+    data() {
+        return {
+            pageLocal: "1",
+            query: ""
+        }
+    },  
     methods: {
-        ...mapActions(useCounterStore, ["fetchMovies"]),
+        ...mapActions(useCounterStore, ["fetchMovies", "search"]),
         pageIncrement() {
-            this.page++
+            this.page += 1
+            this.pageLocal = this.page
+            this.fetchMovies()
+        },
+        pageDecrement() {
+            this.page -= 1
+            this.pageLocal = this.page
+            this.fetchMovies()
+        },
+        pageHandler(value) {
+            this.page = value
             this.fetchMovies()
         }
     },
@@ -15,9 +31,10 @@ export default {
         ...mapWritableState(useCounterStore, ["movies", 'page'])
     },
     created() {
+        this.page = 1
         this.fetchMovies();
     },
-    components: { MoviesCard }
+    components: { MoviesCard },
 };
 </script>
 <template>
@@ -26,56 +43,22 @@ export default {
         <!-- Page container-->
         <div class="container mt-5 mb-md-4 py-5">
             <div class="row py-md-1">
-                <!-- Filers sidebar (Offcanvas on mobile)-->
+                <!-- Search sidebar -->
                 <div class="col-lg-3 pe-xl-4">
                     <div
                         class="offcanvas offcanvas-start offcanvas-collapse bg-dark"
                         id="filters-sidebar"
                     >
-                        <div
-                            class="offcanvas-header bg-transparent d-flex d-lg-none align-items-center"
-                        >
-                            <h2 class="h5 text-light mb-0">Filters</h2>
-                            
-                            <button
-                                class="btn-close btn-close-white"
-                                type="button"
-                                data-bs-dismiss="offcanvas"
-                            ></button>
-                        </div>
                         <div class="offcanvas-body py-lg-4">
                             <div class="pb-4 mb-2">
                                 <h3 class="h6 text-light">Popular Movie</h3>
-                                <form action="">
-                                    <select
-                                        class="form-select form-select-light mb-2"
+                                <form @submit.prevent="search(this.query.split(' ').join('+'))" class="form-group-light bg-dark">
+                                    <input 
+                                        type="text"
+                                        class="form-control mb-2"
+                                        placeholder="Search for movie..."
+                                        v-model="query"
                                     >
-                                        <option
-                                            value=""
-                                            disabled=""
-                                            selected=""
-                                        >
-                                            By Genre
-                                        </option>
-                                        <option value="Thriller">
-                                            Thriller
-                                        </option>
-                                        <option value="Comedy">Comedy</option>
-                                        <option value="Action">Action</option>
-                                    </select>
-                                    <select
-                                        class="form-select form-select-light mb-1"
-                                    >
-                                        <option
-                                            value=""
-                                            disabled=""
-                                            selected=""
-                                        >
-                                            By Release Year
-                                        </option>
-                                        <option value="2022">2022</option>
-                                        <option value="2021">2021</option>
-                                    </select>
                                     <button
                                         class="btn btn-link border border-primary btn-light btn-primary mt-1"
                                     >
@@ -111,36 +94,29 @@ export default {
                         <MoviesCard v-for="m in movies" :key="m.id" :m="m" @click="$router.push('/movie/' + m.id)" />
                     </div>
                     <!-- Pagination-->
-                    <div
-                        class="d-flex align-items-center justify-content-between py-2"
-                    >
+                    <div class="d-flex align-items-center justify-content-between py-2">
                         <nav aria-label="Pagination">
-                            <ul
-                                class="pagination pagination-light mb-0 border rounded"
-                            >
-                                <li class="page-item d-sm-none text-nowrap">
-                                    <span class="page-link page-link-static"
-                                        >1 / 5</span
-                                    >
+                            <ul class="pagination pagination-light mb-0 border rounded">
+                                <li class="page-item">
+                                    <a
+                                        v-if="pageLocal > 1"
+                                        @click.prevent="pageDecrement"
+                                        class="page-link btn-primary"
+                                        href="#"
+                                        aria-label="Before"
+                                        ><i
+                                            class="bi bi-arrow-left-short"
+                                            style="font-size: 1.2rem"
+                                        ></i
+                                    ></a>
                                 </li>
-
-                                <li class="page-item d-none d-sm-block">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item d-none d-sm-block">
-                                    <a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item d-none d-sm-block">
-                                    <a class="page-link" href="#">3</a>
-                                </li>
-                                <li class="page-item d-none d-sm-block">...</li>
-                                <li class="page-item d-none d-sm-block">
-                                    <a class="page-link" href="#">8</a>
+                                <li class="page-item">
+                                    <input @change="pageHandler(pageLocal)" v-model="pageLocal" type="number" class="text-center input-group" min="1">
                                 </li>
                                 <li class="page-item">
                                     <a
                                         @click.prevent="pageIncrement"
-                                        class="page-link"
+                                        class="page-link btn-primary"
                                         href="#"
                                         aria-label="Next"
                                         ><i

@@ -9,7 +9,7 @@ export const useCounterStore = defineStore("counter", {
         isVerified: false,
         movies: [],
         series: [],
-        page: "1",
+        page: 1,
         movieData: {},
         seriesData: {},
         watchlists: [],

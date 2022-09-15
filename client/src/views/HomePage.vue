@@ -95,10 +95,10 @@ export default {
                         class="nav nav-tabs nav-tabs-light fs-sm me-4 pe-2 mb-0"
                     >
                         <li class="nav-item">
-                            <a @click.prevent="movieNavigation" class="nav-link" href="">Movie</a>
+                            <a @click.prevent="movieNavigation" class="btn btn-link border border-primary btn-light btn-sm btn-primary d-none d-lg-block order-lg-3" href="">Movie</a>
                         </li>
                         <li class="nav-item">
-                            <a @click.prevent="seriesNavigation" class="nav-link" href="">TV Series</a>
+                            <a @click.prevent="seriesNavigation" class="btn btn-link border border-primary btn-light btn-sm btn-primary d-none d-lg-block order-lg-3" href="">TV Series</a>
                         </li>
                     </ul>
                     <a

@@ -79,12 +79,6 @@ export default {
                             <div class="col-sm-6 col-md-12 col-lg-6">
                                 <ul class="list-unstyled">
                                     <li class="mb-2">
-                                        <strong>Director:</strong
-                                        ><span class="opacity-70 ms-1">{{
-                                            movieData.director
-                                        }}</span>
-                                    </li>
-                                    <li class="mb-2">
                                         <strong>Status:</strong
                                         ><span class="opacity-70 ms-1">{{
                                             movieData.movie.status
@@ -157,6 +151,7 @@ export default {
                                     <button
                                         class="btn btn-outline-light btn-lg px-4 me-3"
                                         type="button"
+                                        @click="playTrailer"
                                     >
                                         <i
                                             class="bi bi-caret-right-square me-2"

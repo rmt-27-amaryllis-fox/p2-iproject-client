@@ -5,13 +5,10 @@ import SearchCard from "../components/SearchCard.vue";
 
 export default {
     computed: {
-        ...mapWritableState(useCounterStore, ["searchData", "page"]),
+        ...mapWritableState(useCounterStore, ["searchData"]),
     },
     methods: {
         ...mapActions(useCounterStore, ["search"]),
-        pageIncrement() {
-            this.page++
-        }
     },
     created() {
         this.searchData;
@@ -51,48 +48,7 @@ export default {
                         
                     </div>
                     <!-- Pagination-->
-                    <div
-                        v-if="searchData.total_pages > 1"
-                        class="d-flex align-items-center justify-content-between py-2"
-                    >
-                        <nav aria-label="Pagination">
-                            <ul
-                                class="pagination pagination-light mb-0 border rounded"
-                            >
-                                <li class="page-item d-sm-none text-nowrap">
-                                    <span class="page-link page-link-static"
-                                        >1 / 5</span
-                                    >
-                                </li>
-
-                                <li class="page-item d-none d-sm-block">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item d-none d-sm-block">
-                                    <a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item d-none d-sm-block">
-                                    <a class="page-link" href="#">3</a>
-                                </li>
-                                <li class="page-item d-none d-sm-block">...</li>
-                                <li class="page-item d-none d-sm-block">
-                                    <a class="page-link" href="#">8</a>
-                                </li>
-                                <li class="page-item">
-                                    <a
-                                        class="page-link"
-                                        href="#"
-                                        aria-label="Next"
-                                        @click="pageIncrement"
-                                        ><i
-                                            class="bi bi-arrow-right-short"
-                                            style="font-size: 1.2rem"
-                                        ></i
-                                    ></a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                    
                 </div>
             </div>
         </div>
