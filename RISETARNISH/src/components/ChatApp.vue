@@ -14,12 +14,15 @@ export default {
     }
   },
   computed: {
-    ...mapState(useUserStore, {
+    ...mapWritableState(useUserStore, {
       username: 'username',
       isLogin: 'isLogin'
     })
   },
   methods: {
+    ...mapActions(useUserStore, {
+      getUser: 'getUser'
+    }),
     sendMessage() {
       this.addMessage()
       this.text = ''
@@ -32,8 +35,6 @@ export default {
       }
 
       this.messages = this.messages.concat(message)
-      
-      // this.socketInstance.emit('message', message)
     },
     openChat() {
       this.display = true
@@ -45,6 +46,9 @@ export default {
   created() {
     this.text = ''
   },
+  updated() {
+    this.getUser()
+  }
 }
 </script>
 
