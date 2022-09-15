@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const useBaseStore = defineStore("base", {
   state: () => ({
-    baseUrl: `http://localhost:3000`,
+    baseUrl: `https://saikel-in-space.herokuapp.com`,
     isLogin: false,
     name: "",
     role: "",
