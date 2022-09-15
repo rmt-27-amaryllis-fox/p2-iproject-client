@@ -57,5 +57,53 @@ export const useLoginMethodStore = defineStore({
         showConfirmButton: true,
       });
     },
+
+    async handleCredentialResponse(response) {
+      try {
+        let result = await axios({
+          method: "POST",
+          url: `${this.baseurl}/google-sign-in`,
+          headers: {
+            token_dari_google: response.credential
+          }
+        })
+        localStorage.setItem("access_token", result.data.access_token);
+        localStorage.setItem("user_logged", result.data.usernameFind);
+        this.isLogin = true
+        this.router.push("/myhome")
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Logged in as ${result.data.usernameFind}`,
+          showConfirmButton: true,
+          // timer: 1500,
+        });
+      }
+      catch (error) {
+        console.log(error, "google oauth error");
+        Swal.fire({
+          icon: "error",
+          title: `${error.response.data.message}`,
+        })
+      }
+    },
+
+    googleSignInMethod() {
+      const cb = this.handleCredentialResponse;
+      // window.onload = function () {
+      google.accounts.id.initialize({
+        // Please fill with your own client_id!
+        client_id:
+          '763293164102-nqj7em0lbrf2j98i9frqj1qjblf5lr62.apps.googleusercontent.com',
+        callback: cb,
+      });
+      google.accounts.id.renderButton(
+        document.getElementById('google-login'),
+        { theme: 'outline', size: 'large' } // customization attributes
+      );
+      // };
+
+    },
+
   },
 });

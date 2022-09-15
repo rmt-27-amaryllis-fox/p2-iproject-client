@@ -1,5 +1,5 @@
 <script>
-import { mapActions } from "pinia";
+import { mapActions, mapWritableState } from "pinia";
 import { useLoginMethodStore } from "../stores/loginMethod";
 export default {
   data() {
@@ -10,13 +10,21 @@ export default {
       },
     };
   },
+  computed: {},
   methods: {
-    ...mapActions(useLoginMethodStore, ["login"]),
+    ...mapActions(useLoginMethodStore, [
+      "login",
+      "handleCredentialResponse",
+      "googleSignInMethod",
+    ]),
     async loginMethod() {
       let email = this.loginField.email;
       let password = this.loginField.password;
       await this.login(email, password); // panggil store login
     },
+  },
+  mounted() {
+    this.googleSignInMethod();
   },
 };
 </script>
@@ -68,9 +76,14 @@ export default {
               <div>
                 <p class="mb-0">
                   Dont have account?
-                  <a href="#!" class="text-white-50 fw-bold">Sign In</a>
+                  <a
+                    @click.prevent="this.$router.push('/register')"
+                    class="text-white-50 fw-bold"
+                    >Sign In</a
+                  >
                 </p>
               </div>
+              <div class="mt-2" id="google-login"></div>
             </div>
           </div>
         </div>
