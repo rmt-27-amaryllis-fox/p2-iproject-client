@@ -34,8 +34,13 @@
 <script>
 import { mapActions } from 'pinia';
 import { useProjectStore } from '../stores/store';
+import { useToast } from "vue-toastification";
 
 export default {
+  setup() {
+    const toast = useToast();
+    return { toast };
+  },
   data: () => ({
     email: '',
     password: ''
@@ -144,6 +149,7 @@ export default {
   border: 1px solid;
   font-weight: 500;
   cursor: pointer;
+  padding: 10px 20px;
 }
 
 .login .contentbx .formbx .inputbx input[type="submit"]:hover {

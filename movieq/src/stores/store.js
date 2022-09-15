@@ -1,6 +1,8 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
+import toast from 'vue-toastification'
+
 
 export const useProjectStore = defineStore({
   id: "project-store",
@@ -75,6 +77,8 @@ export const useProjectStore = defineStore({
     logout() {
       localStorage.clear();
       this.fetchMovies();
+      this.isLogin = false,
+      this.isPaid = false
       this.router.push("/");
     },
 
@@ -94,13 +98,16 @@ export const useProjectStore = defineStore({
     },
     async paid() {
       try {
-        const { data } = await axios(this.baseUrl + "/status", {
-          methos: "patch",
+        const { data } = await axios({
+          url: this.baseUrl + "/status",
+          method: "patch",
           headers: {
             access_token: localStorage.access_token,
           },
         });
+        console.log(data)
         localStorage.paid = data.paid;
+        this.isPaid = true
         this.router.push("/");
         console.log(data);
       } catch (error) {

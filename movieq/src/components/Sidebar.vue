@@ -55,8 +55,11 @@ export default {
       this.isLogin = true
     }
 
-    if (localStorage.paid === true) {
+    if (localStorage.paid) {
+      console.log("masuk bang")
       this.isPaid = true
+    } else {
+      console.log("masuk else")
     }
   }
 }
