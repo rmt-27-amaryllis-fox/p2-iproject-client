@@ -31,7 +31,7 @@ export default {
 </script>
 
 <template>
-  <!-- <ChatAppVue /> -->
+  <ChatAppVue />
 
   <RouterView />
 </template>
