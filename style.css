@@ -1,0 +1,308 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto:wght@300;400&display=swap");
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+body {
+  background: #fbfbfd;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #313132;
+  font-size: 13px;
+  color: #d6d6d6;
+}
+
+#navigation a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #d6d6d6;
+  margin: 0 20px;
+  transition: all 0.3s ease 0s;
+}
+
+#navigation a:hover {
+  color: white;
+}
+
+.nav_links {
+  list-style: none;
+}
+
+.nav_links li {
+  display: inline-block;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product img {
+  width: 1000px;
+  height: 600px;
+}
+
+.product h1 {
+  margin: 10px;
+  font-size: 3.5em;
+  font-weight: bolder;
+}
+
+.product h3 {
+  margin: 10px;
+  font-weight: lighter;
+  font-size: 1.8em;
+}
+
+.product a {
+  color: #4c93db;
+  font-weight: light;
+  margin: 15px 0 10vh 0;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.product a:hover {
+  text-decoration: underline;
+}
+
+.product p {
+  margin: 10px;
+  color: #86868b;
+  font-weight: lighter;
+}
+
+.end {
+  background-color: #313132;
+  color: rgb(196, 196, 196);
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  margin-top: 10vh;
+}
+
+.end p {
+  font-weight: lighter;
+}
+
+#login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#login h2 {
+  color: #3a3a3a;
+  font-weight: lighter;
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+#login h1 {
+  margin: 10px 0;
+  margin-bottom: 30px;
+}
+
+#login button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+  margin: 10px 0;
+  color: #4b4b4b;
+}
+
+.button-submit {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.link-create {
+  margin-top: 20px;
+  font-weight: 300;
+}
+
+.link-create a {
+  text-decoration: none;
+  color: #2283d0;
+}
+
+.link-create a:hover {
+  text-decoration: underline;
+}
+
+#register {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#register span {
+  color: #4b4b4b;
+  font-weight: 500;
+}
+
+#register span a {
+  text-decoration: none;
+  color: #2283d0;
+  font-weight: 500;
+}
+
+#register span a:hover {
+  text-decoration: underline;
+}
+
+#register span:nth-child(3) {
+  margin-bottom: 20px;
+}
+
+#register input {
+  font-weight: 500;
+}
+
+#register input,
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: all ease 0.3s;
+}
+#register input:focus {
+  box-shadow: 0px 0px 8px #2282d069;
+  outline: 1px solid rgba(61, 216, 255, 0.562);
+}
+
+.button-submit-register {
+  display: flex;
+  justify-content: center;
+}
+
+.button-submit-register button {
+  border: none;
+  background-image: linear-gradient(to bottom, #399ae7, #0272ca);
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 1.2em;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+#add-Product {
+  margin: 3vh 15vh;
+}
+#add-Product span {
+  color: #e7bba0;
+  font-weight: 500;
+}
+.ctrl-choose {
+  display: flex;
+  margin-top: 4vh;
+}
+
+.pick-color h3 {
+  font-size: 1.4em;
+  color: #4b4b4b;
+}
+
+.ctrl-choose img {
+  width: 1000px;
+  height: 600px;
+}
+
+.ctrl-choose li {
+  display: inline;
+}
+
+.ctrl-choose ul {
+  margin-top: 30px;
+}
+
+.ctrl-choose li button {
+  border: none;
+  padding: 25px;
+  cursor: pointer;
+  box-shadow: 0 9px #999;
+  margin: 0 10px;
+  transition: 0.2s;
+  border-radius: 17px;
+  margin-bottom: 12vh;
+}
+
+.ctrl-choose li button:active {
+  color: white;
+  background-color: #4c93db;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.ctrl-choose #gold button {
+  background: #f4e9d3;
+  border: 2px solid #f7d796;
+}
+.ctrl-choose #silver button {
+  background: #f1f3f2;
+  border: 2px solid #bfc0bf;
+}
+.ctrl-choose #space-black button {
+  background: #4c4b49;
+  border: 2px solid #302f2f;
+}
+
+.order button{
+  padding: 20px;
+  border: none;
+  width: 100px;
+  background-image: linear-gradient(to bottom, #399ae7, #0272ca);
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#my-order {
+  margin: 3vh 15vh;
+}
+#my-order span {
+  color: #e7bba0;
+  font-weight: 500;
+}
+
+#my-order .capacity {
+  margin-top: 5vh;
+}
+
+#my-order .ctrl-choose p {
+  padding-top: 7px;
+  color: #e7bba0;
+  font-weight: 500;
+}
+
+#my-order p {
+  color: #313132;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.my-order-product {
+  margin-top: 5vh;
+}
