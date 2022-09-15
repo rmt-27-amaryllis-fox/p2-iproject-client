@@ -17,7 +17,21 @@ export const useCounterStore = defineStore({
     increment(){
       this.count++
     },
-
+    async purchasedItems(id){
+      try {
+        console.log("MASUK PURCHASED COUNTER");
+        console.log(id, "ID PURCHASED");
+        const {data} = axios({
+          method: "POST",
+          url: baseUrl + `owned/${id}`,
+          headers: {
+            access_token: localStorage.access_token,
+          }
+        })
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async addFavourite(id){
       try {
         console.log("<<< MASUK COUNTER ADD");
