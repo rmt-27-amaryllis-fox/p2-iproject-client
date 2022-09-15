@@ -16,6 +16,7 @@ export const useCartStore = defineStore("cart", {
   actions: {
     async getCart() {
       try {
+        console.log("hi");
         const { data } = await axios({
           url: this.baseUrl + "/mycart",
           method: "get",
@@ -24,6 +25,7 @@ export const useCartStore = defineStore("cart", {
           },
         });
         this.carts = data;
+        console.log(data);
         // this.cartsFormat
       } catch (err) {
         console.log(err);
@@ -80,6 +82,8 @@ export const useCartStore = defineStore("cart", {
     },
     async shippingFee(value) {
       try {
+        console.log("darishipping");
+        console.log(value);
         const data = await axios({
           url: this.baseUrl + "/cartshipping",
           method: "post",

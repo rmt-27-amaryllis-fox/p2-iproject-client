@@ -8,14 +8,14 @@ import LoadingPage from "../views/LoadingPage.vue";
 export default {
   data() {
     return {
-      shippingFee: this.shipping,
       test: 15,
     };
   },
   created() {
-    this.getAddress();
-    this.shippingFee(this.address);
     this.getCart();
+    this.getAddress().then(() => {
+      this.shippingFee(this.address);
+    });
   },
   computed: {
     ...mapState(useCartStore, ["carts", "address", "shipping"]),
@@ -57,8 +57,8 @@ export default {
     <h1>Troli Belanja</h1>
     <hr />
     <CartCard v-for="cart in carts" :key="cart.id" :cart="cart" />
-    <h1>Shipping Fee: {{ shipping }}</h1>
-    <h1>Total Price:{{ totalPrice }}</h1>
+    <h1>Shipping Fee: {{ shipping.toLocaleString("ID-id") }}</h1>
+    <h1>Total Price:{{ totalPrice.toLocaleString("ID-id") }}</h1>
     <button type="submit" @click="pay(carts[0].Medicine.price)">
       <img src="https://img.icons8.com/color/48/000000/checkout.png" /> Checkout
     </button>

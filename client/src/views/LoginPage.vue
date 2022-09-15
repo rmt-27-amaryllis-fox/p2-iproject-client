@@ -70,12 +70,6 @@ export default {
                 Sign in
               </button>
               <hr class="my-4" />
-              <p class="text-center mt-0">Sign in with google</p>
-              <div
-                @click="handleCredetentialResponse(response)"
-                class="mx-auto"
-                id="google"
-              ></div>
             </div>
             <hr class="my-4" />
             <div class="mb-3 mt-2 signup">

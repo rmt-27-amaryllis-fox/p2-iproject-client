@@ -13,11 +13,23 @@ const router = createRouter({
       path: "/login",
       name: "login",
       component: LoginPage,
+      beforeEnter: (to, from) => {
+        if (!localStorage.getItem("token")) {
+          return true;
+        }
+        return "/";
+      },
     },
     {
       path: "/register",
       name: "register",
       component: RegisterPage,
+      beforeEnter: (to, from) => {
+        if (!localStorage.getItem("token")) {
+          return true;
+        }
+        return "/";
+      },
     },
     {
       path: "/",
@@ -28,16 +40,34 @@ const router = createRouter({
       path: "/detail/:id",
       name: "detail-product",
       component: DetailPage,
+      beforeEnter: (to, from) => {
+        if (localStorage.getItem("token")) {
+          return true;
+        }
+        return "/login";
+      },
     },
     {
       path: "/address",
       name: "address",
       component: AddAddress,
+      beforeEnter: (to, from) => {
+        if (localStorage.getItem("token")) {
+          return true;
+        }
+        return "/login";
+      },
     },
     {
       path: "/mycart",
       name: "cart",
       component: CartPage,
+      beforeEnter: (to, from) => {
+        if (localStorage.getItem("token")) {
+          return true;
+        }
+        return "/login";
+      },
     },
   ],
 });

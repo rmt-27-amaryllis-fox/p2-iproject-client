@@ -40,15 +40,6 @@ export default {
           <div>
             <h6 class="me-6">{{ cart.Medicine.name }}</h6>
           </div>
-
-          <div class="ms-5">
-            <input
-              v-model="quantity"
-              type="number"
-              class="quantity-field"
-              min="1"
-            />
-          </div>
           <div class="w-25 ms-5">
             Rp. {{ cart.Medicine.price.toLocaleString("ID-id") }}
           </div>
