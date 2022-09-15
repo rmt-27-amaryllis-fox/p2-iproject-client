@@ -5,9 +5,9 @@ import Swal from "sweetalert2"
 export const useUserProfileMethodStore = defineStore({
   id: "UserProfileMethod",
   state: () => ({
-    baseurl: `http://localhost:3000`,
+    // baseurl: `http://localhost:3000`,
     // awal state nya
-    // baseurl: `https://yunikuro-c1-har.herokuapp.com`, // deploy
+    baseurl: `https://simptcg-har-iproject-server.herokuapp.com`, // deploy
     username: {},
     bio: {},
     totalSpellCard: {},

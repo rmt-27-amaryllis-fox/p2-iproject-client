@@ -5,8 +5,8 @@ import Swal from "sweetalert2";
 export const useRedeemMethodStore = defineStore({
   id: "redeemMethod",
   state: () => ({
-    baseurl: `http://localhost:3000`,
-    // baseurl: `https://yunikuro-c1-har.herokuapp.com`, // deploy
+    // baseurl: `http://localhost:3000`,
+    baseurl: `https://simptcg-har-iproject-server.herokuapp.com`, // deploy
 
 
   }),
