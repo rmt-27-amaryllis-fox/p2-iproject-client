@@ -1,8 +1,9 @@
 <script>
 import { GoogleMap, Marker, Polyline } from "vue3-google-map";
 import polyline from 'google-polyline'
-import markerIcon from '../assets/marker.png'
 import axios from 'axios'
+import { mapState, mapWritableState } from "pinia";
+import { useMapStore } from "../stores/map"
 
 export default {
     components: {
@@ -11,14 +12,9 @@ export default {
     data() {
         return {
             center: { lat: -7.330607, lng: 110.504836 },
-            coordinates: [],
-            testvalfrom: [-7.332980, 110.505412],
-            testvalto: [-6.995425, 110.433827],
-            mapkey: 0,
             map: {},
             weathers: [],
-            from: '',
-            to: ''
+            baseUrl : `http://localhost:3000`
         }
     },
     methods: {
@@ -26,112 +22,86 @@ export default {
             let directionsService = new google.maps.DirectionsService();
 
             let request = {
-                // origin: document.getElementById("from").value,
-                // origin: 'Semarang, Semarang City, Central Java, Indonesia',
-                // destination: "Salatiga, Salatiga City, Central Java, Indonesia",
                 origin: document.getElementById("from").value,
                 destination: document.getElementById("to").value,
                 travelMode: google.maps.TravelMode.DRIVING, //WALKING, BYCYCLING, TRANSIT
                 unitSystem: google.maps.UnitSystem.METRIC
             }
 
-            return new Promise(resolve => directionsService.route(request, function (result, status) {
+            return new Promise((resolve, reject) => directionsService.route(request, function (result, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
-
-                    // console.log(polyline.decode(result.routes[0].overview_polyline))
                     resolve(result)
                 } else {
-                    console.log(result);
-                    console.log('distance gak ada');
+                    reject(`Cannot get direction data`)
                 }
             }))
-
-
-
         },
         async findRoute() {
-            let directionsDisplay = new google.maps.DirectionsRenderer();
+            try {
+                this.map = new google.maps.Map(document.getElementById('googleMap'), this.mapOptions);
 
-            //bind the DirectionsRenderer to the map
-            directionsDisplay.setMap(this.map);
+                let directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
 
-            let data = await this.getDirections()
-            this.coordinates = polyline.decode(data.routes[0].overview_polyline)
+                directionsDisplay.setMap(this.map);
 
-            await this.findWeather()
+                let data = await this.getDirections()
 
-            for (const place of this.weathers) {
-                console.log(place);
+                this.mapsdata = data
+                this.coordinates = polyline.decode(data.routes[0].overview_polyline)
 
-                const icon = {
-                    url: `http://openweathermap.org/img/wn/${place.weather[0].icon}@2x.png`, // url
-                    scaledSize: new google.maps.Size(50, 50), // scaled size
-                };
+                await this.findWeather()
 
-                new google.maps.Marker({
-                    position: { lat: place.coord.lat, lng: place.coord.lon },
-                    icon: icon,
-                    map: this.map,
+                for (const place of this.weathers) {
+                    const icon = {
+                        url: `http://openweathermap.org/img/wn/${place.weather[0].icon}@2x.png`, // url
+                        scaledSize: new google.maps.Size(50, 50), // scaled size
+                    };
+
+                    new google.maps.Marker({
+                        position: { lat: place.coord.lat, lng: place.coord.lon },
+                        icon: icon,
+                        map: this.map,
+                    })
+                }
+
+                directionsDisplay.setDirections(data);
+            } catch (error) {
+                Swal.fire({
+                    title: "Error rendering routes",
+                    icon: 'error'
                 })
             }
 
-            directionsDisplay.setDirections(data);
-            console.log(data);
         },
         async findWeather() {
-            let endpoints = []
+            try {
+                let { data } = await axios({
+                    url: this.baseUrl + `/weathers`,
+                    method: 'post',
+                    data: {
+                        coord: this.markerPlaces
+                    }
+                })
 
-            endpoints = this.markerPlaces.map(el => {
-                return `https://api.openweathermap.org/data/2.5/weather?lat=${el.lat}&lon=${el.lng}&appid=5cf54e85c09dd02570b609fdb8142ddc&units=metric`
-            })
+                this.weathers = data
 
-            let response = await axios.all(endpoints.map((endpoint) => axios.get(endpoint)))
-
-            this.weathers = response.map(el => el.data)
-
-            // console.log(this.weathers);
-
+            } catch (error) {
+                Swal.fire({
+                    title: error.response.data.message,
+                    text: 'Error Code ' + error.response.status,
+                    icon: 'error'
+                })
+            }
         }
     },
     computed: {
-        polylineOptions() {
-            let path = this.coordinates.map(el => {
-                return { lat: el[0], lng: el[1] }
-            })
-
-            console.log(path);
-
-            let travelpath = {
-                path: path,
-                geodesic: true,
-                strokeColor: '#FF0000',
-                strokeOpacity: 1.0,
-                strokeWeight: 2,
-            }
-
-            return { center: this.center, travelpath }
-        },
-        markerPlaces() {
-            let result = [];
-            let parts = 6;
-            const array = [...this.coordinates]
-            for (let i = parts; i > 0; i--) {
-                result.push(array.splice(0, Math.ceil(array.length / i)));
-            }
-
-            result = result.map(el => {
-                let coordinates = el[el.length - 1]
-                return { lat: coordinates[0], lng: coordinates[1] }
-            })
-            // console.log(result);
-            result.unshift({ lat: this.coordinates[0][0], lng: this.coordinates[0][1] })
-            // result.push({ lat: this.coordinates[this.coordinates.length - 1][0], lng: this.coordinates[this.coordinates.length - 1][1] })
-            return result;
+        ...mapWritableState(useMapStore, ["mapsdata", "mapOptions", "coordinates"]),
+        ...mapState(useMapStore, ["markerPlaces"]),
+        getDateFromUnix() {
+            return new Date(this.weathers[0].dt * 1000).toLocaleDateString("id-ID") + ' ' + new Date(this.weathers[0].dt * 1000).toLocaleTimeString()
         }
     },
     mounted() {
-
-
         let options = {
             types: ['(cities)']
         }
@@ -141,40 +111,45 @@ export default {
         let input2 = document.getElementById("to");
         let autocomplete2 = new google.maps.places.Autocomplete(input2, options);
 
-        let mapOptions = {
-            center: { lat: -7.330607, lng: 110.504836 },
-            zoom: 10,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+        this.map = new google.maps.Map(document.getElementById('googleMap'), this.mapOptions);
 
-        };
-
-        this.map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
-
+        document.getElementById('from').value= ''
+        document.getElementById('to').value=''
     }
 }
 </script>
     
 <template>
-    <div class="maps-input container">
+    <div class="maps-input container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12 mb-4">
+                <h1 class="mb-4">Check your trip weather here...</h1>
                 <form class="form-horizontal" @submit.prevent="findRoute()">
-                    <div class="form-group">
-                        <label for="from" class="col-xs-2 control-label"><i class="far fa-dot-circle"></i></label>
-                        <div class="col-xs-4">
-                            <input type="text" id="from" v-model="from" placeholder="Origin" class="form-control">
+                    <div class="form-outline mb-3">
+                        <input type="text" id="from" class="form-control" />
+                        <label class="form-label" for="from">Origin</label>
+                        <div class="form-notch">
+                            <div class="form-notch-leading" style="width: 9px;"></div>
+                            <div class="form-notch-middle" style="width: 87.2px;"></div>
+                            <div class="form-notch-trailing"></div>
                         </div>
                     </div>
-                    <div class="form-group">
-
-                        <label for="to" class="col-xs-2 control-label"><i class="fas fa-map-marker-alt"></i></label>
-                        <div class="col-xs-4">
-                            <input type="text" id="to" v-model="to" placeholder="Destination" class="form-control">
+                    <div class="form-outline mb-3">
+                        <input type="text" id="to" class="form-control" />
+                        <label class="form-label" for="to">Destination</label>
+                        <div class="form-notch">
+                            <div class="form-notch-leading" style="width: 9px;"></div>
+                            <div class="form-notch-middle" style="width: 87.2px;"></div>
+                            <div class="form-notch-trailing"></div>
                         </div>
-
                     </div>
 
-                    <button class="btn btn-primary mt-3" type="submit">Check Weather</button>
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-primary btn-lg mt-3" type="submit">Check Weather</button>
+                        <button @click.prevent="this.$router.push('/forecast')" :disabled="coordinates.length === 0"
+                            class="btn btn-secondary mt-3">Forecast Weather</button>
+                    </div>
+
 
                 </form>
             </div>
@@ -188,26 +163,38 @@ export default {
         </div>
     </div>
 
-    <div class="container weather-report d-flex justify-content-center">
-        <div class="row mt-5 d-flex justify-content-center">
-            <div class="col-md-3 mt-2 mb-2" v-for="(weather, idx) in this.weathers" :key="idx" style="width: 18rem;">
-                <div class="card">
-                    <img class="card-img-top"
-                        :src="`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Weather at {{ weather.name }}</h5>
-                        <p class="card-text">Coordinates : [{{ weather.coord.lat }}, {{ weather.coord.lon }}]</p>
-                        <p class="card-text">Weather : {{ weather.weather[0].main }}, {{ weather.weather[0].description
-                        }}</p>
-                        <p class="card-text">Temperature : {{ weather.main.temp }}</p>
-                        <p class="card-text">Temperature : {{ weather.main.temp }}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div v-if="this.mapsdata.routes && this.weathers.length !== 0" class="container">
+        <div class="container d-flex flex-column align-items-center mb-5">
+            <h1>Your travel report</h1>
+            <h3>Driving Distance: {{ this.mapsdata.routes[0].legs[0].distance.text }}</h3>
+            <h3>Driving Duration: {{ this.mapsdata.routes[0].legs[0].duration.text }}</h3>
+        </div>
+        <div class="container weather-report">
+            <div class="container  d-flex justify-content-center">
+                <h1>Weather at {{ getDateFromUnix }}</h1>
+            </div>
+            <div class="row mt-5 d-flex justify-content-center">
+                <div class="col-md-3 mt-2 mb-4" v-for="(weather, idx) in this.weathers" :key="idx"
+                    style="width: 18rem;">
+                    <div class="card">
+                        <img class="card-img-top"
+                            :src="`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`"
+                            alt="Card image cap">
+                        <div class="card-body" style="height:250px;">
+                            <h5 class="card-title">Weather at {{ weather.name }}</h5>
+                            <p class="card-text">Coordinates : [{{ weather.coord.lat }}, {{ weather.coord.lon }}]</p>
+                            <p class="card-text">Weather : {{ weather.weather[0].main }}, {{
+                            weather.weather[0].description
+                            }}</p>
+                            <p class="card-text">Temperature : {{ weather.main.temp }}</p>
+                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 
 </template>
