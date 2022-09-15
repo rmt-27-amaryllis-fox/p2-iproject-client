@@ -45,10 +45,9 @@ const router = createRouter({
 
 router.beforeEach((to, from ,next) => {
   const token = localStorage.access_token
-  const paid = localStorage.paid
 
   if(to.name === 'login' && token) next({name: "home"})
-  else if(to.name === 'subs' && paid) next({name: "home"})
+  else if(to.name === 'subs' && localStorage.paid === false) next({name: "home"})
   else if(to.name === 'subs' && !token) next({name: "login"})
   else next()
 })
