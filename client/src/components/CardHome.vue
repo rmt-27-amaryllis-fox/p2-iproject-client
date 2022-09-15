@@ -17,7 +17,7 @@ export default {
 </script>
 <template>
   <div class="col-12 col-md-3 mt-3">
-    <div class="card shadow">
+    <div class="card bungkusCard">
       <img
         style="width: auto; height: 520px; object-fit: cover"
         :src="data.image"
@@ -44,11 +44,12 @@ export default {
     </div>
   </div>
 </template>
-<!-- <style scoped>
-.card {
-  width: 100%;
-  /* height: 110px; */
-  position: relative;
-  overflow: hidden;
+<style scoped>
+.bungkusCard {
+  transition: 0.5s;
 }
-</style> -->
+.bungkusCard:hover {
+  box-shadow: 0px 0px 10px rgba(57, 154, 231, 0.6);
+  border-radius: 10px;
+}
+</style>
