@@ -13,7 +13,7 @@
       },
       changePage() {
         this.isLogin = true
-        this.$router.push("/favourites")
+        this.$router.push("/owned")
       },
       returnHome() {
         this.isLogin = true
@@ -57,7 +57,7 @@
                 @click="returnHome">Home</a>
               </li>
               <li class="nav-item">
-                <a id="histories" style="font-family:monospace" class="nav-link text-white" href="#" @click="changePage">My Favourites</a>
+                <a id="histories" style="font-family:monospace" class="nav-link text-white" href="#" @click="changePage">My Collection</a>
               </li>
             </ul>
             <button id="logout" type="button" class="btn text-white" style="background-color:rgb(120,12,12);font-family:monospace;font-size:20px" @click="logoutHandler">

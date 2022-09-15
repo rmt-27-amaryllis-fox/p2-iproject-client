@@ -6,7 +6,7 @@ const baseUrl = "http://localhost:3000/"
 
 export const useCounterStore = defineStore({
   id: "counter",
-  state: () => ({paymentToken: "",paintings: [], products: [], productById: [], page:[], filter: 0, totalPages: 0, isLogin: false, qrImage: "", isLoading: false}),
+  state: () => ({owneds: [], paymentToken: "",paintings: [], products: [], productById: [], page:[], filter: 0, totalPages: 0, isLogin: false, qrImage: "", isLoading: false}),
   getters: {
     doubleCount: (state) => state.count * 2,
     filterProduct(state){
@@ -17,6 +17,32 @@ export const useCounterStore = defineStore({
     increment(){
       this.count++
     },
+
+    async fetchOwned(){
+      console.log("<<< masuk owned di counter");
+      try {
+        const {data} = await axios({
+          method: "GET",
+          url: baseUrl + "owned",
+          headers: {
+            access_token: localStorage.access_token
+          }
+        })
+
+        console.log(data, "<<<< DATA DI FAVOURITES")
+        // this.paintings = data;
+        this.owneds = data
+      } catch (error) {
+        console.log(error)
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.message,
+          footer: '<a href="">Why do I have this issue?</a>'
+        })
+      }
+    },
+
     async purchasedItems(id){
       try {
         console.log("MASUK PURCHASED COUNTER");
@@ -34,8 +60,7 @@ export const useCounterStore = defineStore({
     },
     async addFavourite(id){
       try {
-        console.log("<<< MASUK COUNTER ADD");
-        console.log(id, "<<<IDNYA");
+
         const response = await axios({
           method: "POST",
           url: baseUrl + `favourites/${id}`,
@@ -43,12 +68,7 @@ export const useCounterStore = defineStore({
             access_token: localStorage.access_token
           },
         })
-        console.log(response.data.trans_token);
-        console.log(response, "Success add favourite");
-        
-        console.log(this.paymentToken, "<<<SEBELUM");
         this.paymentToken = response.data.trans_token
-        console.log(this.paymentToken, "<<<SESUDAH");
         
       } catch (error) {
         console.log(error);
@@ -62,7 +82,6 @@ export const useCounterStore = defineStore({
     },
     async getPainting (name, next) {
       try {
-        console.log(name);
        this.isLoading = true
        const paintings = []
        const {data} = await axios({
@@ -99,7 +118,7 @@ export const useCounterStore = defineStore({
                created: data.objectEndDate,
                id: data.objectID, 
                price: (new Date().getFullYear()  - data.objectEndDate) * 10000
-              //  price: Math.round((Math.ceil(Math.random()*11)*5000000))
+
            } 
 
            if(painting.image == ""){
@@ -143,7 +162,6 @@ export const useCounterStore = defineStore({
         id: data.objectID
       } 
       this.productById = painting;
-      console.log(painting, "LOG PAINTING");
 
       const qr = await axios({
         url: "https://api.happi.dev/v1/qrcode",
@@ -345,31 +363,6 @@ export const useCounterStore = defineStore({
       }
     },
 
-    async fetchFavourites(){
-      console.log("<<< masuk favourite di counter");
-      try {
-        const {data} = await axios({
-          method: "GET",
-          url: baseUrl + "favourites",
-          headers: {
-            access_token: localStorage.access_token
-          }
-        })
-
-        console.log(data, "<<<< DATA DI FAVOURITES")
-        // this.paintings = data;
-      } catch (error) {
-        console.log(error)
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: error.response.data.message,
-          footer: '<a href="">Why do I have this issue?</a>'
-        })
-      }
-    },
-
-    
     async qrCode() {
       try {
           const apikey = "dd4571pqJwlqcv1dmD4m2FEJLuHAY8rcyiJqXqBEe9ZtPoff0EeN682B"
