@@ -23,6 +23,15 @@ export default {
     ...mapActions(useUserStore, {
       getUser: 'getUser'
     }),
+    join() {
+      this.joinend = true
+      this.socketInstance = io('https://h8omoring.herokuapp.com', {
+        transports: ['websocket']
+      })
+      this.socketInstance.on('message:received', (data) => {
+        this.messages = this.messages.concat(data)
+      })
+    },
     sendMessage() {
       this.addMessage()
       this.text = ''
@@ -33,6 +42,7 @@ export default {
         text: this.text,
         user: this.username
       }
+      this.socketInstance.emit('message', message)
 
       this.messages = this.messages.concat(message)
     },
@@ -51,7 +61,7 @@ export default {
 </script>
 
 <template>
-  <button v-if="!display" class="open-button" @click.prevet="openChat">Chat</button>
+  <button @click.prevent="join" v-if="!display" class="open-button" @click.prevet="openChat">Chat</button>
   
   <div v-if="display" class="chat-popup" id="myForm">
     <form class="form-container">
