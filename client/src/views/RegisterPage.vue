@@ -83,7 +83,11 @@ export default {
               <div>
                 <p class="mb-0">
                   Already have account?
-                  <a href="#!" class="text-white-50 fw-bold">Login</a>
+                  <a
+                    @click.prevent="this.$router.push('/login')"
+                    class="text-white-50 fw-bold"
+                    >Login</a
+                  >
                 </p>
               </div>
             </div>
