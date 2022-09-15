@@ -1,14 +1,12 @@
-import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
-import toast from 'vue-toastification'
-
+import swal from 'sweetalert2'
 
 export const useProjectStore = defineStore({
   id: "project-store",
   state: () => ({
     imageUrl: "https://image.tmdb.org/t/p/w500/",
-    baseUrl: "http://localhost:3000",
+    baseUrl: "https://movieq69.herokuapp.com",
     movies: [],
     movie: {},
     page: 1,
@@ -30,8 +28,13 @@ export const useProjectStore = defineStore({
         localStorage.access_token = data.access_token;
         this.isLogin = true
         this.router.push("/");
-      } catch (error) {
-        console.log(error);
+      } catch ({response}) {
+        swal.fire({
+          icon: "error",
+          title: "Uh oh...",
+          text: response.data.message,
+        });
+        this.router.push("/login");
       }
     },
 
@@ -42,23 +45,38 @@ export const useProjectStore = defineStore({
           url: this.baseUrl + "/register",
           data: param,
         });
+        swal.fire({
+          icon: "success",
+          title: "Register successfull"
+        });
         this.router.push("/login");
-      } catch (error) {
-        console.log(error);
+      } catch ({ response }) {
+        swal.fire({
+          icon: "error",
+          title: "Uh oh...",
+          text: response.data.message,
+        });
       }
     },
 
     async fetchMovies() {
       try {
+        this.isLoading = true
         const { data } = await axios({
           method: "get",
           url: this.baseUrl + "/movies",
         });
         this.movies = data.results;
         this.page = data.page;
-        console.log(data);
+        
       } catch (error) {
-        console.log(error.response);
+        swal.fire({
+          icon: "error",
+          title: "Uh Oh...",
+          text: "Something went wrong, try again later",
+        });
+      } finally {
+        this.isLoading = false
       }
     },
 
@@ -70,7 +88,11 @@ export const useProjectStore = defineStore({
         });
         this.movie = data;
       } catch (error) {
-        console.log(error);
+        swal.fire({
+          icon: "error",
+          title: "Uh oh...",
+          text: "Something went wrong, try again later",
+        });
       }
     },
 
@@ -79,6 +101,11 @@ export const useProjectStore = defineStore({
       this.fetchMovies();
       this.isLogin = false,
       this.isPaid = false
+      swal.fire({
+        icon: "success",
+        title: "Good Bye",
+        text: "Hope you have a great time",
+      });
       this.router.push("/");
     },
 
@@ -108,8 +135,11 @@ export const useProjectStore = defineStore({
         console.log(data)
         localStorage.paid = data.paid;
         this.isPaid = true
+        swal.fire({
+          icon: "success",
+          title: "You havee subscribed"
+        })
         this.router.push("/");
-        console.log(data);
       } catch (error) {
         console.log(error);
       }

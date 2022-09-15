@@ -51,11 +51,12 @@ export default {
     ...mapWritableState(useProjectStore, ['isLogin', 'isPaid'])
   },
   created() {
+    const paid = localStorage.paid
     if (localStorage.access_token) {
       this.isLogin = true
     }
 
-    if (localStorage.paid) {
+    if (paid == true) {
       console.log("masuk bang")
       this.isPaid = true
     } else {

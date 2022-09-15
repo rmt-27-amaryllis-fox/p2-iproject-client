@@ -1,9 +1,12 @@
 <template>
-  <section class="Movies">
-    <div class ="content">
+  <div v-if="isLoading" style="display: flex; justify-content: center; align-items:center" > 
+    <img src="https://pa1.narvii.com/6148/b21e9bc8b98332750d57296dbaf0d606d49fa5ee_hq.gif" alt="">
+  </div>
+  <section v-else class="Movies">
+    <div class="content">
       <!-- <img v-if="isLoading" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921" alt=""> -->
-      <card v-for="movie in movies" :key="movie.id" :movie="movie"/>
-    </div> 
+      <card v-for="movie in movies" :key="movie.id" :movie="movie" />
+    </div>
   </section>
   <!-- <div class="container mt-3">
     <div class="row mt-3">
@@ -42,7 +45,7 @@ export default {
     ...mapActions(useProjectStore, ['fetchMovies'])
   },
   computed: {
-    ...mapWritableState(useProjectStore, ['movies','page'])
+    ...mapWritableState(useProjectStore, ['movies', 'page', 'isLoading'])
   },
   created() {
     this.fetchMovies()
