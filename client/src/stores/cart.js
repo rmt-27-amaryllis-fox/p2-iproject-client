@@ -4,8 +4,8 @@ import axios from "axios";
 export const useCartStore = defineStore("cart", {
   state: () => ({
     isLog: false,
-    baseUrl: "http://localhost:3000",
-    // baseUrl: "https://individual-project-budi.herokuapp.com",
+    // baseUrl: "http://localhost:3000",
+    baseUrl: "https://individual-project-budi.herokuapp.com",
     isLog: false,
     carts: [],
     cartsFormat: {},
@@ -88,7 +88,7 @@ export const useCartStore = defineStore("cart", {
           },
           data: {
             destination: value,
-            weight: 200,
+            weight: 2000,
             courier: "jne",
           },
         });

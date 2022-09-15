@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       shippingFee: this.shipping,
+      test: 15,
     };
   },
   created() {
@@ -19,12 +20,12 @@ export default {
   computed: {
     ...mapState(useCartStore, ["carts", "address", "shipping"]),
     ...mapWritableState(useCartStore, ["orderId"]),
-    // totalPrice() {
-    //   const item = this.carts[0].Medicine.price.toLocaleString("ID-id");
-    //   const shippingFee = +this.shipping;
-    //   const total = shippingFee + item;
-    //   return total;
-    // },
+    totalPrice() {
+      const item = +this.carts[0].Medicine.price;
+      const shippingFee = +this.shipping;
+      const total = shippingFee + item;
+      return total;
+    },
   },
   components: {
     CartCard,
@@ -57,7 +58,7 @@ export default {
     <hr />
     <CartCard v-for="cart in carts" :key="cart.id" :cart="cart" />
     <h1>Shipping Fee: {{ shipping }}</h1>
-    <h1>Total Price:{{ carts[0].Medicine.price.toLocaleString("ID-id") }}</h1>
+    <h1>Total Price:{{ totalPrice }}</h1>
     <button type="submit" @click="pay(carts[0].Medicine.price)">
       <img src="https://img.icons8.com/color/48/000000/checkout.png" /> Checkout
     </button>

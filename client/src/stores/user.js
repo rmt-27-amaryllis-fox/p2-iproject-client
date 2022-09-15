@@ -4,8 +4,8 @@ import axios from "axios";
 export const useUserStore = defineStore("user", {
   state: () => ({
     isLog: false,
-    baseUrl: "http://localhost:3000",
-    // baseUrl: "https://individual-project-budi.herokuapp.com",
+    // baseUrl: "http://localhost:3000",
+    baseUrl: "https://individual-project-budi.herokuapp.com",
     isLog: false,
     medicine: "",
   }),
