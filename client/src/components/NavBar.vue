@@ -15,7 +15,7 @@ export default {
 <template>
   <nav class="navbar navbar-expand-lg bg-light d-flex">
     <div class="container-fluid d-flex">
-      <a class="navbar-brand d-flex" href="#">Navbar</a>
+      <a class="navbar-brand d-flex" href="#">Apotek Cemara</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -47,6 +47,9 @@ export default {
             ><i class="bi bi-cart4"></i
           ></router-link>
           <div class="vr"></div>
+          <router-link v-if="isLog" to="/address" class="nav-link"
+            >Add Address</router-link
+          >
 
           <!-- <form class="d-flex" role="search">
             <input

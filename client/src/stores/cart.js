@@ -4,13 +4,14 @@ import axios from "axios";
 export const useCartStore = defineStore("cart", {
   state: () => ({
     isLog: false,
-    // baseUrl: "http://localhost:3000",
-    baseUrl: "https://individual-project-budi.herokuapp.com",
+    baseUrl: "http://localhost:3000",
+    // baseUrl: "https://individual-project-budi.herokuapp.com",
     isLog: false,
     carts: [],
     cartsFormat: {},
     address: "",
     shipping: 0,
+    orderId: 800,
   }),
   actions: {
     async getCart() {
@@ -91,10 +92,8 @@ export const useCartStore = defineStore("cart", {
             courier: "jne",
           },
         });
-        console.log(value);
         console.log(data.data[0].value);
         this.shipping = data.data[0].value;
-        // console.log("masuk", data.rajaongkir.results[0].costs[0].cost[0].value);
       } catch (err) {
         console.log(err);
       }
@@ -109,6 +108,28 @@ export const useCartStore = defineStore("cart", {
           },
         });
         this.getCart();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async checkOut(gross) {
+      try {
+        const id = new Date().getTime();
+        const order = `${id}-${localStorage.getItem("userid")}`;
+        console.log(gross);
+        const { data } = await axios({
+          url: this.baseUrl + "/checkout",
+          method: "post",
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+          data: {
+            order: order,
+            gross: gross,
+          },
+        });
+
+        window.location.href = `${data.redirect_url}`;
       } catch (err) {
         console.log(err);
       }
