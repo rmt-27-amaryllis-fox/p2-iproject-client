@@ -10,7 +10,7 @@ export default {
         ...mapState(useCounterStore, ["paymentToken"],),
     },
     methods: {
-        ...mapActions(useCounterStore, ["getPainting", "productById", "addFavourite"]),
+        ...mapActions(useCounterStore, ["purchasedItems","getPainting", "productById", "addFavourite"]),
         formatPrice(value) {
             let val = (value / 1).toFixed(2).replace('.', ',')
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -26,7 +26,8 @@ export default {
         },
         addFavouriteComponent() {
             console.log(this.painting.id);
-            this.addFavourite(this.painting.id).then(() => {
+            console.log(this.painting, "PAINTING");
+            this.addFavourite(this.painting.id).then(this.purchasedItems(this.painting.id)).then(() => {
                 console.log(this.paymentToken, "PAYMENT TOKEN DI CARDROW");
                 window.snap.pay(this.paymentToken, {
                     onSuccess: function (result) {
@@ -35,7 +36,7 @@ export default {
                         alert("payment success!"); console.log(result);
                         Swal.fire(
                             'Success,',
-                            'Added to Favourites!',
+                            'Item purchased!',
                             'success'
                         )
                     }
