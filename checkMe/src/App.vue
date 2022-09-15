@@ -17,9 +17,9 @@ export default {
       <NavBar />
     </div>
   </header>
-  <div class="loading" v-if="loadingFlag">
+  <!-- <div class="loading" v-if="loadingFlag">
     <LoadPage v-if="loadingFlag" />
-  </div>
+  </div> -->
   <RouterView />
 </template>
 

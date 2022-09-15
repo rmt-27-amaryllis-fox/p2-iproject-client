@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const useMedicStore = defineStore("medic", {
   state: () => ({
-    baseUrl: "http://localhost:3000",
+    baseUrl: "https://periksa.herokuapp.com",
     symptoms: "",
     addedSymptomsCheck: "",
     dataToCompare: 1000,
