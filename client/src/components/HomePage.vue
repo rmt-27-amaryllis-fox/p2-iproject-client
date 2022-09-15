@@ -13,26 +13,12 @@ export default {
       if (this.currentPage < this.totalPages) {
         this.currentPage += 1;
         this.getInventories();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Next ..",
-          showConfirmButton: false,
-          timer: 1500,
-        });
       }
     },
     previousPage() {
       if (this.currentPage > 0) {
         this.currentPage -= 1;
         this.getInventories();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Back ..",
-          showConfirmButton: false,
-          timer: 1500,
-        });
       }
     },
   },
