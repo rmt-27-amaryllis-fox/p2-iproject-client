@@ -14,12 +14,10 @@ export default {
 <template>
   <header>
     <div class="wrapper">
-      <NavBar />
+      <NavBar class="m-4" />
     </div>
   </header>
-  <!-- <div class="loading" v-if="loadingFlag">
-    <LoadPage v-if="loadingFlag" />
-  </div> -->
+
   <RouterView />
 </template>
 
