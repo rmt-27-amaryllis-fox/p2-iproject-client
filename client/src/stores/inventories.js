@@ -16,6 +16,7 @@ export const useInventoriesStore = defineStore({
     currentPage: 0,
     totalItems: 0,
     totalPages: 0,
+    loading: false,
   }),
   getters: {
     filterCategories(state) {
@@ -32,6 +33,7 @@ export const useInventoriesStore = defineStore({
   actions: {
     async getInventories() {
       try {
+        this.loading = true; //! sebelum fetch datanya belum masuk
         let { data } = await axios({
           url: "https://laksana-baru.herokuapp.com/inventories",
           method: "get",
@@ -46,6 +48,7 @@ export const useInventoriesStore = defineStore({
         this.currentPage = data.currentPage;
         this.totalItems = data.totalItems;
         this.totalPages = data.totalPages - 1;
+        this.loading = false; //! ini karenna datanya sudah ada jadi harus di false kan biar hilanngn
         // console.log(data);
       } catch (error) {
         console.log(error);

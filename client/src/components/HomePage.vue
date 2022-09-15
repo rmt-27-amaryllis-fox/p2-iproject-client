@@ -43,6 +43,7 @@ export default {
       "currentPage",
       "totalItems",
       "totalPages",
+      "loading",
     ]),
   },
 
@@ -147,7 +148,21 @@ export default {
       </div>
 
       <!-- CardHome -->
-      <CardHome v-for="el in filterCategories" :key="el.id" :data="el" />
+      <div v-if="!loading" class="row mt-3">
+        <CardHome v-for="el in filterCategories" :key="el.id" :data="el" />
+      </div>
+
+      <div
+        v-else-if="loading"
+        class="d-flex align-items-center justify-content-center"
+      >
+        <img
+          style="width: 500px; height: 500px"
+          src="https://c.tenor.com/6gHLhmwO87sAAAAi/gg.gif"
+          alt=""
+        />
+      </div>
+
       <div class="container d-flex text-align-center justify-content-center">
         <nav aria-label="Page navigation example" class="mt-5">
           <ul class="pagination">

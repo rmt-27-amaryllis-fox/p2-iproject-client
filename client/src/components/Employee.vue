@@ -1,7 +1,8 @@
 <script>
 import CardEmploye from "./CardEmploye.vue";
-import { mapState } from "pinia";
+import { mapState, mapWritableState } from "pinia";
 import { useEmployeesStore } from "../stores/employee";
+import { useInventoriesStore } from "../stores/inventories";
 export default {
   components: {
     CardEmploye,
@@ -9,6 +10,7 @@ export default {
   methods: {},
   computed: {
     ...mapState(useEmployeesStore, ["employees"]),
+    ...mapWritableState(useInventoriesStore, ["loading"]),
   },
 };
 </script>
@@ -19,29 +21,19 @@ export default {
         <h4>List Employees</h4>
       </div>
       <!-- CardHome -->
-      <CardEmploye v-for="el in employees" :key="el.id" :data="el" />
-
-      <!-- <CardHome v-for="el in inventories" :key="el.id" :data="el" /> -->
-      <!-- <div class="container d-flex text-align-center justify-content-center">
-          <nav aria-label="Page navigation example" class="mt-5">
-            <ul class="pagination">
-              <li @click="previousPage" class="page-item">
-                <a class="page-link" href="#">Previous</a>
-              </li>
-
-              <li class="page-item">
-                <a class="page-link">{{ currentPage }}</a>
-              </li>
-
-              <li @click="nextPage" class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link">{{ totalPages }}</a>
-              </li>
-            </ul>
-          </nav>
-        </div> -->
+      <div v-if="!loading" class="row mt-3">
+        <CardEmploye v-for="el in employees" :key="el.id" :data="el" />
+      </div>
+      <div
+        v-else-if="loading"
+        class="d-flex align-items-center justify-content-center"
+      >
+        <img
+          style="width: 500px; height: 500px"
+          src="https://c.tenor.com/6gHLhmwO87sAAAAi/gg.gif"
+          alt=""
+        />
+      </div>
     </div>
   </div>
 </template>
