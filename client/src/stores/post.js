@@ -11,6 +11,7 @@ export const usePostStore = defineStore("post", {
     aboutThisCity: {},
     cityParagraph: {},
     cityThumbnail: "",
+    cityUrl: "",
   }),
   getters: {},
   actions: {
@@ -156,6 +157,7 @@ export const usePostStore = defineStore("post", {
 
         this.cityParagraph = clearParagraph;
         this.cityThumbnail = result.data.query.pages[key].thumbnail.source;
+        this.cityUrl = result.data.query.pages[key].fullurl;
       } catch (err) {
         Swal.fire({
           icon: "error",
