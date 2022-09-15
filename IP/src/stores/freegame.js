@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import swal from "sweetalert";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://game-searching-aiq.herokuapp.com";
 
 export const useFreeToGamesStore = defineStore("freeToGames", {
   id: "freeToGames",

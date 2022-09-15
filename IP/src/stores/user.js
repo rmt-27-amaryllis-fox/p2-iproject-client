@@ -2,7 +2,7 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://game-searching-aiq.herokuapp.com/";
 const acces_token = localStorage.getItem("acces_token");
 
 export const useUserStore = defineStore("user", {
