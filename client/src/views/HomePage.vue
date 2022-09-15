@@ -1,7 +1,14 @@
 <script>
+import { mapActions } from "pinia";
 import InMemoriam from "../components/InMemoriam.vue";
 import ParagraphOpening from "../components/ParagraphOpening.vue";
-export default { components: { InMemoriam, ParagraphOpening } };
+import { useRedeemMethodStore } from "../stores/redeemMethod";
+export default {
+  components: { InMemoriam, ParagraphOpening },
+  methods: {
+    ...mapActions(useRedeemMethodStore, ["redeemCards"]),
+  },
+};
 </script>
 
 <template>
@@ -22,7 +29,11 @@ export default { components: { InMemoriam, ParagraphOpening } };
               Game Generator
             </button></router-link
           >
-          <button type="button" class="btn btn-outline-light btn-lg px-4">
+          <button
+            @click.prevent="redeemCards"
+            type="button"
+            class="btn btn-outline-light btn-lg px-4"
+          >
             Redeem Card
           </button>
         </div>
