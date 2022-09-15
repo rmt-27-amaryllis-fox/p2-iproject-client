@@ -31,9 +31,6 @@ export default {
             <div class="card card-light card-body" style="max-width: 940px">
                 <div class="row mx-0 align-items-center">
                     <div class="col-md-6 border-end-md border-light p-2 p-sm-5">
-                        <h2 class="h3 text-light mb-4 mb-sm-5">
-                            Join Us!<br />So you can get the benefits
-                        </h2>
                         <img
                             class="d-block mx-auto"
                             src="./img/signup-dark.svg"
@@ -54,15 +51,6 @@ export default {
                     <div
                         class="col-md-6 px-2 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5"
                     >
-                        <a class="btn btn-outline-info w-100 mb-3" href="#"
-                            ><i class="bi bi-facebook me-2"></i>Sign in with
-                            Facebook</a
-                        >
-                        <div class="d-flex align-items-center py-3 mb-3">
-                            <hr class="hr-light w-100" />
-                            <div class="text-light opacity-70 px-3">Or</div>
-                            <hr class="hr-light w-100" />
-                        </div>
                         <form @submit.prevent="localRegisterHandler">
                             <div class="mb-4">
                                 <label

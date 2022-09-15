@@ -151,7 +151,6 @@ export default {
                                     <button
                                         class="btn btn-outline-light btn-lg px-4 me-3"
                                         type="button"
-                                        @click="playTrailer"
                                     >
                                         <i
                                             class="bi bi-caret-right-square me-2"

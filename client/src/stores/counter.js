@@ -4,8 +4,8 @@ import Swal from "sweetalert2";
 
 export const useCounterStore = defineStore("counter", {
     state: () => ({
-        baseUrl: "http://localhost:3000",
-        clientBaseUrl: "http://localhost:8080",
+        baseUrl: "https://vox8.herokuapp.com",
+        clientBaseUrl: "https://vox-eight.web.app",
         isLogin: false,
         isVerified: false,
         movies: [],
