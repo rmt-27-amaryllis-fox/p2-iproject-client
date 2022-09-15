@@ -1,6 +1,6 @@
 <script></script>
 <template>
-  <nav class="navbar navbar-dark bg-info">
+  <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
       <router-link to="/">
         <a class="d-flex navbar-brand" href="">
@@ -28,24 +28,18 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <router-link to="/">
-              <a class="nav-link active" aria-current="page" href=""
-                >Home</a
-              ></router-link
-            >
+              <button class="btn btn-outline-info">Home</button>
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/symptomscheck">
-              <a class="nav-link active" aria-current="page" href=""
-                >Check Symptoms</a
-              ></router-link
-            >
+            <router-link to="/symptomscheck"
+              ><button class="btn btn-outline-info">Check Symptoms</button>
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/icd10">
-              <a class="nav-link active" aria-current="page"
-                >Search Diseases</a
-              ></router-link
-            >
+            <router-link to="/icd10"
+              ><button class="btn btn-outline-info">Search Diseases</button>
+            </router-link>
           </li>
         </ul>
       </div>
