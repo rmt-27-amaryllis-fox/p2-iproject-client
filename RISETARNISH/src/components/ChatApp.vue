@@ -44,10 +44,8 @@ export default {
     }
   },
   created() {
-    this.text = ''
-  },
-  updated() {
     this.getUser()
+    this.text = ''
   }
 }
 </script>
