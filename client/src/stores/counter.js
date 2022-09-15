@@ -3,7 +3,8 @@ import axios from "axios";
 
 export const appleStore = defineStore("counter", {
   state: () => ({
-    baseUrl: "http://localhost:3000",
+    baseUrl: "https://applu-iproject.herokuapp.com",
+    // baseUrl: "http://localhost:3000",
     isLogin: false,
     email: "",
     password: "",
@@ -12,6 +13,7 @@ export const appleStore = defineStore("counter", {
     capacity: "128GB",
     iPhoneId: 0,
     myOrder: [],
+    oneIphone: ''
   }),
 
   getters: {},
@@ -197,6 +199,52 @@ export const appleStore = defineStore("counter", {
             });
         }
       });
+    },
+    register() {
+      axios({
+        method: "POST",
+        url: this.baseUrl + "/register",
+        data: {
+          email: this.email,
+          password: this.password
+        }
+      })
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: `Register Success`,
+          confirmButtonText: "OK",
+          text: 'you can check your email'
+        });
+        this.email = ""
+        this.password = ""
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: `ERROR`,
+          text: `${err.message}`,
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      });
+    },
+    getOneIphone(id) {
+      axios({
+        method: "GET",
+        url: this.baseUrl + `/iPhone/${id}`
+      })
+      .then(data => {
+        this.oneIphone = data.data
+        console.log(this.oneIphone, '<<<<<')
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: `ERROR`,
+          text: `${err.message}`,
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      })
     },
   },
 });

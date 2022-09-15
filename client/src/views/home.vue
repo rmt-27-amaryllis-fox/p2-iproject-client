@@ -9,7 +9,8 @@ export default {
       "fetchIphone",
       "changePageToOrder",
       'getIphoneId',
-      'fetchMyOrder'
+      'fetchMyOrder',
+      'getOneIphone'
     ]),
   },
   computed: {
@@ -23,7 +24,7 @@ export default {
     <h3>{{ el.title }}</h3>
     <p>{{ el.description }}</p>
     <img :src="el.imgUrl" alt="" id="phone" />
-    <a href="" @click.prevent="changePageToOrder(), getIphoneId(el.id)">Pre-order ></a>
+    <a href="" @click.prevent="changePageToOrder(), getIphoneId(el.id), getOneIphone(el.id)">Pre-order ></a>
   </div>
   <div class="end">
     <h1>lorem ipsum</h1>

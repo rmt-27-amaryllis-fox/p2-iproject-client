@@ -7,7 +7,7 @@ export default {
     ...mapWritableState(appleStore, ['email', 'password'])
   },
   methods: {
-    ...mapActions(appleStore, ['login'])
+    ...mapActions(appleStore, ['login', 'changePage'])
   },
 };
 </script>
@@ -29,7 +29,7 @@ export default {
     <div class="link-create">
       <div id="buttonDiv"></div> 
       Don't have an Applu ID?
-      <a href="">Create yours now <i class="fa-solid fa-circle-right"></i></a>
+      <a href="" @click.prevent="changePage('register')">Create yours now <i class="fa-solid fa-circle-right"></i></a>
     </div>
   </div>
 </template>

@@ -6,7 +6,7 @@ export default {
     ...mapActions(appleStore, ["changeColor", "changeCapacity", "addOrder"]),
   },
   computed: {
-    ...mapWritableState(appleStore, ["color", "capacity"]),
+    ...mapWritableState(appleStore, ["color", "capacity", 'oneIphone']),
   },
 };
 </script>
@@ -14,9 +14,9 @@ export default {
   <!-- ADD PRODUCT -->
   <div id="add-Product">
     <span>New</span>
-    <h1>Pre-order iPhone 14 Pro</h1>
+    <h1>Pre-order {{oneIphone.name}}</h1>
     <div class="ctrl-choose">
-      <img src="https://i.ibb.co/tqKBTwh/iphone-14.png" alt="" />
+      <img :src="oneIphone.imgUrl" alt="" />
       <div class="pick-color">
         <h3>Pick your favourite color</h3>
         <span>Color - {{ color }}</span>

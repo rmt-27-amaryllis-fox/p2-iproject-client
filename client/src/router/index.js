@@ -4,6 +4,7 @@ import LoginPage from '../views/login.vue'
 import RegisterPage from '../views/register.vue'
 import OrderPage from '../views/order.vue'
 import MyOrderPage from '../views/myOrder.vue'
+import NotFound from '../views/notFound.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,7 +12,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
     },
     {
       path: '/login',
@@ -31,8 +32,16 @@ const router = createRouter({
     {
       path: '/myOrder',
       name: 'myOrder',
-      component: MyOrderPage
-    }
+      component: MyOrderPage,
+      beforeEnter: (to, from) => {
+        if (localStorage.getItem("access_token")) {
+          return true
+        } else {
+          return '/';
+        }
+      }
+    },
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
   ]
 })
 
