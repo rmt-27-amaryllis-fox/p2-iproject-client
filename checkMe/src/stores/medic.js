@@ -13,57 +13,74 @@ export const useMedicStore = defineStore("medic", {
     descriptionGoogle: "",
     dataFlag: false,
     totData: [],
+    loadingFlag: false,
   }),
   getters: {},
   actions: {
     async totalData() {
       try {
-        let data = await axios.get(this.baseUrl + "/numberdata");
+        this.loadingFlag = true;
+        let { data } = await axios.get(this.baseUrl + "/numberdata");
         this.totData = data;
+        console.log(data);
       } catch (error) {
-        res.send(error);
+        console.log(error);
+      } finally {
+        this.loadingFlag = false;
       }
     },
     async getDiseaseIcd(value) {
       console.log(value);
       try {
         value = value.split(" ").join("+");
+        this.loadingFlag = true;
+
         const { data } = await axios.post(this.baseUrl + "/disease", {
           disease: value,
         });
+
         this.diseasesIcd = data;
         if (!data.data.length || data.data.length == 0) this.dataFlag = true;
         else this.dataFlag = false;
       } catch (error) {
-        res.send(error);
+        console.log(error);
+      } finally {
+        this.loadingFlag = false;
       }
     },
 
     async getSymptomRank() {
       try {
-        console.log("masuk");
+        this.loadingFlag = true;
         const { data } = await axios.post(this.baseUrl + "/symptomcheck", {
           dataToCompare: this.dataToCompare,
           search: this.addedSymptomsCheck,
         });
+
         console.log(data);
         this.diseasesRank = data;
         this.router.push("/symptomsresult");
       } catch (error) {
-        res.send(error);
+        console.log(error);
+      } finally {
+        this.loadingFlag = false;
       }
     },
     async suggestSymptoms(value) {
       try {
-        console.log(value);
         if (value.length) {
+          this.loadingFlag = true;
+
           const { data } = await axios.post(this.baseUrl + "/symptoms", {
             search: value,
           });
+
           this.symptoms = data;
         } else this.symptoms = [];
       } catch (error) {
-        res.send(error);
+        console.log(error);
+      } finally {
+        this.loadingFlag = false;
       }
     },
   },

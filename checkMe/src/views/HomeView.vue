@@ -1,4 +1,15 @@
-<script></script>
+<script>
+import { mapActions, mapState } from "pinia";
+import { useMedicStore } from "../stores/medic";
+
+export default {
+  computed: { ...mapState(useMedicStore, ["totData"]) },
+  methods: { ...mapActions(useMedicStore, ["totalData"]) },
+  created() {
+    this.totalData();
+  },
+};
+</script>
 <template>
   <div class="tengahin">
     <div
@@ -6,9 +17,18 @@
       role="group"
       aria-label="Large button group"
     >
-      <button type="button" class="btn btn-outline-dark">Left</button>
-      <button type="button" class="btn btn-outline-dark">Middle</button>
-      <button type="button" class="btn btn-outline-dark">Right</button>
+      <button type="button" class="btn btn-outline-info">
+        NUMBER OF CASES RECORDED<br />
+        {{ totData.MedicalRecord }}
+      </button>
+      <button type="button" class="btn btn-outline-info">
+        NUMBER OF DISEASE REGISTERED<br />
+        {{ totData.Diseases }}
+      </button>
+      <button type="button" class="btn btn-outline-info">
+        NUMBER OF SYMPOMS COMBINATION<br />
+        {{ totData.SymptomRecord }}
+      </button>
     </div>
   </div>
 </template>
