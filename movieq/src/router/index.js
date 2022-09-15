@@ -4,6 +4,7 @@ import home from '../views/HomePage.vue'
 import login from '../views/LoginPage.vue'
 import register from '../views/RegisterPage.vue'
 import detail from '../views/MovieDetailPage.vue'
+import subs from '../views/SubsPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,11 @@ const router = createRouter({
           path: "/detail/:id",
           name: "detail",
           component: detail
+        },
+        {
+          path: '/subscription',
+          name: "subs",
+          component: subs
         }
       ]
     },
@@ -35,6 +41,16 @@ const router = createRouter({
       component: register
     }
   ]
+})
+
+router.beforeEach((to, from ,next) => {
+  const token = localStorage.access_token
+  const paid = localStorage.paid
+
+  if(to.name === 'login' && token) next({name: "home"})
+  else if(to.name === 'subs' && paid) next({name: "home"})
+  else if(to.name === 'subs' && !token) next({name: "login"})
+  else next()
 })
 
 export default router

@@ -7,7 +7,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <span class="nav-item nav-link active"  style="cursor: pointer; color: #ffff">Log Out</span>
+        <span @click="logoutHandler" class="nav-item nav-link active"  style="cursor: pointer; color: #ffff">Log Out</span>
         <router-link to="/login" class="nav-item nav-link active" style="color:#ffff" >Log In</router-link>
       </div>
     </div>
@@ -16,10 +16,19 @@
 
 
 <script>
+import { mapActions } from 'pinia';
+import {useProjectStore} from '../stores/store'
+
 export default {
   data: () => ({
 
-  })
+  }),
+  methods: {
+    ...mapActions(useProjectStore, ['logout']),
+    logoutHandler(){
+      this.logout()
+    }
+  }
 }
 </script>
 

@@ -10,7 +10,8 @@ export const useProjectStore = defineStore({
     movies: [],
     movie: {},
     page: 1,
-    totalPage: 500
+    totalPage: 500,
+    trans_token: ''
   }),
   actions: {
     async login(param){
@@ -61,6 +62,27 @@ export const useProjectStore = defineStore({
           url: this.baseUrl + `/movies/${param}`
         })
         this.movie = data
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    logout(){
+      localStorage.clear()
+      this.fetchMovies()
+      this.router.push('/')
+    },
+
+    async payment(){
+      try {
+        const {data} = await axios(this.baseUrl + '/payment', {
+          method: "get",
+          headers: {
+            access_token: localStorage.access_token
+          }
+        })
+        this.trans_token = data.trans_token
+        console.log(this.trans_token)
       } catch (error) {
         console.log(error)
       }
