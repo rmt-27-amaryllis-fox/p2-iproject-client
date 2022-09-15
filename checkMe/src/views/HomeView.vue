@@ -26,7 +26,7 @@ export default {
         {{ totData.Diseases }}
       </button>
       <button type="button" class="btn btn-outline-info">
-        NUMBER OF SYMPOMS COMBINATION<br />
+        NUMBER OF SYMPTOMS COMBINATION<br />
         {{ totData.SymptomRecord }}
       </button>
     </div>
