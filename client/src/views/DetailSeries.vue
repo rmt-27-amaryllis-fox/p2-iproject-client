@@ -124,17 +124,17 @@ export default {
                 <div class="col-md-5 pt-5 pt-md-0" style="margin-top: -6rem">
                     <div class="sticky-top pt-5">
                         <div class="d-none d-md-block pt-5">
-                            <div class="card card-light card-body mb-4">
-                                <div>
+                            <div class="card card-light card-body mb-4 align-items-center">
+                                <div class="inline">
                                     <button
-                                        class="btn btn-outline-light btn-lg px-4 mb-3"
+                                        class="btn btn-outline-light btn-lg px-4 me-3"
                                         type="button"
                                     >
                                         <i
                                             class="bi bi-caret-right-square me-2"
                                         ></i
                                         >Play trailer</button
-                                    ><br /><a
+                                    ><a
                                         class="btn btn-primary btn-lg"
                                         href=""
                                         data-bs-toggle="collapse"

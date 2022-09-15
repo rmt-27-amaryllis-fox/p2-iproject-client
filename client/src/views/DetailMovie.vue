@@ -146,7 +146,7 @@ export default {
                 <div class="col-md-5 pt-5 pt-md-0" style="margin-top: -6rem">
                     <div class="sticky-top pt-5">
                         <div class="d-none d-md-block pt-5">
-                            <div class="card card-light card-body mb-4">
+                            <div class="card card-light card-body mb-4 align-items-center">
                                 <div class="inline">
                                     <button
                                         class="btn btn-outline-light btn-lg px-4 me-3"
