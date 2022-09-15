@@ -91,7 +91,7 @@ export const useInventoriesStore = defineStore({
     },
     async getProductbyId(id) {
       try {
-        console.log(id, "<< id get inventories");
+        // console.log(id, "<< id get inventories");
         let { data } = await axios({
           url: `https://laksana-baru.herokuapp.com/inventories/${id}`,
           method: "get",
@@ -101,7 +101,7 @@ export const useInventoriesStore = defineStore({
         });
 
         this.oneProduct = data;
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -124,7 +124,7 @@ export const useInventoriesStore = defineStore({
         // this.categories = data;
         this.router.push("/");
         this.getInventories();
-        console.log(data);
+        // console.log(data);
         Swal.fire({
           position: "top-end",
           icon: "success",
