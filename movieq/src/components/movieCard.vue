@@ -1,5 +1,22 @@
 <template>
-  <div class="col-12 col-md-2">
+  <div class="card">
+    <div @click="movieById" class="card-img">
+      <img :src="imageUrl + movie.poster_path"
+        alt="this is image">
+    </div>
+    <div class="card-body">
+      <h3>{{movie.title}}</h3>
+      <!-- <p class="genre">Genre: {{movie.Genre.name}}</p>
+      <p class="author">Author: {{movie.User.username}}</p>
+      <p class="rating">Rating: {{movie.rating}}</p> -->
+    </div>
+    <div class="card-footer">
+      <p v-if="isLogin && page !== 'bookmarks'" @click="addBookmarks">Bookmark</p>
+      <span><RouterLink style="text-decoration: none; color: #827397;" :to="{name: 'detail', params: {id : movie.id}}">See Detail</RouterLink></span>
+    </div>
+  </div>
+  
+  <!-- <div class="col-12 col-md-2">
     <div class="card m-3">
       <img :src="imageUrl + movie.poster_path" style="width: 162px;" />
       <div class="card-body">
@@ -9,7 +26,7 @@
           Detail</router-link>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -25,6 +42,7 @@ export default {
     ...mapActions(useProjectStore, ['movieById']),
     detail(){
       this.movieById(this.movie.id)
+      this.$router.push(`/detail/${this.movie.id}`)
     }
   }
 }

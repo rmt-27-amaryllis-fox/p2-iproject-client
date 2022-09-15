@@ -1,7 +1,23 @@
 <template>
-  <!-- DETAIL PAGE -->
-  <div class="container mt-3">
-    <!-- <h1 class="text-center">DETAIL PAGE OF {{ product.name }}</h1> -->
+  <section class="movie-detail">
+    <div class="title">
+      <h1>Details</h1>
+    </div>
+    <div class="detail-card">
+      <div class="detail-card-img">
+        <img :src="imageUrl + movie.poster_path" alt="">
+      </div>
+      <div class="detail-card-body">
+        <h2>{{movie.title}}</h2>
+        <p class="detail-genre">Release Date: {{movie.release_date}}</p>
+        <!-- <p class="detail-author">Author: {{movie.User.username}}</p> -->
+        <p class="detail-rating">Rating: {{movie.rating}}</p>
+        <p class="detail-synopsis"><span>Overvies : <br></span>{{movie.overview}}</p>
+        <iframe :src="movie.trailerUrl" frameborder="0"></iframe>
+      </div>
+    </div>
+  </section>
+  <!-- <div class="container mt-3">
     <div class="row mt-3">
       <div class="d-flex justify-content-center">
         <div class="card">
@@ -22,7 +38,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>

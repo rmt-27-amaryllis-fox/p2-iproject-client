@@ -1,5 +1,11 @@
 <template>
-  <div class="container mt-3">
+  <section class="Movies">
+    <div class ="content">
+      <!-- <img v-if="isLoading" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921" alt=""> -->
+      <card v-for="movie in movies" :key="movie.id" :movie="movie"/>
+    </div> 
+  </section>
+  <!-- <div class="container mt-3">
     <div class="row mt-3">
       <card v-for="movie in movies" :key="movie.id" :movie="movie" />
     </div>
@@ -20,7 +26,7 @@
         </ul>
       </nav>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>

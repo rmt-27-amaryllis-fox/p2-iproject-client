@@ -1,6 +1,8 @@
 <template>
+  <div class="container">
     <sidebar />
-    <router-view /> 
+    <router-view />
+  </div>
 </template>
 
 <script>
@@ -14,5 +16,9 @@ export default {
 </script>
 
 <style>
-
+.container {
+  display: flex;
+  min-height: 100vh;
+  padding: 0;
+}
 </style>
