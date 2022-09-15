@@ -40,7 +40,8 @@
         style="font-family:monospace;vertical-align: auto;width: auto;text-align: center;">MET Digital is a preview of our
         vast collection in New York. Here you may look at paintings currently being shown at our museum. Enjoy this
         virtual tour!</h3>
-    </section>
+      </section>
+     
       <div class="d-flex justify-content-center">
         <div class="row">
           <div class="col-md-4">
@@ -61,9 +62,9 @@
                 </div>
                 <button type="submit" class="btn text-white align-items-center" style="background-color:rgb(12,12,100);font-family:monospace;font-size:20px">Submit</button><br>
                 <a @click="changePage" href="#">Don't have an account? Register here</a><br>
-                <br>or sign in with google:<br>
+                <!-- <br>or sign in with google:<br> -->
               </form>
-              <button id="google-button-login"></button>
+              <!-- <button id="google-button-login"></button> -->
             </section>
           </div>
           <div class="col container-fluid">
@@ -71,4 +72,6 @@
           </div>
         </div>
       </div>
+
+
 </template>
