@@ -63,7 +63,7 @@ h1 {
 }
 .grid-container {
   justify-content: center;
-  margin-top: 0px;
+  margin-top: 25px;
   margin-bottom: 50px;
   margin-left: 50px;
   margin-right: 50px;

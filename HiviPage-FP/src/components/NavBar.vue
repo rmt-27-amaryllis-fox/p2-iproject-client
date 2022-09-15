@@ -139,7 +139,7 @@ a {
   cursor: pointer;
 
   font-size: 20px;
-  color: rgb(96, 237, 245);
+  color: rgb(226, 254, 255);
 }
 
 .LogoMusik {
