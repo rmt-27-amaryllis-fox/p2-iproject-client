@@ -42,7 +42,7 @@ export default {
         <div class="col-6 align-self-center">
           <form @submit.prevent="onRegister">
             <div class="mb-3">
-              <h5 class="mb-4">Register</h5>
+              <h5 class="mb-3 display-4">Register</h5>
               <div class="mb-3">
                 <label for="email" class="form-label">Username</label>
                 <input

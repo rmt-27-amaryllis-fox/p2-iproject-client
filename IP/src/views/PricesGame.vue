@@ -1,6 +1,6 @@
 <script>
 import PricesGameCard from "../components/PricesGameCard.vue";
-import { mapActions, mapState, mapWritableState} from "pinia";
+import { mapActions, mapState, mapWritableState } from "pinia";
 import { usePricesGamesStore } from "../stores/pricesgame";
 import { useUserStore } from "../stores/user";
 
@@ -21,7 +21,7 @@ export default {
     ...mapActions(usePricesGamesStore, ["search"]),
     onChangePage(page) {
       this.page = page;
-      this.search(this.searchKey)
+      this.search(this.searchKey);
     },
   },
 };
@@ -44,33 +44,36 @@ export default {
   </div>
 
   <hr />
-  <div class="container my-5">
-    <ul class="pagination">
-      <li class="page-item">
-        <a
-          @click="onChangePage(page - 1)"
-          class="page-link"
-          aria-label="Previous"
-        >
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <li class="page-item" v-for="page in totalPage">
-        <a @click="onChangePage(page)" class="page-link">{{ page }}</a>
-      </li>
-      <li class="page-item">
-        <a @click="onChangePage(page + 1)" class="page-link" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </div>
 
-  
   <div class="container my-5">
     <div class="row">
       <PricesGameCard v-for="game in games.games" :game="game" />
       <!-- <FreeGameCard v-for="game in freeGames" :game="game"/> -->
+    </div>
+    <div class="container my-5">
+      <ul class="pagination">
+        <li class="page-item">
+          <a
+            @click="onChangePage(page - 1)"
+            class="page-link"
+            aria-label="Previous"
+          >
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item" v-for="page in totalPage">
+          <a @click="onChangePage(page)" class="page-link">{{ page }}</a>
+        </li>
+        <li class="page-item">
+          <a
+            @click="onChangePage(page + 1)"
+            class="page-link"
+            aria-label="Next"
+          >
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </template>

@@ -11,7 +11,14 @@ export default {
       if (!money) {
         return 0;
       }
+
       return Math.round(money * 15000);
+    },
+    formatCurrency(number) {
+      return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      }).format(number);
     },
   },
 };
@@ -24,7 +31,8 @@ export default {
         <h5 class="card-title">{{ game.name }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ game.type }}</h6>
         <p class="card-text short_desc">
-          Lowest Price: Rp. {{ converToIdr(game.currentLowestPrice) }}
+          Lowest Price:
+          {{ formatCurrency(converToIdr(game.currentLowestPrice)) }}
         </p>
         <div class="d-flex justify-content-between align-items-center">
           <div class="btn-group">
@@ -47,44 +55,43 @@ export default {
           >
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
-                
-                  <div class="container">
-                    <div class="row">
-                      <div class="col">
-                        <div class="card container">
-                          <div class="card-body">
-                            <table class="table table-hover">
-                              <thead>
-                                <tr class="title">
-                                  <th colspan="">Seller</th>
-                                  <th colspan="" scope="col">Prices</th>
-                                  <th colspan="" scope="col">URL</th>
-                                </tr>
-                              </thead>
-                              <tbody v-for="store in game.stores">
-                                <tr class="title">
-                                  <td>
-                                    <div class="form-check">
-                                      <label
-                                        class="form-check-label"
-                                        for="paymentmethod"
-                                      >
-                                        {{store.seller}}
-                                      </label>
-                                    </div>
-                                  </td>
-                                  <td>Rp. {{converToIdr(store.price)}}</td>
-                                  <td>
-                                    <a :href="store.url" target="_blank">Visit</a>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col">
+                      <div class="card container">
+                        <div class="card-body">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr class="title">
+                                <th colspan="">Seller</th>
+                                <th colspan="" scope="col">Prices</th>
+                                <th colspan="" scope="col">URL</th>
+                              </tr>
+                            </thead>
+                            <tbody v-for="store in game.stores">
+                              <tr class="title">
+                                <td>
+                                  <div class="form-check">
+                                    <label
+                                      class="form-check-label"
+                                      for="paymentmethod"
+                                    >
+                                      {{ store.seller }}
+                                    </label>
+                                  </div>
+                                </td>
+                                <td>Rp. {{ converToIdr(store.price) }}</td>
+                                <td>
+                                  <a :href="store.url" target="_blank">Visit</a>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
               </div>
             </div>
           </div>

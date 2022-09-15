@@ -48,7 +48,9 @@ export default {
               />
             </div>
             <button type="submit" class="btn btn-primary w-100">Login</button>
-            <p class="text-center mt-2">OR <h4><RouterLink to="/register"><strong class="text-danger text-align-center"><u>Sing Up</u></strong></RouterLink></h4></p>
+            <p class="text-center mt-2">OR <h4><RouterLink to="/register"><button class="btn btn-dark">
+              Sign Up
+            </button></RouterLink></h4></p>
           </form>
         </div>
         <div class="col-6 align-self-center" >

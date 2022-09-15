@@ -22,6 +22,12 @@ export default {
 
       return sum;
     },
+    formatCurrency(number) {
+      return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      }).format(number);
+    },
     onClickPay() {
       if (this.paymentType == "") {
         swal("Payment type must be choosen", "", "error");
@@ -56,7 +62,7 @@ export default {
                   <tr v-for="(cart, index) in myCart">
                     <td>{{ index + 1 }}</td>
                     <td>{{ cart.itemName }}</td>
-                    <td>Rp. {{ cart.price }}</td>
+                    <td>{{ formatCurrency(cart.price) }}</td>
                   </tr>
                   <tr>
                     <td class="totalprice font-weight-bolder" colspan="2">
@@ -67,7 +73,7 @@ export default {
                       style="color: #4ab8b8"
                       id="totalprice"
                     >
-                      Rp. {{ totalPrice() }}
+                      {{ formatCurrency(totalPrice()) }}
                     </td>
                   </tr>
                 </tbody>

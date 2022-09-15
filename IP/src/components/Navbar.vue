@@ -2,6 +2,7 @@
 import { mapActions, mapState } from "pinia";
 import { useUserStore } from "../stores/user";
 
+
 export default {
   computed: {
     ...mapState(useUserStore, ["isLogin"]),
@@ -9,6 +10,7 @@ export default {
   methods: {
     ...mapActions(useUserStore, ["logout"]),
   },
+  
 };
 </script>
 
@@ -16,7 +18,7 @@ export default {
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <RouterLink to="/">
-        <a class="navbar-brand">
+        <a class="navbar-brand text-white">
           <img
             src="https://cdn.dribbble.com/users/1014040/screenshots/5343178/gamepad-za-dribbble.png?compress=1&resize=400x300"
             width="40"
@@ -53,7 +55,7 @@ export default {
         </div>
       </div>
       <ul class="navbar-nav mx-2 mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li v-if="isLogin"  class="nav-item">
           <RouterLink to="/mycart"
             ><a class="nav-link">My Cart</a></RouterLink
           >
