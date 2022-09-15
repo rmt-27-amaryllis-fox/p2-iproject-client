@@ -32,14 +32,14 @@ export default {
               type="button"
               class="btn btn-primary"
               data-toggle="modal"
-              data-target=".bd-example-modal-lg"
+              :data-target="`.bd-example-modal-lg-${game.id}`"
             >
               Store
             </button>
           </div>
 
           <div
-            class="modal fade bd-example-modal-lg"
+            :class="`modal fade bd-example-modal-lg-${game.id}`"
             tabindex="-1"
             role="dialog"
             aria-labelledby="myLargeModalLabel"
@@ -61,7 +61,6 @@ export default {
                                   <th colspan="" scope="col">URL</th>
                                 </tr>
                               </thead>
-
                               <tbody v-for="store in game.stores">
                                 <tr class="title">
                                   <td>

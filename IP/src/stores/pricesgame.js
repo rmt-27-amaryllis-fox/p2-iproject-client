@@ -9,7 +9,8 @@ export const usePricesGamesStore = defineStore("pricesGames", {
   id: "pricesGames",
   state: () => ({
     games: [],
-    page : 1,
+    totalPage: 1,
+    page: 1,
   }),
   actions: {
     async search(search) {
@@ -19,10 +20,11 @@ export const usePricesGamesStore = defineStore("pricesGames", {
           url: BASE_URL + "/prices",
           params: {
             name: search,
-            page : this.page
+            page: this.page,
           },
         });
 
+        this.totalPage = Math.ceil(data.totalAmountFound / data.amount);
         this.games = data;
       } catch (error) {
         console.log(error);
