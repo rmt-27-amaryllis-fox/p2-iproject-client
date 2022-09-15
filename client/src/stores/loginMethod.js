@@ -62,13 +62,14 @@ export const useLoginMethodStore = defineStore({
       try {
         let result = await axios({
           method: "POST",
-          url: `${this.baseurl}/google-sign-in`,
+          url: `${this.baseurl}/users/google-sign-in`,
           headers: {
             token_dari_google: response.credential
           }
         })
         localStorage.setItem("access_token", result.data.access_token);
         localStorage.setItem("user_logged", result.data.usernameFind);
+        this.username_logged = localStorage.getItem("user_logged");
         this.isLogin = true
         this.router.push("/myhome")
         Swal.fire({
@@ -80,7 +81,6 @@ export const useLoginMethodStore = defineStore({
         });
       }
       catch (error) {
-        console.log(error, "google oauth error");
         Swal.fire({
           icon: "error",
           title: `${error.response.data.message}`,
