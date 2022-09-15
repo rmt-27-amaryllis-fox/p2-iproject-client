@@ -1,15 +1,33 @@
 <script>
-import {mapActions} from 'pinia';
+import {mapActions, mapWritableState} from 'pinia';
 import {useCounterStore} from '../stores/counter';
+import PopularCard from '../components/PopularCard.vue';
 
 export default {
     data() {
         return {
-            query: ""
-        }
+            query: "",
+            popularNavigation: "Movies"
+        };
+    },
+    computed: {
+        ...mapWritableState(useCounterStore, ['movies', 'series'])
     },
     methods: {
-        ...mapActions(useCounterStore, ['search'])
+        ...mapActions(useCounterStore, ["search", 'fetchMovies', 'fetchSeries']),
+        movieNavigation() {
+            this.popularNavigation = "Movies"
+            this.fetchMovies()
+        },
+        seriesNavigation() {
+            this.popularNavigation = "Series"
+            this.fetchSeries()
+        },
+    },
+    components: { PopularCard },
+    created() {
+        this.fetchMovies()
+        this.fetchSeries()
     }
 };
 </script>
@@ -77,238 +95,33 @@ export default {
                         class="nav nav-tabs nav-tabs-light fs-sm me-4 pe-2 mb-0"
                     >
                         <li class="nav-item">
-                            <a class="nav-link" href="#">TV Series</a>
+                            <a @click.prevent="movieNavigation" class="nav-link" href="">Movie</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Movie</a>
+                            <a @click.prevent="seriesNavigation" class="nav-link" href="">TV Series</a>
                         </li>
                     </ul>
                     <a
                         class="btn btn-link btn-light fw-normal px-0"
-                        href="car-finder-catalog-grid.html"
+                        href=""
+                        v-if="popularNavigation== 'Movies'"
+                        @click="$router.push('/movie')"
+                        >View all<i class="bi bi-arrow-right mt-0 ps-1 ms-2"></i
+                    ></a>
+                    <a
+                        class="btn btn-link btn-light fw-normal px-0"
+                        href=""
+                        v-if="popularNavigation== 'Series'"
+                        @click="$router.push('/series')"
                         >View all<i class="bi bi-arrow-right mt-0 ps-1 ms-2"></i
                     ></a>
                 </div>
             </div>
-            <div
-                class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-2 g-md-4"
-            >
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-2 g-md-4">
                 <!-- Item-->
+                <PopularCard v-if="popularNavigation == 'Movies'" v-for="m in movies.slice(0, 5)" :key="m.id" :p="m" :kind="popularNavigation" />
+                <PopularCard v-else-if="popularNavigation == 'Series'" v-for="s in series.slice(0, 5)" :key="s.id" :p="s" :kind="popularNavigation" />
 
-                <div class="col">
-                    <div class="card card-light card-hover h-100">
-                        <div class="card-img-top card-img-hover">
-                            <a
-                                class="img-overlay"
-                                href="car-finder-single.html"
-                            ></a>
-
-                            <div class="content-overlay end-0 top-0 pt-3 pe-3">
-                                <button
-                                    class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
-                                    type="button"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="left"
-                                    title=""
-                                    data-bs-original-title="Add to Watchlist"
-                                    aria-label="Add to Watchlist"
-                                >
-                                    <i class="bi bi-bookmark-heart-fill"></i>
-                                </button>
-                            </div>
-                            <img
-                                src="https://image.tmdb.org/t/p/original/ujr5pztc1oitbe7ViMUOilFaJ7s.jpg"
-                                alt="Image"
-                            />
-                        </div>
-                        <div class="card-body">
-                            <div
-                                class="d-flex align-items-center justify-content-between pb-1"
-                            >
-                                <span class="fs-sm text-light me-3">2022</span>
-                            </div>
-                            <h3 class="h6 mb-1">
-                                <a
-                                    class="nav-link-light"
-                                    href="car-finder-single.html"
-                                    >Thor: Love and Thunder</a
-                                >
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <!-- Item-->
-                <div class="col">
-                    <div class="card card-light card-hover h-100">
-                        <div class="card-img-top card-img-hover">
-                            <a
-                                class="img-overlay"
-                                href="car-finder-single.html"
-                            ></a>
-
-                            <div class="content-overlay end-0 top-0 pt-3 pe-3">
-                                <button
-                                    class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
-                                    type="button"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="left"
-                                    title=""
-                                    data-bs-original-title="Add to Watchlist"
-                                    aria-label="Add to Watchlist"
-                                >
-                                    <i class="bi bi-bookmark-heart-fill"></i>
-                                </button>
-                            </div>
-                            <img
-                                src="https://www.themoviedb.org/t/p/w440_and_h660_face/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg"
-                                alt="Image"
-                            />
-                        </div>
-                        <div class="card-body">
-                            <div
-                                class="d-flex align-items-center justify-content-between pb-1"
-                            >
-                                <span class="fs-sm text-light me-3">2022</span>
-                            </div>
-                            <h3 class="h6 mb-1">
-                                <a
-                                    class="nav-link-light"
-                                    href="car-finder-single.html"
-                                    >Thor: Love and Thunder</a
-                                >
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <!-- Item-->
-                <div class="col">
-                    <div class="card card-light card-hover h-100">
-                        <div class="card-img-top card-img-hover">
-                            <a
-                                class="img-overlay"
-                                href="car-finder-single.html"
-                            ></a>
-
-                            <div class="content-overlay end-0 top-0 pt-3 pe-3">
-                                <button
-                                    class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
-                                    type="button"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="left"
-                                    title=""
-                                    data-bs-original-title="Add to Watchlist"
-                                    aria-label="Add to Watchlist"
-                                >
-                                    <i class="bi bi-bookmark-heart-fill"></i>
-                                </button>
-                            </div>
-                            <img
-                                src="https://www.themoviedb.org/t/p/w440_and_h660_face/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg"
-                                alt="Image"
-                            />
-                        </div>
-                        <div class="card-body">
-                            <div
-                                class="d-flex align-items-center justify-content-between pb-1"
-                            >
-                                <span class="fs-sm text-light me-3">2022</span>
-                            </div>
-                            <h3 class="h6 mb-1">
-                                <a
-                                    class="nav-link-light"
-                                    href="car-finder-single.html"
-                                    >Dragon Ball Super: Super Hero</a
-                                >
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <!-- Item-->
-                <div class="col">
-                    <div class="card card-light card-hover h-100">
-                        <div class="card-img-top card-img-hover">
-                            <a
-                                class="img-overlay"
-                                href="car-finder-single.html"
-                            ></a>
-
-                            <div class="content-overlay end-0 top-0 pt-3 pe-3">
-                                <button
-                                    class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
-                                    type="button"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="left"
-                                    title=""
-                                    data-bs-original-title="Add to Watchlist"
-                                    aria-label="Add to Watchlist"
-                                >
-                                    <i class="bi bi-bookmark-heart-fill"></i>
-                                </button>
-                            </div>
-                            <img
-                                src="https://www.themoviedb.org/t/p/w440_and_h660_face/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg"
-                                alt="Image"
-                            />
-                        </div>
-                        <div class="card-body">
-                            <div
-                                class="d-flex align-items-center justify-content-between pb-1"
-                            >
-                                <span class="fs-sm text-light me-3">2022</span>
-                            </div>
-                            <h3 class="h6 mb-1">
-                                <a
-                                    class="nav-link-light"
-                                    href="car-finder-single.html"
-                                    >Thor: Love and Thunder</a
-                                >
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <!-- Item-->
-                <div class="col">
-                    <div class="card card-light card-hover h-100">
-                        <div class="card-img-top card-img-hover">
-                            <a
-                                class="img-overlay"
-                                href="car-finder-single.html"
-                            ></a>
-
-                            <div class="content-overlay end-0 top-0 pt-3 pe-3">
-                                <button
-                                    class="btn btn-icon btn-light btn-xs text-primary rounded-circle"
-                                    type="button"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="left"
-                                    title=""
-                                    data-bs-original-title="Add to Watchlist"
-                                    aria-label="Add to Watchlist"
-                                >
-                                    <i class="bi bi-bookmark-heart-fill"></i>
-                                </button>
-                            </div>
-                            <img
-                                src="https://www.themoviedb.org/t/p/w440_and_h660_face/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg"
-                                alt="Image"
-                            />
-                        </div>
-                        <div class="card-body">
-                            <div
-                                class="d-flex align-items-center justify-content-between pb-1"
-                            >
-                                <span class="fs-sm text-light me-3">2022</span>
-                            </div>
-                            <h3 class="h6 mb-1">
-                                <a
-                                    class="nav-link-light"
-                                    href="car-finder-single.html"
-                                    >Thor: Love and Thunder</a
-                                >
-                            </h3>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
     </main>

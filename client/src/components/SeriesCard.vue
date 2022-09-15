@@ -19,10 +19,10 @@ export default {
                 <div
                     class="d-flex align-items-center justify-content-between pb-1"
                 >
-                    <span class="fs-sm text-light me-3">{{s.first_air_date}}</span>
+                    <span class="fs-sm text-light me-3">{{new Date(s.release_date).getFullYear()}}</span>
                 </div>
                 <h3 class="h6 mb-1">
-                    <a class="nav-link-light" href="">{{s.name}}</a>
+                    <a @click="$router.push('/series/' + s.id)" class="nav-link-light" href="">{{s.name}}</a>
                 </h3>
             </div>
         </div>

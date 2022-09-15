@@ -147,7 +147,7 @@ export default {
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div
                             v-if="seriesData.provider.length > 0"
                             class="card card-body bg-transparent border-light"

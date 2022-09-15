@@ -20,7 +20,7 @@ export default {
                 <div
                     class="d-flex align-items-center justify-content-between pb-1"
                 >
-                    <span class="fs-sm text-light me-3">{{new Date(m.release_date).toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}}</span>
+                    <span class="fs-sm text-light me-3">{{new Date(m.release_date).getFullYear()}}</span>
                 </div>
                 <h3 class="h6 mb-1">
                     <a href="" @click.prevent="$router.push('/movie/' + m.id)" class="nav-link-light">{{m.title}}</a>
