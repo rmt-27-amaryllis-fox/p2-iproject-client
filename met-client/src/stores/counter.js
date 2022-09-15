@@ -2,7 +2,8 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import Swal from "sweetalert2"
 
-const baseUrl = "http://localhost:3000/"
+// const baseUrl = "http://localhost:3000/"
+const baseUrl = "https://met-digital.herokuapp.com/"
 
 export const useCounterStore = defineStore({
   id: "counter",
@@ -69,6 +70,7 @@ export const useCounterStore = defineStore({
           },
         })
         this.paymentToken = response.data.trans_token
+        console.log(this.paymentToken, "TOKEN");
         
       } catch (error) {
         console.log(error);
@@ -215,6 +217,12 @@ export const useCounterStore = defineStore({
         // this.router.push("/register")
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.message,
+          footer: '<a href="">Why do I have this issue?</a>'
+          })
       }
     },
     handleCredentialResponse(response){
@@ -289,6 +297,12 @@ export const useCounterStore = defineStore({
         this.router.push('/login')
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.message,
+          footer: '<a href="">Why do I have this issue?</a>'
+          })
       }
     },
 
