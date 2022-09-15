@@ -4,7 +4,8 @@ import axios from "axios"
 export const useCustomerStore = defineStore({
     id:'customer',
     state: () => ({ 
-        baseUrl:'http://localhost:3000',
+        // baseUrl:'http://localhost:3000',
+        baseUrl:'https://planplentyplant.herokuapp.com',
         isLogin: false,
         formRegistration: {},
         formLogin: {},

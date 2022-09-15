@@ -4,17 +4,19 @@ import axios from "axios"
 export const useProductStore = defineStore({
     id:'Product',
     state: () => ({ 
-        baseUrl:'http://localhost:3000',
+        // baseUrl:'http://localhost:3000',
+        baseUrl:'https://planplentyplant.herokuapp.com',
         PlanList :[],
         AllPlan: [],
         pageNumber:0,
         selectedPlan: {},
         productlist: [],
         MyPlanList: [],
-        CheckOutItem:{},
-        CheckOutList:[],
+        CheckOutItem:[],
+        CheckOutList:{},
         tokenPayment:'',
-        invoiceNo:0
+        invoiceNo:0,
+        recommendationList:[]
     }),
     getters: {
 
@@ -176,8 +178,9 @@ export const useProductStore = defineStore({
                         access_token : localStorage.getItem('access_token')
                     }
                 })
-                this.invoiceNo = invoice.id
-                
+                this.invoiceNo = invoice.data.id
+                this.CheckOutList = invoice.data
+                console.log(this.CheckOutList);
             } catch (error) {
                 console.log(error);
             }
@@ -200,31 +203,33 @@ export const useProductStore = defineStore({
             }
         },
 
-        // async showInvoice(targetedId){
-        //     try {
-        //         let invoice = await axios({
-        //             method: 'GET',
-        //             url: this.baseUrl+ '/order/'+targetedId,
-        //             headers: {
-        //                 access_token : localStorage.getItem('access_token')
-        //             }
-        //         })
-        //         this.CheckOutItem = invoice.Plans.map(list=>{
-        //             let item = {
-        //                 name:list.name,
-        //                 price:list.price,
-        //                 quantity:list.OrderItem.quantity,
-        //                 priceSum:list.OrderItem.priceSum
-        //             }
-        //             return item
-        //         })
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
-        // },
+        async showInvoice(targetedId){
+            try {
+                let invoice = await axios({
+                    method: 'GET',
+                    url: this.baseUrl+ '/order/'+targetedId,
+                    headers: {
+                        access_token : localStorage.getItem('access_token')
+                    }
+                })
+                console.log(invoice.data.Plans);
+                this.CheckOutItem = invoice.data.Plans.map(list=>{
+                    let item = {
+                        name:list.name,
+                        price:list.price,
+                        quantity:list.OrderItem.quantity,
+                        priceSum:list.OrderItem.priceSum
+                    }
+                    return item
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        },
 
         async payment(targetedId){
             try {
+                console.log(targetedId);
                 let result = await axios({
                     method: "GET",
                     url: this.baseUrl + '/payment/'+ targetedId,
@@ -232,13 +237,30 @@ export const useProductStore = defineStore({
                         access_token : localStorage.getItem('access_token')
                     }
                 })
+                console.log(result.data.token_payment);
                 this.tokenPayment = result.data.token_payment
+            } catch (error) {
+                console.log(error, '<<<<');
+            }
+        },
+    
+        async recommendation(str){
+            try {
+                let result = await axios ({
+                    method: "GET",
+                    url: this.baseUrl + '/recommendation',
+                    headers: {
+                        access_token : localStorage.getItem('access_token')
+                    },
+                    params: {
+                        productname:str
+                    }
+                })
+                this.recommendationList  = result
             } catch (error) {
                 console.log(error);
             }
         }
-    
-
     },
 })
 
