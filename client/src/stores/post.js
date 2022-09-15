@@ -4,13 +4,15 @@ import Swal from "sweetalert2";
 
 export const usePostStore = defineStore("post", {
   state: () => ({
-    baseUrl: "http://localhost:3000",
+    // baseUrl: "http://localhost:3000",
+    baseUrl: "https://p2-weathernow.herokuapp.com/",
     posts: [],
     weatherData: [],
     post: {},
     aboutThisCity: {},
     cityParagraph: {},
     cityThumbnail: "",
+    cityUrl: "",
   }),
   getters: {},
   actions: {
@@ -156,6 +158,7 @@ export const usePostStore = defineStore("post", {
 
         this.cityParagraph = clearParagraph;
         this.cityThumbnail = result.data.query.pages[key].thumbnail.source;
+        this.cityUrl = result.data.query.pages[key].fullurl;
       } catch (err) {
         Swal.fire({
           icon: "error",

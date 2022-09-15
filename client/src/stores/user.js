@@ -4,7 +4,8 @@ import Swal from "sweetalert2";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    baseUrl: "http://localhost:3000",
+    // baseUrl: "http://localhost:3000",
+    baseUrl: "https://p2-weathernow.herokuapp.com/",
     isLogin: false,
     loggedInUsername: "",
     navbarProfilePicture: "",

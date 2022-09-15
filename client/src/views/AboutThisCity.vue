@@ -9,6 +9,7 @@ export default {
       "aboutThisCity",
       "cityParagraph",
       "cityThumbnail",
+      "cityUrl",
     ]),
   },
   methods: {
@@ -34,6 +35,8 @@ export default {
         </div>
         <div class="col location"></div>
         <p class="mt-3 paragraph caption">{{ cityParagraph }}</p>
+        <h5>Read more:</h5>
+        <a :href="cityUrl" class="caption">{{ cityUrl }}</a>
 
         <div class="d-flex mt-3">
           <button class="btn btn-dark" type="button" @click="$router.go(-1)">
