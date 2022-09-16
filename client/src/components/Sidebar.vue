@@ -29,6 +29,9 @@ export default {
                     <RouterLink to="/playlists" class="nav-link text-dark"><i class="bi bi-music-note-list me-3"></i><b>PLAYLISTS</b></RouterLink>
                 </li>
                 <li class="nav-item mb-2">
+                    <RouterLink to="/lyrics" class="nav-link text-dark"><i class="bi bi-blockquote-left me-3"></i><b>LYRICS</b></RouterLink>
+                </li>
+                <li class="nav-item mb-2">
                     <RouterLink to="/similar" class="nav-link text-dark"><i class="bi bi-person-lines-fill me-3"></i><b>SIMILAR ARTIST</b></RouterLink>
                 </li>
                 <li class="nav-item">

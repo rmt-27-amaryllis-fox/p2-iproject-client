@@ -10,6 +10,7 @@ export const useCounterStore = defineStore("counter", {
     playlists: [],
     user: '',
     genre: '',
+    lyrics: '',
     alreadyLogin: false
   }),
   actions: {
@@ -50,7 +51,7 @@ export const useCounterStore = defineStore("counter", {
       try {
         const { data } = await axios({
           method: 'get',
-          url: this.baseUrl + '/songs/search',
+          url: this.baseUrl + '/albums/search',
           headers: {
             access_token: localStorage.access_token
           },
@@ -117,6 +118,7 @@ export const useCounterStore = defineStore("counter", {
     },
     async searchSimilar(value) {
       try {
+        console.log(value)
         const { data } = await axios({
           method: 'get',
           url: this.baseUrl + '/artists/search',
@@ -125,14 +127,32 @@ export const useCounterStore = defineStore("counter", {
           },
           params: value
         });
-        this.artistsSearch = data;
+        this.artistsSearch = data.Results;
+        console.log(this.artistsSearch)
       } catch (error) {
         console.log(error);
-        swal({
-          title: "Error!",
-          text: error.response.data.message,
-          icon: "error"
+        // swal({
+        //   title: "Error!",
+        //   text: error.response.data.message,
+        //   icon: "error"
+        // });
+      }
+    },
+    async searchLyrics(value) {
+      try {
+        console.log(value)
+        const { data } = await axios({
+          method: 'get',
+          url: this.baseUrl + '/lyrics/search',
+          headers: {
+            access_token: localStorage.access_token
+          },
+          params: value
         });
+        this.lyrics = data;
+        console.log(this.lyrics)
+      } catch (error) {
+        console.log(error);
       }
     },
     async genrenator() {

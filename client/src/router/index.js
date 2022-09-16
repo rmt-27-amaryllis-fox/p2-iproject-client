@@ -5,6 +5,7 @@ import SearchPage from "../views/SearchPage.vue";
 import PlaylistPage from "../views/PlaylistPage.vue";
 import SimilarArtistPage from "../views/SimilarArtistPage.vue";
 import GenrenatorPage from "../views/GenrenatorPage.vue";
+import LyricsPage from "../views/LyricsPage.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -37,6 +38,11 @@ const router = createRouter({
       path: "/genrenator",
       name: "genrenator",
       component: GenrenatorPage,
+    },
+    {
+      path: "/lyrics",
+      name: "lyrics",
+      component: LyricsPage,
     }
   ],
 });

@@ -45,7 +45,7 @@ export default {
                     </div>
                 </form>
             </div>
-            <div class="row row-cols-1 row-cols-md-5 g-2 d-flex col-12 ms-1 me-3">
+            <div class="row row-cols-1 row-cols-md-5 g-2 d-flex col-12 ms-1 me-3 mt-2">
                 <ArtistCard v-for="artist in artistsSearch" :artist="artist" />
             </div>
         </div>

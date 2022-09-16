@@ -13,7 +13,7 @@ export default {
 </script>
             
 <template>
-    <div class="col-8 mb-3">
+    <div class="col-9 mb-3">
         <div class="card py-3 rounded-pill border-success" style="background-color:#292823">
             <div class="row align-items-center">
                 <div class="col-3">
