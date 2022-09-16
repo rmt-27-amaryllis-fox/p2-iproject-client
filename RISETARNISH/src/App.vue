@@ -41,5 +41,8 @@ export default {
 </template>
 
 <style>
+/* body {
+  background-image: url('./assets/Elden-ring-background-page.png');
+} */
 </style>
   

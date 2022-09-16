@@ -61,5 +61,11 @@ li.list-group-item a {
   text-decoration: none;
   cursor: pointer;
 }
+
+div.filter-area{
+  /* background: white; */
+  border-radius: 5px;
+  font-size: 1.2em;
+}
 </style>
   

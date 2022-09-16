@@ -10,7 +10,7 @@ export default {
     return {
       display: false,
       text: '',
-      messages: []
+      messages: [],
     }
   },
   computed: {
@@ -24,12 +24,8 @@ export default {
       getUser: 'getUser'
     }),
     join() {
-      this.joinend = true
       this.socketInstance = io('https://h8omoring.herokuapp.com', {
         transports: ['websocket']
-      })
-      this.socketInstance.on('message:received', (data) => {
-        this.messages = this.messages.concat(data)
       })
     },
     sendMessage() {
@@ -50,6 +46,7 @@ export default {
       this.display = true
     },
     closeChat() {
+      this.socketInstance.emit('forceDisconnect')
       this.display = false
     }
   },
@@ -103,10 +100,8 @@ export default {
 </template>
 
 <style scoped>
-body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 
-/* Button used to open the chat form - fixed at the bottom of the page */
 .open-button {
   background-color: #555;
   color: white;

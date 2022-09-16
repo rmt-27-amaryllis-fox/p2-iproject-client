@@ -59,6 +59,7 @@ export default {
 <style scoped>
 div.card{
   cursor: pointer;
+  margin-bottom: 0;
 }
 
 div.card:hover{

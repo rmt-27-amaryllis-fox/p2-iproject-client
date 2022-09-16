@@ -20,7 +20,7 @@ export default {
 <template>
   <!-- Navbar -->
   <section class="container-fluid" id="nav">
-    <nav class="navbar bg-dark sticky-top flex-md-nowrap p-0 shadow">
+    <nav class="navbar sticky-top flex-md-nowrap p-0 shadow">
       <div class="container-fluid row">
         <div class="col">
           <a class="navbar-brand col" href="#">
@@ -43,5 +43,8 @@ export default {
 </template>
 
 <style>
+nav.navbar {
+  background-color: #06172cef;
+}
 </style>
   
