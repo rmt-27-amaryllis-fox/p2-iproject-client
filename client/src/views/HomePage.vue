@@ -27,7 +27,7 @@ export default {
         <div class="row">
 
             <div class="col-12">
-                <h2 class="mb-3 mt-4"><b>RELEASE BARU</b></h2>
+                <h2 class="mb-3 mt-4"><b>NEW RELEASES</b></h2>
                 <div class="row row-cols-1 row-cols-md-5 g-2 d-flex col-12 ms-1 me-3">
                     <SongCard v-for="song in songs" :key="songs.id" :song="song" />
                 </div>

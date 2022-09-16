@@ -16,8 +16,8 @@ export default {
                 <div class="text-center" style="width: 18rem;">
                     <div class="card-body">
                         <h1 class="card-title mb-0" style="font-size: 50px"><b>MUSICALI</b></h1>
-                        <p class="card-text mb-3">Music Playlists & Events</p>
-                        <a @click.prevent="loginAction" href="#" class="btn btn-outline-dark p-2">Masuk dengan Spotify</a>
+                        <p class="card-text mb-3">Music Playlists</p>
+                        <a @click.prevent="loginAction" href="#" class="btn btn-outline-dark p-2">Enter using Spotify</a>
                     </div>
                 </div>
             </div>

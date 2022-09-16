@@ -13,18 +13,7 @@ export default {
 </script>
             
 <template>
-    <!-- <a @click.prevent="detailAction(song.id)" class="page-link" href="#"> -->
-    <!-- <div class="col p-1">
-        <div class="card h-100 col-12" style="background-color: #292823;">
-            <img src="../assets/headphone.jpg" class="card-img-top">
-            <div class="card-body mb-0">
-                <h6 class="card-title text-light">{{playlist.name}}</h6>
-            </div>
-        </div>
-    </div> -->
-    <!-- </a> -->
-
-    <div class="col-9 mb-3">
+    <div class="col-8 mb-3">
         <div class="card py-3 rounded-pill border-success" style="background-color:#292823">
             <div class="row align-items-center">
                 <div class="col-3">

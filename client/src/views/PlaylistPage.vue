@@ -29,13 +29,13 @@ export default {
 </script>
         
 <template>
-    <section class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <section class="col-md-8 ms-sm-auto col-lg-10 px-md-4">
         <div class="row">
             <div class="col-12">
                 <h2 class="mb-3 mt-4"><b>YOUR PLAYLISTS</b></h2>
 
 
-                <div class="row row-cols-1 row-cols-md-3 d-flex col-12 ms--1 me-3 mt-4">
+                <div class="row row-cols-1 row-cols-md-3 d-flex col-12 ms-0 me-3 mt-4">
                     <div class="col-9 mb-3">
                         <form @submit.prevent="createPlaylistComponent" class="rounded-pill">
                             <div class="card py-2 rounded-pill border-success">
@@ -56,7 +56,7 @@ export default {
                 </div>
 
 
-                <div class="row row-cols-1 row-cols-md-3 d-flex col-12 ms--1 me-3 mt-4">
+                <div class="row row-cols-1 row-cols-md-3 col-12 ms-2 me-3 mt-4">
                     <PlaylistCard v-for="playlist in playlists" :playlist="playlist" />
                 </div>
             </div>

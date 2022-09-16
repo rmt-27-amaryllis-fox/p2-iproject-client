@@ -9,7 +9,7 @@ export const useCounterStore = defineStore("counter", {
     artistsSearch: [],
     playlists: [],
     user: '',
-    // userId: '',
+    genre: '',
     alreadyLogin: false
   }),
   actions: {
@@ -83,9 +83,6 @@ export const useCounterStore = defineStore("counter", {
     },
     async fetchPlaylist() {
       try {
-        console.log('playlist')
-        console.log(localStorage.access_token, ' <<< ACCESS_TOKEN')
-        console.log(localStorage.userId, ' <<< USERID');
         let userId = localStorage.userId
         const { data } = await axios({
           method: 'get',
@@ -95,7 +92,6 @@ export const useCounterStore = defineStore("counter", {
           }
         });
         this.playlists = data;
-        // console.log(data)
       } catch (error) {
         console.log(error);
       }
@@ -138,6 +134,19 @@ export const useCounterStore = defineStore("counter", {
           icon: "error"
         });
       }
-    }
+    },
+    async genrenator() {
+      try {
+        console.log('genrenator')
+        const { data } = await axios({
+          method: 'get',
+          url:`https://binaryjazz.us/wp-json/genrenator/v1/genre/`
+        });
+        console.log(data)
+        this.genre = data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   }
 });
