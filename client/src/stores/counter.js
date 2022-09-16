@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const useCounterStore = defineStore("counter", {
   state: () => ({
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'https://musicaliip.herokuapp.com',
     songs: [],
     songsSearch: [],
     artistsSearch: [],
