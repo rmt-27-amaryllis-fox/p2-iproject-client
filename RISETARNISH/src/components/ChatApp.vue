@@ -27,6 +27,9 @@ export default {
       this.socketInstance = io('https://h8omoring.herokuapp.com', {
         transports: ['websocket']
       })
+      this.socketInstance.on('message:received', (data) => {
+        this.messages = this.messages.concat(data)
+      })
     },
     sendMessage() {
       this.addMessage()
@@ -39,7 +42,6 @@ export default {
         user: this.username
       }
       this.socketInstance.emit('message', message)
-
       this.messages = this.messages.concat(message)
     },
     openChat() {
