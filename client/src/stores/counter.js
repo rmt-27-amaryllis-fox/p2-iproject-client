@@ -9,7 +9,7 @@ export const useCounterStore = defineStore("counter", {
     artistsSearch: [],
     playlists: [],
     user: '',
-    userId: '',
+    // userId: '',
     alreadyLogin: false
   }),
   actions: {
@@ -29,8 +29,7 @@ export const useCounterStore = defineStore("counter", {
         const params = new Proxy(new URLSearchParams(window.location.search), {
           get: (searchParams, prop) => searchParams.get(prop),
         });
-        let value = params.access_token;
-        localStorage.access_token = params.access_token;
+        localStorage.setItem("access_token", params.access_token);
         this.alreadyLogin = true;
     },
     async fetchNewReleases() {
@@ -77,7 +76,7 @@ export const useCounterStore = defineStore("counter", {
           }
         });
         this.user = data;
-        this.userId = data.id;
+        localStorage.userId = data.id;
       } catch (error) {
         console.log(error);
       }
@@ -85,15 +84,36 @@ export const useCounterStore = defineStore("counter", {
     async fetchPlaylist() {
       try {
         console.log('playlist')
-        console.log(this.userId);
+        console.log(localStorage.access_token, ' <<< ACCESS_TOKEN')
+        console.log(localStorage.userId, ' <<< USERID');
+        let userId = localStorage.userId
         const { data } = await axios({
           method: 'get',
-          url: this.baseUrl + `/playlists/${this.userId}`,
+          url: this.baseUrl + `/playlists/${userId}`,
           headers: {
             access_token: localStorage.access_token
           }
         });
         this.playlists = data;
+        // console.log(data)
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async createPlaylist(value) {
+      try {
+        console.log('create playlist')
+        console.log(localStorage.access_token, ' <<< ACCESS_TOKEN')
+        console.log(localStorage.userId, ' <<< USERID');
+        let userId = localStorage.userId
+        const { data } = await axios({
+          method: 'post',
+          url: this.baseUrl + `/playlists/${userId}`,
+          headers: {
+            access_token: localStorage.access_token
+          },
+          data: value
+        });
         console.log(data)
       } catch (error) {
         console.log(error);
