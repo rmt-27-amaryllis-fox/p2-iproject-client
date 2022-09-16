@@ -77,6 +77,7 @@ export const useCounterStore = defineStore("counter", {
           }
         });
         this.user = data;
+        console.log(data)
         localStorage.userId = data.id;
       } catch (error) {
         console.log(error);
@@ -99,9 +100,6 @@ export const useCounterStore = defineStore("counter", {
     },
     async createPlaylist(value) {
       try {
-        console.log('create playlist')
-        console.log(localStorage.access_token, ' <<< ACCESS_TOKEN')
-        console.log(localStorage.userId, ' <<< USERID');
         let userId = localStorage.userId
         const { data } = await axios({
           method: 'post',
@@ -128,7 +126,7 @@ export const useCounterStore = defineStore("counter", {
           params: value
         });
         this.artistsSearch = data.Results;
-        console.log(this.artistsSearch)
+        console.log(data.Results)
       } catch (error) {
         console.log(error);
         // swal({
