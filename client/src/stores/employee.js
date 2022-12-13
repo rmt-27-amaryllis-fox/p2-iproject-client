@@ -7,13 +7,14 @@ export const useEmployeesStore = defineStore({
   state: () => ({
     employees: [],
     oneEmployee: {},
+    url: "http://localhost:3000/",
   }),
   actions: {
     async getEmployees() {
       try {
         //! udah oke
         let { data } = await axios({
-          url: "https://laksana-baru.herokuapp.com/employees",
+          url: `${this.url}employees`,
           method: "get",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -30,7 +31,8 @@ export const useEmployeesStore = defineStore({
         //! udah oke
         console.log(id);
         let { data } = await axios({
-          url: `https://laksana-baru.herokuapp.com/employees/${id}`,
+          // url: `https://laksana-baru.herokuapp.com/employees/${id}`,
+          url: `${this.url}employees/${id}`,
           method: "get",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -48,7 +50,8 @@ export const useEmployeesStore = defineStore({
         //! udah oke
         // console.log(id);
         let { data } = await axios({
-          url: `https://laksana-baru.herokuapp.com/employees/${id}`,
+          // url: `https://laksana-baru.herokuapp.com/employees/${id}`,
+          url: `${this.url}employees/${id}`,
           method: "delete",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -81,7 +84,7 @@ export const useEmployeesStore = defineStore({
         console.log(formData);
         console.log(formData.imageUrl);
         let { data } = await axios({
-          url: "https://laksana-baru.herokuapp.com/employees",
+          url: `${this.url}employees`,
           method: "post",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -131,7 +134,8 @@ export const useEmployeesStore = defineStore({
         // console.log(formData);
         // console.log(formData.imageUrl);
         let { data } = await axios({
-          url: `https://laksana-baru.herokuapp.com/employees/${this.oneEmployee.cloudinary_id}`,
+          // url: `https://laksana-baru.herokuapp.com/employees/${this.oneEmployee.cloudinary_id}`,
+          url: `${this.url}employees/${this.oneEmployee.cloudinary_id}`,
           method: "put",
           headers: {
             access_token: localStorage.getItem("access_token"),

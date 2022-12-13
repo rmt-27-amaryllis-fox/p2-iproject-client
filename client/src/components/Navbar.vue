@@ -11,7 +11,7 @@ export default {
 };
 </script>
 <template>
-  <nav class="navbar navbar-expand-lg bg-primary shadow">
+  <nav class="navbar sticky-top navbar-expand-lg bg-primary shadow">
     <div class="container-fluid">
       <router-link
         style="color: white"

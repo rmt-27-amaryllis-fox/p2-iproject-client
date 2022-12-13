@@ -7,12 +7,14 @@ export const useLoginStore = defineStore({
   state: () => ({
     inventories: [],
     isLogin: false,
+    url: "http://localhost:3000/",
   }),
   actions: {
     async loginAja(email, password) {
       try {
         let { data } = await axios({
-          url: "https://laksana-baru.herokuapp.com/login",
+          // url: "https://laksana-baru.herokuapp.com/login",
+          url: `${this.url}login`,
           method: "post",
           data: {
             email: email,
@@ -41,7 +43,7 @@ export const useLoginStore = defineStore({
     async register(username, email, password) {
       try {
         let { data } = await axios({
-          url: "https://laksana-baru.herokuapp.com/register",
+          url: `${this.url}register`,
           method: "post",
           data: {
             email: email,

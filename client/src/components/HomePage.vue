@@ -46,7 +46,7 @@ export default {
 <template>
   <div
     style="margin-bottom: 5vh"
-    class="container-fluid home shadow rounded mb-2 mt-5"
+    class="container-fluid home rounded mb-2 mt-5"
   >
     <div class="mt-5 mb-2 mt-2 filter">
       <select
@@ -93,7 +93,7 @@ export default {
           <div class="carousel-item active" data-bs-interval="10000">
             <img
               src="https://radarbanyumas.disway.id/upload/2019/09/Karyawan-LB-Swalayan-Berkostum-Wayang.jpg"
-              class="d-block w-100"
+              class="d-block imgcarousel"
               alt="..."
             />
             <div class="title carousel-caption d-none d-md-block">
@@ -104,7 +104,7 @@ export default {
           <div class="carousel-item">
             <img
               src="https://pbs.twimg.com/media/DtEsUmoVAAAscVA?format=jpg&name=4096x4096"
-              class="d-block w-100"
+              class="d-block imgcarousel"
               alt="..."
             />
             <div class="carousel-caption title d-none d-md-block">
@@ -171,8 +171,19 @@ export default {
       </div>
     </div>
   </div>
+  <div class="footer">
+    <p class="footerp">Nur mizwari | 2022</p>
+  </div>
 </template>
 <style>
+.footer {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(7, 70, 218);
+  color: white;
+  padding-top: 20px;
+}
+
 .home {
   margin-top: 200px;
 }
@@ -188,5 +199,10 @@ export default {
   color: white;
   font-size: 2em;
   -webkit-text-stroke: 1px black;
+}
+.imgcarousel {
+  height: 50vh;
+  width: 100%;
+  object-fit: cover;
 }
 </style>

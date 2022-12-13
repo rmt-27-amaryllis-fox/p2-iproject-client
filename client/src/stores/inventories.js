@@ -17,6 +17,7 @@ export const useInventoriesStore = defineStore({
     totalItems: 0,
     totalPages: 0,
     loading: false,
+    url: "http://localhost:3000/",
   }),
   getters: {
     filterCategories(state) {
@@ -36,6 +37,7 @@ export const useInventoriesStore = defineStore({
         this.loading = true; //! sebelum fetch datanya belum masuk
         let { data } = await axios({
           url: "https://laksana-baru.herokuapp.com/inventories",
+          url: `${this.url}inventories`,
           method: "get",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -57,7 +59,8 @@ export const useInventoriesStore = defineStore({
     async getCategories() {
       try {
         let { data } = await axios({
-          url: "https://laksana-baru.herokuapp.com/categories",
+          // url: "https://laksana-baru.herokuapp.com/categories",
+          url: `${this.url}categories`,
           method: "get",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -72,7 +75,8 @@ export const useInventoriesStore = defineStore({
     async deleteProduct(id) {
       try {
         let { data } = await axios({
-          url: `https://laksana-baru.herokuapp.com/inventories/${id}`,
+          // url: `https://laksana-baru.herokuapp.com/inventories/${id}`,
+          url: `${this.url}inventories/${id}`,
           method: "delete",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -96,7 +100,8 @@ export const useInventoriesStore = defineStore({
       try {
         // console.log(id, "<< id get inventories");
         let { data } = await axios({
-          url: `https://laksana-baru.herokuapp.com/inventories/${id}`,
+          // url: `https://laksana-baru.herokuapp.com/inventories/${id}`,
+          url: `${this.url}inventories/${id}`,
           method: "get",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -112,7 +117,8 @@ export const useInventoriesStore = defineStore({
     async addProduct(name, image, stock, CategoryId) {
       try {
         let { data } = await axios({
-          url: "https://laksana-baru.herokuapp.com/inventories",
+          // url: "https://laksana-baru.herokuapp.com/inventories",
+          url: `${this.url}inventories`,
           method: "post",
           headers: {
             access_token: localStorage.getItem("access_token"),
@@ -147,7 +153,8 @@ export const useInventoriesStore = defineStore({
     async editProduct(name, image, stock, CategoryId) {
       try {
         let { data } = await axios({
-          url: `https://laksana-baru.herokuapp.com/inventories/${this.oneProduct.id}`,
+          // url: `https://laksana-baru.herokuapp.com/inventories/${this.oneProduct.id}`,
+          url: `${this.url}inventories/${this.oneProduct.id}`,
           method: "put",
           headers: {
             access_token: localStorage.getItem("access_token"),

@@ -24,20 +24,24 @@ export default {
     <div class="card shadow">
       <img :src="data.imageUrl" alt="image" class="card-img-top" />
       <div class="card-body">
-        <h6 class="card-title">Name: {{ data.name }}</h6>
-        <h6 class="card-text">Status: {{ data.status }}</h6>
-        <h6 class="card-text">Department: {{ data.department }}</h6>
-        <div class="row">
-          <div class="col mt-2">
-            <button @click="edit" type="submit" class="btn btn-outline-primary">
-              Edit
-            </button>
-            <button
-              @click="deleted"
-              type="submit"
-              class="btn btn-outline-primary m-2"
-            >
+        <h6 class="card-title">
+          <span class="badge bg-secondary">Name: {{ data.name }}</span>
+        </h6>
+        <h6 class="card-text">
+          <span class="badge bg-secondary">Status: {{ data.status }}</span>
+        </h6>
+        <h6 class="card-text">
+          <span class="badge bg-secondary"
+            >Department: {{ data.department }}</span
+          >
+        </h6>
+        <div class="row mt-2">
+          <div class="col mt-2 mb-2 d-grid">
+            <button @click="deleted" type="submit" class="btn btn-primary mb-2">
               Delete
+            </button>
+            <button @click="edit" type="submit" class="btn btn-primary">
+              Edit
             </button>
           </div>
         </div>
@@ -45,3 +49,12 @@ export default {
     </div>
   </div>
 </template>
+<style scoped>
+.card {
+  height: 100%;
+  transition: 0.5s;
+}
+.card:hover {
+  transform: scale(1.1);
+}
+</style>
