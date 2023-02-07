@@ -26,7 +26,7 @@
         created() {
             this.getProductById(this.$route.params.id)
             console.log(this.$route.params.id)
-            console.log(this.productById.created);
+            console.log(this.productById, "LOG PRODUCTBY ID");
             
         }
     }

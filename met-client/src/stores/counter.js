@@ -1,403 +1,384 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 
 // const baseUrl = "http://localhost:3000/"
-const baseUrl = "https://met-digital.herokuapp.com/"
+const baseUrl = "https://met-digital-server-production.up.railway.app/";
 
 export const useCounterStore = defineStore({
   id: "counter",
-  state: () => ({owneds: [], paymentToken: "",paintings: [], products: [], productById: [], page:[], filter: 0, totalPages: 0, isLogin: false, qrImage: "", isLoading: false}),
+  state: () => ({
+    owneds: [],
+    paymentToken: "",
+    paintings: [],
+    products: [],
+    productById: [],
+    page: [],
+    filter: 0,
+    totalPages: 0,
+    isLogin: false,
+    qrImage: "",
+    isLoading: false,
+  }),
   getters: {
     doubleCount: (state) => state.count * 2,
-    filterProduct(state){
-      return
-    }
+    filterProduct(state) {
+      return;
+    },
   },
   actions: {
-    increment(){
-      this.count++
+    increment() {
+      this.count++;
     },
 
-    async fetchOwned(){
+    async fetchOwned() {
       console.log("<<< masuk owned di counter");
       try {
-        const {data} = await axios({
+        const { data } = await axios({
           method: "GET",
           url: baseUrl + "owned",
           headers: {
-            access_token: localStorage.access_token
-          }
-        })
+            access_token: localStorage.access_token,
+          },
+        });
 
-        console.log(data, "<<<< DATA DI FAVOURITES")
+        console.log(data, "<<<< DATA DI FAVOURITES");
         // this.paintings = data;
-        this.owneds = data
+        this.owneds = data;
       } catch (error) {
-        console.log(error)
+        console.log(error);
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
+          icon: "error",
+          title: "Oops...",
           text: error.response.data.message,
-          footer: '<a href="">Why do I have this issue?</a>'
-        })
+          footer: '<a href="">Why do I have this issue?</a>',
+        });
       }
     },
 
-    async purchasedItems(id){
+    async purchasedItems(id) {
       try {
         console.log("MASUK PURCHASED COUNTER");
         console.log(id, "ID PURCHASED");
-        const {data} = axios({
+        const { data } = axios({
           method: "POST",
           url: baseUrl + `owned/${id}`,
           headers: {
             access_token: localStorage.access_token,
-          }
-        })
+          },
+        });
       } catch (error) {
         console.log(error);
       }
     },
-    async addFavourite(id){
+    async addFavourite(id) {
       try {
-
         const response = await axios({
           method: "POST",
           url: baseUrl + `favourites/${id}`,
           headers: {
-            access_token: localStorage.access_token
+            access_token: localStorage.access_token,
           },
-        })
-        this.paymentToken = response.data.trans_token
+        });
+        this.paymentToken = response.data.trans_token;
         console.log(this.paymentToken, "TOKEN");
-        
       } catch (error) {
         console.log(error);
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
+          icon: "error",
+          title: "Oops...",
           text: error.response.data.message,
-          footer: 'please login first'
-        })
+          footer: "please login first",
+        });
       }
     },
-    async getPainting (name, next) {
+    async getPainting(name, next) {
       try {
-       this.isLoading = true
-       const paintings = []
-       const {data} = await axios({
-           method: "GET",
-           url: `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${name}`
-       })
-  
-       paintings.push(data.objectIDs)
-  
-       let images = []
-  
-       for(let i=0; i<6; i++){
-           let image = ``
-           let id = paintings[0][i]
-  
-           image = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
-           images.push(image)
-       }
-  
-       let imgUrls = []
-  
-       for(let i = 0; i<images.length;i++){
-  
-           const {data} = await axios({
-               method: "GET",
-               url: images[i],
-  
-           })
-           
-           let painting = {
-               title: data.title,
-               artist: data.artistDisplayName,
-               image: data.primaryImageSmall,
-               created: data.objectEndDate,
-               id: data.objectID, 
-               price: (new Date().getFullYear()  - data.objectEndDate) * 10000
+        this.isLoading = true;
+        const paintings = [];
+        const { data } = await axios({
+          method: "GET",
+          url: `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${name}`,
+        });
 
-           } 
+        paintings.push(data.objectIDs);
 
-           if(painting.image == ""){
-            continue
-           }else {
+        let images = [];
 
-             imgUrls.push(painting)
-          }
-       }
-  
-       this.paintings = imgUrls
-       console.log(this.paintings);
-       
-  
-  
-      } catch (error) {
-       next(error)
-       console.log(error);
-      } finally {
-        this.isLoading = false
-      }
-   },
-   async getProductById(id){
-    console.log(id, "<<< masuk product by id di counter");
-    try {
-      this.isLoading = true
-      const {data} = await axios({
-        method: "GET",
-        url: `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,
-        headers: {
-          access_token: localStorage.access_token
+        for (let i = 0; i < 6; i++) {
+          let image = ``;
+          let id = paintings[0][i];
+
+          image = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`;
+          images.push(image);
         }
-      })
-      console.log(data);
-      let painting = {
-        title: data.title,
-        artist: data.artistDisplayName,
-        price: (new Date().getFullYear()  - data.objectEndDate) * 10000,
-        image: data.primaryImage,
-        created: data.objectEndDate,
-        id: data.objectID
-      } 
-      this.productById = painting;
 
-      const qr = await axios({
-        url: "https://api.happi.dev/v1/qrcode",
-        params: {
-          apikey: "dd4571pqJwlqcv1dmD4m2FEJLuHAY8rcyiJqXqBEe9ZtPoff0EeN682B",
-          data: baseUrl + `products/${id}`
-        },
-        
-        
-      })
+        let imgUrls = [];
 
-      console.log(qr, "<<<< manggil QR");
+        for (let i = 0; i < images.length; i++) {
+          const { data } = await axios({
+            method: "GET",
+            url: images[i],
+          });
 
-      this.qrImage = qr.data.qrcode
+          let painting = {
+            title: data.title,
+            artist: data.artistDisplayName,
+            image: data.primaryImageSmall,
+            created: data.objectEndDate,
+            id: data.objectID,
+            price: (new Date().getFullYear() - data.objectEndDate) * 10000,
+          };
 
-     
-     
-    } catch (error) {
-      this.isLoading = false
-      console.log(error)
-    } finally {
-      console.log("MASUK FINALLY");
-      this.isLoading = false
-      
-    }
-  },
-    async loginHandler(value){
+          if (painting.image == "") {
+            continue;
+          } else {
+            imgUrls.push(painting);
+          }
+        }
+
+        this.paintings = imgUrls;
+        console.log(this.paintings);
+      } catch (error) {
+        next(error);
+        console.log(error);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+    async getProductById(id) {
       try {
-        this.isLogin = false
+        this.isLoading = true;
+        console.log(
+          id,
+          "<<< masuk product by id di counter========================"
+        );
+        const { data } = await axios({
+          method: "GET",
+          url: `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+        console.log(data, "ini data");
+        let painting = {
+          title: data.title,
+          artist: data.artistDisplayName,
+          price: (new Date().getFullYear() - data.objectEndDate) * 10000,
+          image: data.primaryImage,
+          created: data.objectEndDate,
+          id: data.objectID,
+        };
+        this.productById = painting;
+
+        // const qr = await axios({
+        //   url: "https://api.happi.dev/v1/qrcode",
+        //   params: {
+        //     apikey: "dd4571pqJwlqcv1dmD4m2FEJLuHAY8rcyiJqXqBEe9ZtPoff0EeN682B",
+        //     data: baseUrl + `products/${id}`,
+        //   },
+        // });
+
+        // console.log(qr, "<<<< manggil QR");
+
+        // this.qrImage = qr.data.qrcode;
+      } catch (error) {
+        console.log(error, "Error get 1 image");
+        this.isLoading = false;
+      } finally {
+        console.log("MASUK FINALLY");
+        this.isLoading = false;
+      }
+    },
+    async loginHandler(value) {
+      try {
+        this.isLogin = false;
         console.log(value, "sampai ke store loginHandler");
 
-        const {data} = await axios({
+        const { data } = await axios({
           method: "POST",
           url: baseUrl + "login",
-          data: value
-        })
+          data: value,
+        });
         console.log("MASUK SINI JUGA");
         console.log(data);
 
-        localStorage.access_token = data.access_token
-        
+        localStorage.access_token = data.access_token;
 
-        Swal.fire(
-          'Success Login!',
-          'Enjoy our services!',
-          'success'
-        )
-          console.log("SWAL UDAH LEWAT");
-          this.router.push('/')
-          this.isLogin = true
+        Swal.fire("Success Login!", "Enjoy our services!", "success");
+        console.log("SWAL UDAH LEWAT");
+        this.router.push("/");
+        this.isLogin = true;
         // this.router.push("/register")
       } catch (error) {
         console.log(error);
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
+          icon: "error",
+          title: "Oops...",
           text: error.response.data.message,
-          footer: '<a href="">Why do I have this issue?</a>'
-          })
+          footer: '<a href="">Why do I have this issue?</a>',
+        });
       }
     },
-    handleCredentialResponse(response){
+    handleCredentialResponse(response) {
       console.log("<<< masuk credential");
       axios({
-          method: "POST",
-          url: baseUrl + `google-sign-in`,
-          data: {
-              credential: response.credential
-          }
-      })  
-      .then(response => {
-          console.log(response);
-          const {access_token} = response.data
-          localStorage.access_token = access_token
-          this.isLogin=true
-          this.router.push('/')
-          Swal.fire(
-            'Success Login!',
-            'Enjoy our services!',
-            'success'
-          )
+        method: "POST",
+        url: baseUrl + `google-sign-in`,
+        data: {
+          credential: response.credential,
+        },
       })
-      .catch(err => {
+        .then((response) => {
+          console.log(response);
+          const { access_token } = response.data;
+          localStorage.access_token = access_token;
+          this.isLogin = true;
+          this.router.push("/");
+          Swal.fire("Success Login!", "Enjoy our services!", "success");
+        })
+        .catch((err) => {
           console.log(err, "Google sign in error!");
           Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: "Google Sign In Error!",
-              footer: '<a href="">Why do I have this issue?</a>'
-              })
-      }) 
-  },
-//   async handleCredentialResponse(response) {
-//     try {
-//         const { data } = await axios({
-//             method: "POST",
-//             url: baseUrl + 'google-sign-in',
-//             headers: {
-//                 google_token: response.credential
-//             }
-//         })
+            icon: "error",
+            title: "Oops...",
+            text: "Google Sign In Error!",
+            footer: '<a href="">Why do I have this issue?</a>',
+          });
+        });
+    },
+    //   async handleCredentialResponse(response) {
+    //     try {
+    //         const { data } = await axios({
+    //             method: "POST",
+    //             url: baseUrl + 'google-sign-in',
+    //             headers: {
+    //                 google_token: response.credential
+    //             }
+    //         })
 
-//         localStorage.setItem("access_token", data.access_token)
+    //         localStorage.setItem("access_token", data.access_token)
 
-//         this.isLogin = true
+    //         this.isLogin = true
 
-//         this.router.push("/home")
-//         // this.alertSuccess(data)
-//     } catch (error) {
-//         // this.alertError(error)
-//         console.log(error);
-//     }
-// },
-    async registerHandler(value){
+    //         this.router.push("/home")
+    //         // this.alertSuccess(data)
+    //     } catch (error) {
+    //         // this.alertError(error)
+    //         console.log(error);
+    //     }
+    // },
+    async registerHandler(value) {
       try {
         console.log("<<<masuk ke registerHandler di counter.js");
 
-        const {data} = await axios({
+        const { data } = await axios({
           method: "POST",
           url: baseUrl + "register",
-          data: value
-        })
+          data: value,
+        });
         console.log("masuk register sini juga");
         console.log(data);
 
-        Swal.fire(
-          'Success Register!',
-          'Please login to continue!',
-          'success'
-        )
-        this.router.push('/login')
+        Swal.fire("Success Register!", "Please login to continue!", "success");
+        this.router.push("/login");
       } catch (error) {
         console.log(error);
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
+          icon: "error",
+          title: "Oops...",
           text: error.response.data.message,
-          footer: '<a href="">Why do I have this issue?</a>'
-          })
+          footer: '<a href="">Why do I have this issue?</a>',
+        });
       }
     },
 
-    logoutHandler(){
-      localStorage.clear()
-      this.isLogin = false
-      this.router.push('/login')
+    logoutHandler() {
+      localStorage.clear();
+      this.isLogin = false;
+      this.router.push("/login");
     },
 
-    async fetchProducts(categoryId, page){
+    async fetchProducts(categoryId, page) {
       console.log("masuk fetch products di counter");
       try {
-        const {data} = await axios({
+        const { data } = await axios({
           method: "GET",
           url: baseUrl + "products",
           headers: {
-            access_token: localStorage.access_token
+            access_token: localStorage.access_token,
           },
           params: {
             page: page,
             size: 8,
-            category: categoryId ? categoryId : undefined
-          }
-        })
+            category: categoryId ? categoryId : undefined,
+          },
+        });
 
         console.log(data);
-        this.products = data.data.products
-        this.totalPages = data.data.totalPages
+        this.products = data.data.products;
+        this.totalPages = data.data.totalPages;
         // this.page = 2
       } catch (error) {
         console.log(error);
       }
     },
-    
-    async getProductById(id){
+
+    async getProductById(id) {
       console.log(id, "<<< masuk product by id di counter");
       try {
-        const {data} = await axios({
+        const { data } = await axios({
           method: "GET",
           url: `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,
           headers: {
-            access_token: localStorage.access_token
-          }
-        })
-
-        const qr = await axios({
-          url: "https://api.happi.dev/v1/qrcode",
-          params: {
-            apikey: "dd4571pqJwlqcv1dmD4m2FEJLuHAY8rcyiJqXqBEe9ZtPoff0EeN682B",
-            data: baseUrl + `products/${id}`
+            access_token: localStorage.access_token,
           },
-          
-          
-        })
+        });
 
-        console.log(qr, "<<<< manggil QR");
+        // const qr = await axios({
+        //   url: "https://api.happi.dev/v1/qrcode",
+        //   params: {
+        //     apikey: "dd4571pqJwlqcv1dmD4m2FEJLuHAY8rcyiJqXqBEe9ZtPoff0EeN682B",
+        //     data: baseUrl + `products/${id}`,
+        //   },
+        // });
 
-        this.qrImage = qr.data.qrcode
+        // console.log(qr, "<<<< manggil QR");
 
-        console.log(data)
+        // this.qrImage = qr.data.qrcode;
+
+        console.log(data);
 
         let painting = {
           title: data.title,
           artist: data.artistDisplayName,
           image: data.primaryImage,
           created: data.objectEndDate,
-          id: data.objectID 
-      } 
+          id: data.objectID,
+        };
         this.productById = painting;
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     },
 
     async qrCode() {
       try {
-          const apikey = "dd4571pqJwlqcv1dmD4m2FEJLuHAY8rcyiJqXqBEe9ZtPoff0EeN682B"
-          const { data } = await axios({
-              method: "GET",
-              url: "https://api.happi.dev/v1/qrcode",
-              params: {
-                  data: baseUrl + "products",
-                  apikey
-              }
-          })
+        const apikey =
+          "dd4571pqJwlqcv1dmD4m2FEJLuHAY8rcyiJqXqBEe9ZtPoff0EeN682B";
+        const { data } = await axios({
+          method: "GET",
+          url: "https://api.happi.dev/v1/qrcode",
+          params: {
+            data: baseUrl + "products",
+            apikey,
+          },
+        });
 
-          this.qrcode = data.qrcode 
+        this.qrcode = data.qrcode;
       } catch (error) {
-          this.alertError(error)
+        this.alertError(error);
       }
+    },
   },
-  
-  
-
-  }
-})  
-
-
+});

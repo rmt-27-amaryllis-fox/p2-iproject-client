@@ -25,8 +25,6 @@ export default {
             this.$router.push(`/paintings/${this.painting.id}`)
         },
         addFavouriteComponent() {
-            console.log(this.painting.id);
-            console.log(this.painting, "PAINTING");
             this.addFavourite(this.painting.id).then(this.purchasedItems(this.painting.id)).then(() => {
                 console.log(this.paymentToken, "PAYMENT TOKEN DI CARDROW");
                 window.snap.pay(this.paymentToken, {
